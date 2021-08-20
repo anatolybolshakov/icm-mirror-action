@@ -1,0 +1,30 @@
+{
+  "name": "icm-mirror-action",
+  "version": "1.0.0",
+  "description": "GitHub action to mirror Icm tickets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc && ncc build lib/index.js",
+    "format": "prettier --write **/*.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anatolybolshakov/icm-mirror-action.git"
+  },
+  "author": "Anatolii Bolshakov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anatolybolshakov/icm-mirror-action/issues"
+  },
+  "homepage": "https://github.com/anatolybolshakov/icm-mirror-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.5.0",
+    "@actions/github": "^5.0.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.29.2",
+    "prettier": "^2.3.2",
+    "typescript": "^4.3.5"
+  }
+}
