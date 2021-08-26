@@ -3,9 +3,6 @@ inputs:
   repo-token:
     description: 'The GITHUB_TOKEN secret'
     required: true
-  ado-token:
-    description: 'The Azure DevOps token'
-    required: true
   label-filter:
     description: 'GitHub label to filter existing issues on'
     required: false
