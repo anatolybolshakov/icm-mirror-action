@@ -83,7 +83,7 @@ function main() {
         const aadAppId = core.getInput('aad-app-id', { required: true });
         const appKey = core.getInput('aad-app-key', { required: true });
         const oktokit = github.getOctokit(githubPAT);
-        const existingIssues = yield mainLogic_1.default.getExistingIssues(oktokit, ["IcM"], "Icm");
+        const existingIssues = yield mainLogic_1.default.getExistingIssues(oktokit, "IcM", "[Icm");
         const currentWorkItems = yield mainLogic_1.default.getWorkItems(Constants.icmClusterUrl, Constants.kustoQuery, Constants.icmClusterDatabase, aadAppId, appKey, tenantId);
         mainLogic_1.default.createIssues(oktokit, existingIssues, currentWorkItems, labelForIssues, labelFilter);
     });

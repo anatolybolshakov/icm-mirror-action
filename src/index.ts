@@ -13,7 +13,7 @@ async function main() {
 
     const oktokit = github.getOctokit(githubPAT);
 
-    const existingIssues = await MainLogic.getExistingIssues(oktokit, ["IcM"], "Icm");
+    const existingIssues = await MainLogic.getExistingIssues(oktokit, "IcM", "[Icm");
 
     const currentWorkItems = await MainLogic.getWorkItems(Constants.icmClusterUrl, Constants.kustoQuery, 
         Constants.icmClusterDatabase, aadAppId, appKey, tenantId);
