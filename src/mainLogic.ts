@@ -26,7 +26,6 @@ class MainLogic {
         const resultArray: any = [];
 
         while (!currentRow.done) {
-            resultArray.push(currentRow?.value?.raw);
             console.log(currentRow);
             currentRow = resultsIterator.next();
         }
@@ -74,9 +73,10 @@ class MainLogic {
             let title: string;
             let itemId: string;
             let severity: string;
+            let status: string;
             let link: string;
 
-            [title, itemId, severity, link] = item;
+            [title, itemId, severity, status, link] = item;
 
             if (existingIssues.some(v => v.includes(`${itemId}`))) {
                 console.log(`Work item ${itemId} already has an issue created for it`);

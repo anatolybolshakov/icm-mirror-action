@@ -1,7 +1,7 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 462:
+/***/ 5105:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -33,7 +33,7 @@ getincidents(${exports.tenantIdIcm}, startTime, endTime)
 
 /***/ }),
 
-/***/ 9599:
+/***/ 4822:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -70,10 +70,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const github = __importStar(__nccwpck_require__(4054));
-const core = __importStar(__nccwpck_require__(4588));
-const mainLogic_1 = __importDefault(__nccwpck_require__(169));
-const Constants = __importStar(__nccwpck_require__(462));
+const github = __importStar(__nccwpck_require__(5438));
+const core = __importStar(__nccwpck_require__(2186));
+const mainLogic_1 = __importDefault(__nccwpck_require__(1933));
+const Constants = __importStar(__nccwpck_require__(5105));
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         const githubPAT = core.getInput('repo-token', { required: true });
@@ -93,7 +93,7 @@ main();
 
 /***/ }),
 
-/***/ 169:
+/***/ 1933:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -127,8 +127,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const AzureKustoData = __importStar(__nccwpck_require__(2272));
-const github = __importStar(__nccwpck_require__(4054));
+const AzureKustoData = __importStar(__nccwpck_require__(1138));
+const github = __importStar(__nccwpck_require__(5438));
 class MainLogic {
     /**
      * Returns Icm tickets
@@ -142,7 +142,7 @@ class MainLogic {
      * @returns
      */
     static getWorkItems(icmClusterUrl, kustoQuery, kustoCluster, aadAppId, appKey, tenantId) {
-        var _a, _b;
+        var _a;
         return __awaiter(this, void 0, void 0, function* () {
             console.log('Getting existing ICM tickets...');
             const kustoConnectionStringBuilder = AzureKustoData.KustoConnectionStringBuilder;
@@ -153,7 +153,6 @@ class MainLogic {
             let currentRow = resultsIterator.next();
             const resultArray = [];
             while (!currentRow.done) {
-                resultArray.push((_b = currentRow === null || currentRow === void 0 ? void 0 : currentRow.value) === null || _b === void 0 ? void 0 : _b.raw);
                 console.log(currentRow);
                 currentRow = resultsIterator.next();
             }
@@ -200,8 +199,9 @@ class MainLogic {
                 let title;
                 let itemId;
                 let severity;
+                let status;
                 let link;
-                [title, itemId, severity, link] = item;
+                [title, itemId, severity, status, link] = item;
                 if (existingIssues.some(v => v.includes(`${itemId}`))) {
                     console.log(`Work item ${itemId} already has an issue created for it`);
                 }
@@ -234,7 +234,7 @@ exports.default = MainLogic;
 
 /***/ }),
 
-/***/ 9346:
+/***/ 7351:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -261,7 +261,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.issue = exports.issueCommand = void 0;
 const os = __importStar(__nccwpck_require__(2087));
-const utils_1 = __nccwpck_require__(3372);
+const utils_1 = __nccwpck_require__(5278);
 /**
  * Commands
  *
@@ -333,7 +333,7 @@ function escapeProperty(s) {
 
 /***/ }),
 
-/***/ 4588:
+/***/ 2186:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -368,9 +368,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getState = exports.saveState = exports.group = exports.endGroup = exports.startGroup = exports.info = exports.notice = exports.warning = exports.error = exports.debug = exports.isDebug = exports.setFailed = exports.setCommandEcho = exports.setOutput = exports.getBooleanInput = exports.getMultilineInput = exports.getInput = exports.addPath = exports.setSecret = exports.exportVariable = exports.ExitCode = void 0;
-const command_1 = __nccwpck_require__(9346);
-const file_command_1 = __nccwpck_require__(7031);
-const utils_1 = __nccwpck_require__(3372);
+const command_1 = __nccwpck_require__(7351);
+const file_command_1 = __nccwpck_require__(717);
+const utils_1 = __nccwpck_require__(5278);
 const os = __importStar(__nccwpck_require__(2087));
 const path = __importStar(__nccwpck_require__(5622));
 /**
@@ -645,7 +645,7 @@ exports.getState = getState;
 
 /***/ }),
 
-/***/ 7031:
+/***/ 717:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -676,7 +676,7 @@ exports.issueCommand = void 0;
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const fs = __importStar(__nccwpck_require__(5747));
 const os = __importStar(__nccwpck_require__(2087));
-const utils_1 = __nccwpck_require__(3372);
+const utils_1 = __nccwpck_require__(5278);
 function issueCommand(command, message) {
     const filePath = process.env[`GITHUB_${command}`];
     if (!filePath) {
@@ -694,7 +694,7 @@ exports.issueCommand = issueCommand;
 
 /***/ }),
 
-/***/ 3372:
+/***/ 5278:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -740,7 +740,7 @@ exports.toCommandProperties = toCommandProperties;
 
 /***/ }),
 
-/***/ 1452:
+/***/ 4087:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -801,7 +801,7 @@ exports.Context = Context;
 
 /***/ }),
 
-/***/ 4054:
+/***/ 5438:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -827,8 +827,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getOctokit = exports.context = void 0;
-const Context = __importStar(__nccwpck_require__(1452));
-const utils_1 = __nccwpck_require__(1323);
+const Context = __importStar(__nccwpck_require__(4087));
+const utils_1 = __nccwpck_require__(3030);
 exports.context = new Context.Context();
 /**
  * Returns a hydrated octokit ready to use for GitHub Actions
@@ -844,7 +844,7 @@ exports.getOctokit = getOctokit;
 
 /***/ }),
 
-/***/ 3141:
+/***/ 7914:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -870,7 +870,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getApiBaseUrl = exports.getProxyAgent = exports.getAuthString = void 0;
-const httpClient = __importStar(__nccwpck_require__(1230));
+const httpClient = __importStar(__nccwpck_require__(9925));
 function getAuthString(token, options) {
     if (!token && !options.auth) {
         throw new Error('Parameter token or opts.auth is required');
@@ -894,7 +894,7 @@ exports.getApiBaseUrl = getApiBaseUrl;
 
 /***/ }),
 
-/***/ 1323:
+/***/ 3030:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -920,12 +920,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getOctokitOptions = exports.GitHub = exports.context = void 0;
-const Context = __importStar(__nccwpck_require__(1452));
-const Utils = __importStar(__nccwpck_require__(3141));
+const Context = __importStar(__nccwpck_require__(4087));
+const Utils = __importStar(__nccwpck_require__(7914));
 // octokit + plugins
-const core_1 = __nccwpck_require__(6529);
-const plugin_rest_endpoint_methods_1 = __nccwpck_require__(5935);
-const plugin_paginate_rest_1 = __nccwpck_require__(7261);
+const core_1 = __nccwpck_require__(6762);
+const plugin_rest_endpoint_methods_1 = __nccwpck_require__(3044);
+const plugin_paginate_rest_1 = __nccwpck_require__(4193);
 exports.context = new Context.Context();
 const baseUrl = Utils.getApiBaseUrl();
 const defaults = {
@@ -955,7 +955,7 @@ exports.getOctokitOptions = getOctokitOptions;
 
 /***/ }),
 
-/***/ 1230:
+/***/ 9925:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -963,7 +963,7 @@ exports.getOctokitOptions = getOctokitOptions;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const http = __nccwpck_require__(8605);
 const https = __nccwpck_require__(7211);
-const pm = __nccwpck_require__(9003);
+const pm = __nccwpck_require__(6443);
 let tunnel;
 var HttpCodes;
 (function (HttpCodes) {
@@ -1382,7 +1382,7 @@ class HttpClient {
         if (useProxy) {
             // If using proxy, need tunnel
             if (!tunnel) {
-                tunnel = __nccwpck_require__(968);
+                tunnel = __nccwpck_require__(4294);
             }
             const agentOptions = {
                 maxSockets: maxSockets,
@@ -1500,7 +1500,7 @@ exports.HttpClient = HttpClient;
 
 /***/ }),
 
-/***/ 9003:
+/***/ 6443:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -1565,7 +1565,7 @@ exports.checkBypass = checkBypass;
 
 /***/ }),
 
-/***/ 6226:
+/***/ 2557:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -1573,7 +1573,7 @@ exports.checkBypass = checkBypass;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 
-var tslib = __nccwpck_require__(6914);
+var tslib = __nccwpck_require__(4351);
 
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
@@ -1832,7 +1832,7 @@ exports.AbortSignal = AbortSignal;
 
 /***/ }),
 
-/***/ 592:
+/***/ 6821:
 /***/ (() => {
 
 "use strict";
@@ -1844,7 +1844,7 @@ if (typeof Symbol === undefined || !Symbol.asyncIterator) {
 
 /***/ }),
 
-/***/ 621:
+/***/ 9729:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -1852,9 +1852,9 @@ if (typeof Symbol === undefined || !Symbol.asyncIterator) {
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 
-var coreRestPipeline = __nccwpck_require__(3740);
+var coreRestPipeline = __nccwpck_require__(8121);
 var url = __nccwpck_require__(8835);
-__nccwpck_require__(592);
+__nccwpck_require__(6821);
 
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
@@ -3741,7 +3741,7 @@ exports.serializationPolicyName = serializationPolicyName;
 
 /***/ }),
 
-/***/ 3740:
+/***/ 8121:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -3751,20 +3751,20 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var logger$1 = __nccwpck_require__(6200);
+var logger$1 = __nccwpck_require__(3233);
 var url = __nccwpck_require__(8835);
 var os = __nccwpck_require__(2087);
 var util = __nccwpck_require__(1669);
-var coreTracing = __nccwpck_require__(56);
-var httpsProxyAgent$1 = __nccwpck_require__(5346);
-var httpProxyAgent$1 = __nccwpck_require__(32);
-var FormData = _interopDefault(__nccwpck_require__(3603));
+var coreTracing = __nccwpck_require__(3285);
+var httpsProxyAgent$1 = __nccwpck_require__(7219);
+var httpProxyAgent$1 = __nccwpck_require__(3764);
+var FormData = _interopDefault(__nccwpck_require__(1826));
 var http = __nccwpck_require__(8605);
 var https = __nccwpck_require__(7211);
 var zlib = __nccwpck_require__(8761);
 var stream = __nccwpck_require__(2413);
-var abortController = __nccwpck_require__(6226);
-var uuid = __nccwpck_require__(2302);
+var abortController = __nccwpck_require__(2557);
+var uuid = __nccwpck_require__(8640);
 
 // Copyright (c) Microsoft Corporation.
 const logger = logger$1.createClientLogger("core-rest-pipeline");
@@ -5766,7 +5766,7 @@ exports.userAgentPolicyName = userAgentPolicyName;
 
 /***/ }),
 
-/***/ 56:
+/***/ 3285:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -5774,7 +5774,7 @@ exports.userAgentPolicyName = userAgentPolicyName;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 
-var api = __nccwpck_require__(3529);
+var api = __nccwpck_require__(5163);
 
 // Copyright (c) Microsoft Corporation.
 (function (SpanKind) {
@@ -5993,7 +5993,7 @@ exports.setSpanContext = setSpanContext;
 
 /***/ }),
 
-/***/ 2302:
+/***/ 8640:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -6057,29 +6057,29 @@ Object.defineProperty(exports, "parse", ({
   }
 }));
 
-var _v = _interopRequireDefault(__nccwpck_require__(8337));
+var _v = _interopRequireDefault(__nccwpck_require__(6432));
 
-var _v2 = _interopRequireDefault(__nccwpck_require__(4638));
+var _v2 = _interopRequireDefault(__nccwpck_require__(2677));
 
-var _v3 = _interopRequireDefault(__nccwpck_require__(4221));
+var _v3 = _interopRequireDefault(__nccwpck_require__(9271));
 
-var _v4 = _interopRequireDefault(__nccwpck_require__(5109));
+var _v4 = _interopRequireDefault(__nccwpck_require__(8126));
 
-var _nil = _interopRequireDefault(__nccwpck_require__(6629));
+var _nil = _interopRequireDefault(__nccwpck_require__(1982));
 
-var _version = _interopRequireDefault(__nccwpck_require__(283));
+var _version = _interopRequireDefault(__nccwpck_require__(7889));
 
-var _validate = _interopRequireDefault(__nccwpck_require__(5960));
+var _validate = _interopRequireDefault(__nccwpck_require__(3507));
 
-var _stringify = _interopRequireDefault(__nccwpck_require__(2663));
+var _stringify = _interopRequireDefault(__nccwpck_require__(9124));
 
-var _parse = _interopRequireDefault(__nccwpck_require__(8522));
+var _parse = _interopRequireDefault(__nccwpck_require__(645));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
 
-/***/ 5069:
+/***/ 8093:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -6109,7 +6109,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 6629:
+/***/ 1982:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -6124,7 +6124,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 8522:
+/***/ 645:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -6135,7 +6135,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _validate = _interopRequireDefault(__nccwpck_require__(5960));
+var _validate = _interopRequireDefault(__nccwpck_require__(3507));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6176,7 +6176,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 676:
+/***/ 1712:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -6191,7 +6191,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 9848:
+/***/ 8088:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -6222,7 +6222,7 @@ function rng() {
 
 /***/ }),
 
-/***/ 3745:
+/***/ 5289:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -6252,7 +6252,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 2663:
+/***/ 9124:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -6263,7 +6263,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _validate = _interopRequireDefault(__nccwpck_require__(5960));
+var _validate = _interopRequireDefault(__nccwpck_require__(3507));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6298,7 +6298,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 8337:
+/***/ 6432:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -6309,9 +6309,9 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _rng = _interopRequireDefault(__nccwpck_require__(9848));
+var _rng = _interopRequireDefault(__nccwpck_require__(8088));
 
-var _stringify = _interopRequireDefault(__nccwpck_require__(2663));
+var _stringify = _interopRequireDefault(__nccwpck_require__(9124));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6412,7 +6412,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 4638:
+/***/ 2677:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -6423,9 +6423,9 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _v = _interopRequireDefault(__nccwpck_require__(6026));
+var _v = _interopRequireDefault(__nccwpck_require__(3134));
 
-var _md = _interopRequireDefault(__nccwpck_require__(5069));
+var _md = _interopRequireDefault(__nccwpck_require__(8093));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6435,7 +6435,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 6026:
+/***/ 3134:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -6447,9 +6447,9 @@ Object.defineProperty(exports, "__esModule", ({
 exports.default = _default;
 exports.URL = exports.DNS = void 0;
 
-var _stringify = _interopRequireDefault(__nccwpck_require__(2663));
+var _stringify = _interopRequireDefault(__nccwpck_require__(9124));
 
-var _parse = _interopRequireDefault(__nccwpck_require__(8522));
+var _parse = _interopRequireDefault(__nccwpck_require__(645));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6520,7 +6520,7 @@ function _default(name, version, hashfunc) {
 
 /***/ }),
 
-/***/ 4221:
+/***/ 9271:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -6531,9 +6531,9 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _rng = _interopRequireDefault(__nccwpck_require__(9848));
+var _rng = _interopRequireDefault(__nccwpck_require__(8088));
 
-var _stringify = _interopRequireDefault(__nccwpck_require__(2663));
+var _stringify = _interopRequireDefault(__nccwpck_require__(9124));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6564,7 +6564,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 5109:
+/***/ 8126:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -6575,9 +6575,9 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _v = _interopRequireDefault(__nccwpck_require__(6026));
+var _v = _interopRequireDefault(__nccwpck_require__(3134));
 
-var _sha = _interopRequireDefault(__nccwpck_require__(3745));
+var _sha = _interopRequireDefault(__nccwpck_require__(5289));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6587,7 +6587,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 5960:
+/***/ 3507:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -6598,7 +6598,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _regex = _interopRequireDefault(__nccwpck_require__(676));
+var _regex = _interopRequireDefault(__nccwpck_require__(1712));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6611,7 +6611,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 283:
+/***/ 7889:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -6622,7 +6622,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _validate = _interopRequireDefault(__nccwpck_require__(5960));
+var _validate = _interopRequireDefault(__nccwpck_require__(3507));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6639,7 +6639,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 4761:
+/***/ 4175:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -6647,7 +6647,7 @@ exports.default = _default;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 
-var api = __nccwpck_require__(3529);
+var api = __nccwpck_require__(5163);
 
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
@@ -7197,7 +7197,7 @@ exports.setTracer = setTracer;
 
 /***/ }),
 
-/***/ 1565:
+/***/ 3084:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -7207,25 +7207,25 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var tslib = __nccwpck_require__(6914);
-var coreTracing = __nccwpck_require__(4761);
-var logger$h = __nccwpck_require__(6200);
-var qs = _interopDefault(__nccwpck_require__(3277));
-var coreRestPipeline = __nccwpck_require__(3740);
-var coreClient = __nccwpck_require__(621);
-var jws = _interopDefault(__nccwpck_require__(7931));
-var uuid = __nccwpck_require__(3469);
+var tslib = __nccwpck_require__(4351);
+var coreTracing = __nccwpck_require__(4175);
+var logger$h = __nccwpck_require__(3233);
+var qs = _interopDefault(__nccwpck_require__(2760));
+var coreRestPipeline = __nccwpck_require__(8121);
+var coreClient = __nccwpck_require__(9729);
+var jws = _interopDefault(__nccwpck_require__(4636));
+var uuid = __nccwpck_require__(7176);
 var fs = __nccwpck_require__(5747);
 var fs__default = _interopDefault(fs);
 var crypto = __nccwpck_require__(6417);
 var child_process = __nccwpck_require__(3129);
 var os = _interopDefault(__nccwpck_require__(2087));
 var path = _interopDefault(__nccwpck_require__(5622));
-var msalNode = __nccwpck_require__(460);
-__nccwpck_require__(3343);
-var open = _interopDefault(__nccwpck_require__(4873));
+var msalNode = __nccwpck_require__(6714);
+__nccwpck_require__(6545);
+var open = _interopDefault(__nccwpck_require__(5768));
 var http = _interopDefault(__nccwpck_require__(8605));
-var stoppable = _interopDefault(__nccwpck_require__(8593));
+var stoppable = _interopDefault(__nccwpck_require__(4477));
 
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
@@ -8726,7 +8726,7 @@ class AzureCliCredential {
 let keytar;
 try {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    keytar = __nccwpck_require__(4513);
+    keytar = __nccwpck_require__(3229);
 }
 catch (er) {
     keytar = null;
@@ -9421,7 +9421,7 @@ exports.logger = logger;
 
 /***/ }),
 
-/***/ 460:
+/***/ 6714:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
@@ -9429,15 +9429,15 @@ exports.logger = logger;
 
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __nccwpck_require__(4778)
+  module.exports = __nccwpck_require__(7630)
 } else {
-  module.exports = __nccwpck_require__(1881)
+  module.exports = __nccwpck_require__(6639)
 }
 
 
 /***/ }),
 
-/***/ 1881:
+/***/ 6639:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -9447,11 +9447,11 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var msalCommon = __nccwpck_require__(3065);
-var axios = _interopDefault(__nccwpck_require__(3343));
-var uuid = __nccwpck_require__(3469);
+var msalCommon = __nccwpck_require__(5728);
+var axios = _interopDefault(__nccwpck_require__(6545));
+var uuid = __nccwpck_require__(7176);
 var crypto = _interopDefault(__nccwpck_require__(6417));
-var jsonwebtoken = __nccwpck_require__(963);
+var jsonwebtoken = __nccwpck_require__(7486);
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -12904,17 +12904,17 @@ exports.buildAppConfiguration = buildAppConfiguration;
 
 /***/ }),
 
-/***/ 4778:
+/***/ 7630:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
-function e(e){return e&&"object"==typeof e&&"default"in e?e.default:e}Object.defineProperty(exports, "__esModule", ({value:!0}));var t=__nccwpck_require__(3065),r=e(__nccwpck_require__(3343)),n=__nccwpck_require__(3469),i=e(__nccwpck_require__(6417)),o=__nccwpck_require__(963);function a(e,t,r,n,i,o,a){try{var c=e[o](a),s=c.value}catch(e){return void r(e)}c.done?t(s):Promise.resolve(s).then(n,i)}function c(e){return function(){var t=this,r=arguments;return new Promise((function(n,i){var o=e.apply(t,r);function c(e){a(o,n,i,c,s,"next",e)}function s(e){a(o,n,i,c,s,"throw",e)}c(void 0)}))}}function s(){return(s=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var n in r)Object.prototype.hasOwnProperty.call(r,n)&&(e[n]=r[n])}return e}).apply(this,arguments)}function u(e,t){e.prototype=Object.create(t.prototype),e.prototype.constructor=e,e.__proto__=t}var h,l,f=(function(e){var t=function(e){var t=Object.prototype,r=t.hasOwnProperty,n="function"==typeof Symbol?Symbol:{},i=n.iterator||"@@iterator",o=n.asyncIterator||"@@asyncIterator",a=n.toStringTag||"@@toStringTag";function c(e,t,r){return Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}),e[t]}try{c({},"")}catch(e){c=function(e,t,r){return e[t]=r}}function s(e,t,r,n){var i=Object.create((t&&t.prototype instanceof l?t:l).prototype),o=new A(n||[]);return i._invoke=function(e,t,r){var n="suspendedStart";return function(i,o){if("executing"===n)throw new Error("Generator is already running");if("completed"===n){if("throw"===i)throw o;return{value:void 0,done:!0}}for(r.method=i,r.arg=o;;){var a=r.delegate;if(a){var c=C(a,r);if(c){if(c===h)continue;return c}}if("next"===r.method)r.sent=r._sent=r.arg;else if("throw"===r.method){if("suspendedStart"===n)throw n="completed",r.arg;r.dispatchException(r.arg)}else"return"===r.method&&r.abrupt("return",r.arg);n="executing";var s=u(e,t,r);if("normal"===s.type){if(n=r.done?"completed":"suspendedYield",s.arg===h)continue;return{value:s.arg,done:r.done}}"throw"===s.type&&(n="completed",r.method="throw",r.arg=s.arg)}}}(e,r,o),i}function u(e,t,r){try{return{type:"normal",arg:e.call(t,r)}}catch(e){return{type:"throw",arg:e}}}e.wrap=s;var h={};function l(){}function f(){}function p(){}var d={};d[i]=function(){return this};var g=Object.getPrototypeOf,y=g&&g(g(w([])));y&&y!==t&&r.call(y,i)&&(d=y);var v=p.prototype=l.prototype=Object.create(d);function m(e){["next","throw","return"].forEach((function(t){c(e,t,(function(e){return this._invoke(t,e)}))}))}function k(e,t){var n;this._invoke=function(i,o){function a(){return new t((function(n,a){!function n(i,o,a,c){var s=u(e[i],e,o);if("throw"!==s.type){var h=s.arg,l=h.value;return l&&"object"==typeof l&&r.call(l,"__await")?t.resolve(l.__await).then((function(e){n("next",e,a,c)}),(function(e){n("throw",e,a,c)})):t.resolve(l).then((function(e){h.value=e,a(h)}),(function(e){return n("throw",e,a,c)}))}c(s.arg)}(i,o,n,a)}))}return n=n?n.then(a,a):a()}}function C(e,t){var r=e.iterator[t.method];if(void 0===r){if(t.delegate=null,"throw"===t.method){if(e.iterator.return&&(t.method="return",t.arg=void 0,C(e,t),"throw"===t.method))return h;t.method="throw",t.arg=new TypeError("The iterator does not provide a 'throw' method")}return h}var n=u(r,e.iterator,t.arg);if("throw"===n.type)return t.method="throw",t.arg=n.arg,t.delegate=null,h;var i=n.arg;return i?i.done?(t[e.resultName]=i.value,t.next=e.nextLoc,"return"!==t.method&&(t.method="next",t.arg=void 0),t.delegate=null,h):i:(t.method="throw",t.arg=new TypeError("iterator result is not an object"),t.delegate=null,h)}function b(e){var t={tryLoc:e[0]};1 in e&&(t.catchLoc=e[1]),2 in e&&(t.finallyLoc=e[2],t.afterLoc=e[3]),this.tryEntries.push(t)}function T(e){var t=e.completion||{};t.type="normal",delete t.arg,e.completion=t}function A(e){this.tryEntries=[{tryLoc:"root"}],e.forEach(b,this),this.reset(!0)}function w(e){if(e){var t=e[i];if(t)return t.call(e);if("function"==typeof e.next)return e;if(!isNaN(e.length)){var n=-1,o=function t(){for(;++n<e.length;)if(r.call(e,n))return t.value=e[n],t.done=!1,t;return t.value=void 0,t.done=!0,t};return o.next=o}}return{next:x}}function x(){return{value:void 0,done:!0}}return f.prototype=v.constructor=p,p.constructor=f,f.displayName=c(p,a,"GeneratorFunction"),e.isGeneratorFunction=function(e){var t="function"==typeof e&&e.constructor;return!!t&&(t===f||"GeneratorFunction"===(t.displayName||t.name))},e.mark=function(e){return Object.setPrototypeOf?Object.setPrototypeOf(e,p):(e.__proto__=p,c(e,a,"GeneratorFunction")),e.prototype=Object.create(v),e},e.awrap=function(e){return{__await:e}},m(k.prototype),k.prototype[o]=function(){return this},e.AsyncIterator=k,e.async=function(t,r,n,i,o){void 0===o&&(o=Promise);var a=new k(s(t,r,n,i),o);return e.isGeneratorFunction(r)?a:a.next().then((function(e){return e.done?e.value:a.next()}))},m(v),c(v,a,"Generator"),v[i]=function(){return this},v.toString=function(){return"[object Generator]"},e.keys=function(e){var t=[];for(var r in e)t.push(r);return t.reverse(),function r(){for(;t.length;){var n=t.pop();if(n in e)return r.value=n,r.done=!1,r}return r.done=!0,r}},e.values=w,A.prototype={constructor:A,reset:function(e){if(this.prev=0,this.next=0,this.sent=this._sent=void 0,this.done=!1,this.delegate=null,this.method="next",this.arg=void 0,this.tryEntries.forEach(T),!e)for(var t in this)"t"===t.charAt(0)&&r.call(this,t)&&!isNaN(+t.slice(1))&&(this[t]=void 0)},stop:function(){this.done=!0;var e=this.tryEntries[0].completion;if("throw"===e.type)throw e.arg;return this.rval},dispatchException:function(e){if(this.done)throw e;var t=this;function n(r,n){return a.type="throw",a.arg=e,t.next=r,n&&(t.method="next",t.arg=void 0),!!n}for(var i=this.tryEntries.length-1;i>=0;--i){var o=this.tryEntries[i],a=o.completion;if("root"===o.tryLoc)return n("end");if(o.tryLoc<=this.prev){var c=r.call(o,"catchLoc"),s=r.call(o,"finallyLoc");if(c&&s){if(this.prev<o.catchLoc)return n(o.catchLoc,!0);if(this.prev<o.finallyLoc)return n(o.finallyLoc)}else if(c){if(this.prev<o.catchLoc)return n(o.catchLoc,!0)}else{if(!s)throw new Error("try statement without catch or finally");if(this.prev<o.finallyLoc)return n(o.finallyLoc)}}}},abrupt:function(e,t){for(var n=this.tryEntries.length-1;n>=0;--n){var i=this.tryEntries[n];if(i.tryLoc<=this.prev&&r.call(i,"finallyLoc")&&this.prev<i.finallyLoc){var o=i;break}}o&&("break"===e||"continue"===e)&&o.tryLoc<=t&&t<=o.finallyLoc&&(o=null);var a=o?o.completion:{};return a.type=e,a.arg=t,o?(this.method="next",this.next=o.finallyLoc,h):this.complete(a)},complete:function(e,t){if("throw"===e.type)throw e.arg;return"break"===e.type||"continue"===e.type?this.next=e.arg:"return"===e.type?(this.rval=this.arg=e.arg,this.method="return",this.next="end"):"normal"===e.type&&t&&(this.next=t),h},finish:function(e){for(var t=this.tryEntries.length-1;t>=0;--t){var r=this.tryEntries[t];if(r.finallyLoc===e)return this.complete(r.completion,r.afterLoc),T(r),h}},catch:function(e){for(var t=this.tryEntries.length-1;t>=0;--t){var r=this.tryEntries[t];if(r.tryLoc===e){var n=r.completion;if("throw"===n.type){var i=n.arg;T(r)}return i}}throw new Error("illegal catch attempt")},delegateYield:function(e,t,r){return this.delegate={iterator:w(e),resultName:t,nextLoc:r},"next"===this.method&&(this.arg=void 0),h}},e}(e.exports);try{regeneratorRuntime=t}catch(e){Function("r","regeneratorRuntime = r")(t)}}(l={exports:{}}),l.exports);!function(e){e.GET="get",e.POST="post"}(h||(h={}));var p,d="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";!function(e){e[e.acquireTokenSilent=62]="acquireTokenSilent",e[e.acquireTokenByUsernamePassword=371]="acquireTokenByUsernamePassword",e[e.acquireTokenByDeviceCode=671]="acquireTokenByDeviceCode",e[e.acquireTokenByClientCredential=771]="acquireTokenByClientCredential",e[e.acquireTokenByCode=871]="acquireTokenByCode",e[e.acquireTokenByRefreshToken=872]="acquireTokenByRefreshToken"}(p||(p={}));var g=function(){function e(){}var t=e.prototype;return t.sendGetRequestAsync=function(){var e=c(f.mark((function e(t,n){var i,o;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return i={method:h.GET,url:t,headers:n&&n.headers,validateStatus:function(){return!0}},e.next=3,r(i);case 3:return e.abrupt("return",{headers:(o=e.sent).headers,body:o.data,status:o.status});case 5:case"end":return e.stop()}}),e)})));return function(t,r){return e.apply(this,arguments)}}(),t.sendPostRequestAsync=function(){var e=c(f.mark((function e(t,n){var i,o;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return i={method:h.POST,url:t,data:n&&n.body||"",headers:n&&n.headers,validateStatus:function(){return!0}},e.next=3,r(i);case 3:return e.abrupt("return",{headers:(o=e.sent).headers,body:o.data,status:o.status});case 5:case"end":return e.stop()}}),e)})));return function(t,r){return e.apply(this,arguments)}}(),e}(),y={clientId:"",authority:t.Constants.DEFAULT_AUTHORITY,clientSecret:"",clientAssertion:"",clientCertificate:{thumbprint:"",privateKey:"",x5c:""},knownAuthorities:[],cloudDiscoveryMetadata:"",authorityMetadata:"",clientCapabilities:[],protocolMode:t.ProtocolMode.AAD},v={},m={loggerOptions:{loggerCallback:function(){},piiLoggingEnabled:!1,logLevel:t.LogLevel.Info},networkClient:function(){function e(){}return e.getNetworkClient=function(){return new g},e}().getNetworkClient()};function k(e){var t=e.cache,r=e.system;return{auth:s({},y,e.auth),cache:s({},v,t),system:s({},m,r)}}var C=function(){function e(){}return e.generateGuid=function(){return n.v4()},e.isGuid=function(e){return/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(e)},e}(),b=function(){function e(){}return e.base64Encode=function(e,t){return Buffer.from(e,t).toString("base64")},e.base64EncodeUrl=function(t,r){return e.base64Encode(t,r).replace(/=/g,"").replace(/\+/g,"-").replace(/\//g,"_")},e.base64Decode=function(e){return Buffer.from(e,"base64").toString("utf8")},e.base64DecodeUrl=function(t){for(var r=t.replace(/-/g,"+").replace(/_/g,"/");r.length%4;)r+="=";return e.base64Decode(r)},e}(),T=function(){function e(){}var t=e.prototype;return t.generatePkceCodes=function(){var e=c(f.mark((function e(){var t,r;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return t=this.generateCodeVerifier(),r=this.generateCodeChallengeFromVerifier(t),e.abrupt("return",{verifier:t,challenge:r});case 3:case"end":return e.stop()}}),e,this)})));return function(){return e.apply(this,arguments)}}(),t.generateCodeVerifier=function(){var e=i.randomBytes(32),t=this.bufferToCVString(e);return b.base64EncodeUrl(t)},t.generateCodeChallengeFromVerifier=function(e){return b.base64EncodeUrl(this.sha256(e).toString("base64"),"base64")},t.sha256=function(e){return i.createHash("sha256").update(e).digest()},t.bufferToCVString=function(e){for(var t=[],r=0;r<e.byteLength;r+=1)t.push(d[e[r]%d.length]);return t.join("")},e}(),A=function(){function e(){this.pkceGenerator=new T}var t=e.prototype;return t.createNewGuid=function(){return C.generateGuid()},t.base64Encode=function(e){return b.base64Encode(e)},t.base64Decode=function(e){return b.base64Decode(e)},t.generatePkceCodes=function(){return this.pkceGenerator.generatePkceCodes()},t.getPublicKeyThumbprint=function(){throw new Error("Method not implemented.")},t.signJwt=function(){throw new Error("Method not implemented.")},e}(),w=function(){function e(){}return e.deserializeJSONBlob=function(e){return t.StringUtils.isEmpty(e)?{}:JSON.parse(e)},e.deserializeAccounts=function(e){var r={};return e&&Object.keys(e).map((function(n){var i=e[n],o={homeAccountId:i.home_account_id,environment:i.environment,realm:i.realm,localAccountId:i.local_account_id,username:i.username,authorityType:i.authority_type,name:i.name,clientInfo:i.client_info,lastModificationTime:i.last_modification_time,lastModificationApp:i.last_modification_app},a=new t.AccountEntity;t.CacheManager.toObject(a,o),r[n]=a})),r},e.deserializeIdTokens=function(e){var r={};return e&&Object.keys(e).map((function(n){var i=e[n],o={homeAccountId:i.home_account_id,environment:i.environment,credentialType:i.credential_type,clientId:i.client_id,secret:i.secret,realm:i.realm},a=new t.IdTokenEntity;t.CacheManager.toObject(a,o),r[n]=a})),r},e.deserializeAccessTokens=function(e){var r={};return e&&Object.keys(e).map((function(n){var i=e[n],o={homeAccountId:i.home_account_id,environment:i.environment,credentialType:i.credential_type,clientId:i.client_id,secret:i.secret,realm:i.realm,target:i.target,cachedAt:i.cached_at,expiresOn:i.expires_on,extendedExpiresOn:i.extended_expires_on,refreshOn:i.refresh_on,keyId:i.key_id,tokenType:i.token_type},a=new t.AccessTokenEntity;t.CacheManager.toObject(a,o),r[n]=a})),r},e.deserializeRefreshTokens=function(e){var r={};return e&&Object.keys(e).map((function(n){var i=e[n],o={homeAccountId:i.home_account_id,environment:i.environment,credentialType:i.credential_type,clientId:i.client_id,secret:i.secret,familyId:i.family_id,target:i.target,realm:i.realm},a=new t.RefreshTokenEntity;t.CacheManager.toObject(a,o),r[n]=a})),r},e.deserializeAppMetadata=function(e){var r={};return e&&Object.keys(e).map((function(n){var i=e[n],o={clientId:i.client_id,environment:i.environment,familyId:i.family_id},a=new t.AppMetadataEntity;t.CacheManager.toObject(a,o),r[n]=a})),r},e.deserializeAllCache=function(e){return{accounts:e.Account?this.deserializeAccounts(e.Account):{},idTokens:e.IdToken?this.deserializeIdTokens(e.IdToken):{},accessTokens:e.AccessToken?this.deserializeAccessTokens(e.AccessToken):{},refreshTokens:e.RefreshToken?this.deserializeRefreshTokens(e.RefreshToken):{},appMetadata:e.AppMetadata?this.deserializeAppMetadata(e.AppMetadata):{}}},e}(),x=function(){function e(){}return e.serializeJSONBlob=function(e){return JSON.stringify(e)},e.serializeAccounts=function(e){var t={};return Object.keys(e).map((function(r){var n=e[r];t[r]={home_account_id:n.homeAccountId,environment:n.environment,realm:n.realm,local_account_id:n.localAccountId,username:n.username,authority_type:n.authorityType,name:n.name,client_info:n.clientInfo,last_modification_time:n.lastModificationTime,last_modification_app:n.lastModificationApp}})),t},e.serializeIdTokens=function(e){var t={};return Object.keys(e).map((function(r){var n=e[r];t[r]={home_account_id:n.homeAccountId,environment:n.environment,credential_type:n.credentialType,client_id:n.clientId,secret:n.secret,realm:n.realm}})),t},e.serializeAccessTokens=function(e){var t={};return Object.keys(e).map((function(r){var n=e[r];t[r]={home_account_id:n.homeAccountId,environment:n.environment,credential_type:n.credentialType,client_id:n.clientId,secret:n.secret,realm:n.realm,target:n.target,cached_at:n.cachedAt,expires_on:n.expiresOn,extended_expires_on:n.extendedExpiresOn,refresh_on:n.refreshOn,key_id:n.keyId,token_type:n.tokenType}})),t},e.serializeRefreshTokens=function(e){var t={};return Object.keys(e).map((function(r){var n=e[r];t[r]={home_account_id:n.homeAccountId,environment:n.environment,credential_type:n.credentialType,client_id:n.clientId,secret:n.secret,family_id:n.familyId,target:n.target,realm:n.realm}})),t},e.serializeAppMetadata=function(e){var t={};return Object.keys(e).map((function(r){var n=e[r];t[r]={client_id:n.clientId,environment:n.environment,family_id:n.familyId}})),t},e.serializeAllCache=function(e){return{Account:this.serializeAccounts(e.accounts),IdToken:this.serializeIdTokens(e.idTokens),AccessToken:this.serializeAccessTokens(e.accessTokens),RefreshToken:this.serializeRefreshTokens(e.refreshTokens),AppMetadata:this.serializeAppMetadata(e.appMetadata)}},e}(),E=function(e){function r(t,r,n){var i;return(i=e.call(this,r,n)||this).cache={},i.changeEmitters=[],i.logger=t,i}u(r,e);var n=r.prototype;return n.registerChangeEmitter=function(e){this.changeEmitters.push(e)},n.emitChange=function(){this.changeEmitters.forEach((function(e){return e.call(null)}))},n.cacheToInMemoryCache=function(e){var r={accounts:{},idTokens:{},accessTokens:{},refreshTokens:{},appMetadata:{}};for(var n in e)if(e[n]instanceof t.AccountEntity)r.accounts[n]=e[n];else if(e[n]instanceof t.IdTokenEntity)r.idTokens[n]=e[n];else if(e[n]instanceof t.AccessTokenEntity)r.accessTokens[n]=e[n];else if(e[n]instanceof t.RefreshTokenEntity)r.refreshTokens[n]=e[n];else{if(!(e[n]instanceof t.AppMetadataEntity))continue;r.appMetadata[n]=e[n]}return r},n.inMemoryCacheToCache=function(e){return this.getCache(),s({},e.accounts,e.idTokens,e.accessTokens,e.refreshTokens,e.appMetadata)},n.getInMemoryCache=function(){return this.logger.verbose("Getting in-memory cache"),this.cacheToInMemoryCache(this.getCache())},n.setInMemoryCache=function(e){this.logger.verbose("Setting in-memory cache");var t=this.inMemoryCacheToCache(e);this.setCache(t),this.emitChange()},n.getCache=function(){return this.logger.verbose("Getting cache key-value store"),this.cache},n.setCache=function(e){this.logger.verbose("Setting cache key value store"),this.cache=e,this.emitChange()},n.getItem=function(e){return this.logger.verbosePii("Item key: "+e),this.getCache()[e]},n.setItem=function(e,t){this.logger.verbosePii("Item key: "+e);var r=this.getCache();r[e]=t,this.setCache(r)},n.getAccount=function(e){var r=this.getItem(e);return t.AccountEntity.isAccountEntity(r)?r:null},n.setAccount=function(e){var t=e.generateAccountKey();this.setItem(t,e)},n.getIdTokenCredential=function(e){var r=this.getItem(e);return t.IdTokenEntity.isIdTokenEntity(r)?r:null},n.setIdTokenCredential=function(e){var t=e.generateCredentialKey();this.setItem(t,e)},n.getAccessTokenCredential=function(e){var r=this.getItem(e);return t.AccessTokenEntity.isAccessTokenEntity(r)?r:null},n.setAccessTokenCredential=function(e){var t=e.generateCredentialKey();this.setItem(t,e)},n.getRefreshTokenCredential=function(e){var r=this.getItem(e);return t.RefreshTokenEntity.isRefreshTokenEntity(r)?r:null},n.setRefreshTokenCredential=function(e){var t=e.generateCredentialKey();this.setItem(t,e)},n.getAppMetadata=function(e){var r=this.getItem(e);return t.AppMetadataEntity.isAppMetadataEntity(e,r)?r:null},n.setAppMetadata=function(e){var t=e.generateAppMetadataKey();this.setItem(t,e)},n.getServerTelemetry=function(e){var r=this.getItem(e);return r&&t.ServerTelemetryEntity.isServerTelemetryEntity(e,r)?r:null},n.setServerTelemetry=function(e,t){this.setItem(e,t)},n.getAuthorityMetadata=function(e){var r=this.getItem(e);return r&&t.AuthorityMetadataEntity.isAuthorityMetadataEntity(e,r)?r:null},n.getAuthorityMetadataKeys=function(){var e=this;return this.getKeys().filter((function(t){return e.isAuthorityMetadata(t)}))},n.setAuthorityMetadata=function(e,t){this.setItem(e,t)},n.getThrottlingCache=function(e){var r=this.getItem(e);return r&&t.ThrottlingEntity.isThrottlingEntity(e,r)?r:null},n.setThrottlingCache=function(e,t){this.setItem(e,t)},n.removeItem=function(e){this.logger.verbosePii("Item key: "+e);var t=!1,r=this.getCache();return r[e]&&(delete r[e],t=!0),t&&(this.setCache(r),this.emitChange()),t},n.containsKey=function(e){return this.getKeys().includes(e)},n.getKeys=function(){this.logger.verbose("Retrieving all cache keys");var e=this.getCache();return[].concat(Object.keys(e))},n.clear=function(){var e=this;this.logger.verbose("Clearing cache entries created by MSAL"),this.getKeys().forEach((function(t){e.removeItem(t)})),this.emitChange()},r.generateInMemoryCache=function(e){return w.deserializeAllCache(w.deserializeJSONBlob(e))},r.generateJsonCache=function(e){return x.serializeAllCache(e)},r}(t.CacheManager),I={},O={},_={},M={},S={},R=function(){function e(e,t,r){this.cacheHasChanged=!1,this.storage=e,this.storage.registerChangeEmitter(this.handleChangeEvent.bind(this)),r&&(this.persistence=r),this.logger=t}var r=e.prototype;return r.hasChanged=function(){return this.cacheHasChanged},r.serialize=function(){this.logger.verbose("Serializing in-memory cache");var e=x.serializeAllCache(this.storage.getInMemoryCache());return t.StringUtils.isEmpty(this.cacheSnapshot)?this.logger.verbose("No cache snapshot to merge"):(this.logger.verbose("Reading cache snapshot from disk"),e=this.mergeState(JSON.parse(this.cacheSnapshot),e)),this.cacheHasChanged=!1,JSON.stringify(e)},r.deserialize=function(e){if(this.logger.verbose("Deserializing JSON to in-memory cache"),this.cacheSnapshot=e,t.StringUtils.isEmpty(this.cacheSnapshot))this.logger.verbose("No cache snapshot to deserialize");else{this.logger.verbose("Reading cache snapshot from disk");var r=w.deserializeAllCache(this.overlayDefaults(JSON.parse(this.cacheSnapshot)));this.storage.setInMemoryCache(r)}},r.getKVStore=function(){return this.storage.getCache()},r.getAllAccounts=function(){var e=c(f.mark((function e(){var r;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:if(this.logger.verbose("getAllAccounts called"),e.prev=1,!this.persistence){e.next=6;break}return r=new t.TokenCacheContext(this,!1),e.next=6,this.persistence.beforeCacheAccess(r);case 6:return e.abrupt("return",this.storage.getAllAccounts());case 7:if(e.prev=7,!this.persistence||!r){e.next=11;break}return e.next=11,this.persistence.afterCacheAccess(r);case 11:return e.finish(7);case 12:case"end":return e.stop()}}),e,this,[[1,,7,12]])})));return function(){return e.apply(this,arguments)}}(),r.getAccountByHomeId=function(){var e=c(f.mark((function e(r){var n;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return e.next=2,this.getAllAccounts();case 2:if(n=e.sent,t.StringUtils.isEmpty(r)||!n||!n.length){e.next=7;break}return e.abrupt("return",n.filter((function(e){return e.homeAccountId===r}))[0]||null);case 7:return e.abrupt("return",null);case 8:case"end":return e.stop()}}),e,this)})));return function(t){return e.apply(this,arguments)}}(),r.getAccountByLocalId=function(){var e=c(f.mark((function e(r){var n;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return e.next=2,this.getAllAccounts();case 2:if(n=e.sent,t.StringUtils.isEmpty(r)||!n||!n.length){e.next=7;break}return e.abrupt("return",n.filter((function(e){return e.localAccountId===r}))[0]||null);case 7:return e.abrupt("return",null);case 8:case"end":return e.stop()}}),e,this)})));return function(t){return e.apply(this,arguments)}}(),r.removeAccount=function(){var e=c(f.mark((function e(r){var n;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:if(this.logger.verbose("removeAccount called"),e.prev=1,!this.persistence){e.next=6;break}return n=new t.TokenCacheContext(this,!0),e.next=6,this.persistence.beforeCacheAccess(n);case 6:this.storage.removeAccount(t.AccountEntity.generateAccountCacheKey(r));case 7:if(e.prev=7,!this.persistence||!n){e.next=11;break}return e.next=11,this.persistence.afterCacheAccess(n);case 11:return e.finish(7);case 12:case"end":return e.stop()}}),e,this,[[1,,7,12]])})));return function(t){return e.apply(this,arguments)}}(),r.handleChangeEvent=function(){this.cacheHasChanged=!0},r.mergeState=function(e,t){this.logger.verbose("Merging in-memory cache with cache snapshot");var r=this.mergeRemovals(e,t);return this.mergeUpdates(r,t)},r.mergeUpdates=function(e,t){var r=this;return Object.keys(t).forEach((function(n){var i=t[n];if(e.hasOwnProperty(n)){var o=null!==i,a="object"==typeof i,c=!Array.isArray(i);o&&a&&c&&null!=e[n]?r.mergeUpdates(e[n],i):e[n]=i}else null!==i&&(e[n]=i)})),e},r.mergeRemovals=function(e,t){return this.logger.verbose("Remove updated entries in cache"),s({},e,{Account:e.Account?this.mergeRemovalsDict(e.Account,t.Account):e.Account,AccessToken:e.AccessToken?this.mergeRemovalsDict(e.AccessToken,t.AccessToken):e.AccessToken,RefreshToken:e.RefreshToken?this.mergeRemovalsDict(e.RefreshToken,t.RefreshToken):e.RefreshToken,IdToken:e.IdToken?this.mergeRemovalsDict(e.IdToken,t.IdToken):e.IdToken,AppMetadata:e.AppMetadata?this.mergeRemovalsDict(e.AppMetadata,t.AppMetadata):e.AppMetadata})},r.mergeRemovalsDict=function(e,t){var r=s({},e);return Object.keys(e).forEach((function(e){t&&t.hasOwnProperty(e)||delete r[e]})),r},r.overlayDefaults=function(e){return this.logger.verbose("Overlaying input cache with the default cache"),{Account:s({},I,e.Account),IdToken:s({},O,e.IdToken),AccessToken:s({},_,e.AccessToken),RefreshToken:s({},M,e.RefreshToken),AppMetadata:s({},S,e.AppMetadata)}},e}(),j=function(){function e(e){this.config=k(e),this.cryptoProvider=new A,this.logger=new t.Logger(this.config.system.loggerOptions,"@azure/msal-node","1.0.0-beta.6"),this.storage=new E(this.logger,this.config.auth.clientId,this.cryptoProvider),this.tokenCache=new R(this.storage,this.logger,this.config.cache.cachePlugin)}var r=e.prototype;return r.getAuthCodeUrl=function(){var e=c(f.mark((function e(r){var n,i,o;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return this.logger.info("getAuthCodeUrl called"),n=s({},r,this.initializeBaseRequest(r),{responseMode:r.responseMode||t.ResponseMode.QUERY,authenticationScheme:t.AuthenticationScheme.BEARER}),e.next=4,this.buildOauthClientConfiguration(n.authority);case 4:return i=e.sent,this.logger.verbose("Auth client config generated"),o=new t.AuthorizationCodeClient(i),e.abrupt("return",o.getAuthCodeUrl(n));case 8:case"end":return e.stop()}}),e,this)})));return function(t){return e.apply(this,arguments)}}(),r.acquireTokenByCode=function(){var e=c(f.mark((function e(r){var n,i,o,a;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return this.logger.info("acquireTokenByCode called"),n=s({},r,this.initializeBaseRequest(r),{authenticationScheme:t.AuthenticationScheme.BEARER}),i=this.initializeServerTelemetryManager(p.acquireTokenByCode,n.correlationId),e.prev=3,e.next=6,this.buildOauthClientConfiguration(n.authority,i);case 6:return o=e.sent,this.logger.verbose("Auth client config generated"),a=new t.AuthorizationCodeClient(o),e.abrupt("return",a.acquireToken(n));case 12:throw e.prev=12,e.t0=e.catch(3),i.cacheFailedRequest(e.t0),e.t0;case 16:case"end":return e.stop()}}),e,this,[[3,12]])})));return function(t){return e.apply(this,arguments)}}(),r.acquireTokenByRefreshToken=function(){var e=c(f.mark((function e(r){var n,i,o,a;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return this.logger.info("acquireTokenByRefreshToken called"),n=s({},r,this.initializeBaseRequest(r),{authenticationScheme:t.AuthenticationScheme.BEARER}),i=this.initializeServerTelemetryManager(p.acquireTokenByRefreshToken,n.correlationId),e.prev=3,e.next=6,this.buildOauthClientConfiguration(n.authority,i);case 6:return o=e.sent,this.logger.verbose("Auth client config generated"),a=new t.RefreshTokenClient(o),e.abrupt("return",a.acquireToken(n));case 12:throw e.prev=12,e.t0=e.catch(3),i.cacheFailedRequest(e.t0),e.t0;case 16:case"end":return e.stop()}}),e,this,[[3,12]])})));return function(t){return e.apply(this,arguments)}}(),r.acquireTokenSilent=function(){var e=c(f.mark((function e(r){var n,i,o;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return n=s({},r,this.initializeBaseRequest(r),{forceRefresh:r.forceRefresh||!1}),i=this.initializeServerTelemetryManager(p.acquireTokenSilent,n.correlationId,n.forceRefresh),e.prev=2,e.next=5,this.buildOauthClientConfiguration(n.authority,i);case 5:return o=new t.SilentFlowClient(e.sent),e.abrupt("return",o.acquireToken(n));case 10:throw e.prev=10,e.t0=e.catch(2),i.cacheFailedRequest(e.t0),e.t0;case 14:case"end":return e.stop()}}),e,this,[[2,10]])})));return function(t){return e.apply(this,arguments)}}(),r.getTokenCache=function(){return this.logger.info("getTokenCache called"),this.tokenCache},r.getLogger=function(){return this.logger},r.setLogger=function(e){this.logger=e},r.buildOauthClientConfiguration=function(){var e=c(f.mark((function e(t,r){var n;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return this.logger.verbose("buildOauthClientConfiguration called"),e.next=3,this.createAuthority(t);case 3:return e.abrupt("return",{authOptions:{clientId:this.config.auth.clientId,authority:n=e.sent,clientCapabilities:this.config.auth.clientCapabilities},loggerOptions:{loggerCallback:this.config.system.loggerOptions.loggerCallback,piiLoggingEnabled:this.config.system.loggerOptions.piiLoggingEnabled},cryptoInterface:this.cryptoProvider,networkInterface:this.config.system.networkClient,storageInterface:this.storage,serverTelemetryManager:r,clientCredentials:{clientSecret:this.clientSecret,clientAssertion:this.clientAssertion?this.getClientAssertion(n):void 0},libraryInfo:{sku:"msal.js.node",version:"1.0.0-beta.6",cpu:process.arch||"",os:process.platform||""},persistencePlugin:this.config.cache.cachePlugin,serializableCache:this.tokenCache});case 5:case"end":return e.stop()}}),e,this)})));return function(t,r){return e.apply(this,arguments)}}(),r.getClientAssertion=function(e){return{assertion:this.clientAssertion.getJwt(this.cryptoProvider,this.config.auth.clientId,e.tokenEndpoint),assertionType:"urn:ietf:params:oauth:client-assertion-type:jwt-bearer"}},r.initializeBaseRequest=function(e){return this.logger.verbose("initializeRequestScopes called"),s({},e,{scopes:[].concat(e&&e.scopes||[],t.OIDC_DEFAULT_SCOPES),correlationId:e&&e.correlationId||this.cryptoProvider.createNewGuid(),authority:e.authority||this.config.auth.authority})},r.initializeServerTelemetryManager=function(e,r,n){return new t.ServerTelemetryManager({clientId:this.config.auth.clientId,correlationId:r,apiId:e,forceRefresh:n||!1},this.storage)},r.createAuthority=function(){var e=c(f.mark((function e(r){var n;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return this.logger.verbose("createAuthority called"),n={protocolMode:this.config.auth.protocolMode,knownAuthorities:this.config.auth.knownAuthorities,cloudDiscoveryMetadata:this.config.auth.cloudDiscoveryMetadata,authorityMetadata:this.config.auth.authorityMetadata},e.next=4,t.AuthorityFactory.createDiscoveredInstance(r,this.config.system.networkClient,this.storage,n);case 4:return e.abrupt("return",e.sent);case 5:case"end":return e.stop()}}),e,this)})));return function(t){return e.apply(this,arguments)}}(),e}(),q=function(e){function r(t){return e.call(this,t)||this}u(r,e);var n=r.prototype;return n.acquireTokenByDeviceCode=function(){var e=c(f.mark((function e(r){var n,i,o,a;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return this.logger.info("acquireTokenByDeviceCode called"),n=s({},r,this.initializeBaseRequest(r)),i=this.initializeServerTelemetryManager(p.acquireTokenByDeviceCode,n.correlationId),e.prev=3,e.next=6,this.buildOauthClientConfiguration(n.authority,i);case 6:return o=e.sent,this.logger.verbose("Auth client config generated"),a=new t.DeviceCodeClient(o),e.abrupt("return",a.acquireToken(n));case 12:throw e.prev=12,e.t0=e.catch(3),i.cacheFailedRequest(e.t0),e.t0;case 16:case"end":return e.stop()}}),e,this,[[3,12]])})));return function(t){return e.apply(this,arguments)}}(),n.acquireTokenByUsernamePassword=function(){var e=c(f.mark((function e(r){var n,i,o,a;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return this.logger.info("acquireTokenByUsernamePassword called"),n=s({},r,this.initializeBaseRequest(r)),i=this.initializeServerTelemetryManager(p.acquireTokenByUsernamePassword,n.correlationId),e.prev=3,e.next=6,this.buildOauthClientConfiguration(n.authority,i);case 6:return o=e.sent,this.logger.verbose("Auth client config generated"),a=new t.UsernamePasswordClient(o),e.abrupt("return",a.acquireToken(n));case 12:throw e.prev=12,e.t0=e.catch(3),i.cacheFailedRequest(e.t0),e.t0;case 16:case"end":return e.stop()}}),e,this,[[3,12]])})));return function(t){return e.apply(this,arguments)}}(),r}(j),P=function(){function e(){}e.fromAssertion=function(t){var r=new e;return r.jwt=t,r},e.fromCertificate=function(t,r,n){var i=new e;return i.privateKey=r,i.thumbprint=t,n&&(i.publicCertificate=this.parseCertificate(n)),i};var r=e.prototype;return r.getJwt=function(e,r,n){if(this.privateKey&&this.thumbprint)return this.jwt&&!this.isExpired()&&r===this.issuer&&n===this.jwtAudience?this.jwt:this.createJwt(e,r,n);if(this.jwt)return this.jwt;throw t.ClientAuthError.createInvalidAssertionError()},r.createJwt=function(e,r,n){var i,a;this.issuer=r,this.jwtAudience=n;var c=t.TimeUtils.nowSeconds();this.expirationTime=c+600;var s,u=((i={}).alg="RS256",i.x5t=b.base64EncodeUrl(this.thumbprint,"hex"),i);this.publicCertificate&&Object.assign(u,((s={}).x5c=this.publicCertificate,s));var h=((a={}).aud=this.jwtAudience,a.exp=this.expirationTime,a.iss=this.issuer,a.sub=this.issuer,a.nbf=c,a.jti=e.createNewGuid(),a);return this.jwt=o.sign(h,this.privateKey,{header:u}),this.jwt},r.isExpired=function(){return this.expirationTime<t.TimeUtils.nowSeconds()},e.parseCertificate=function(e){for(var t,r=/\x2D\x2D\x2D\x2D\x2DBEGIN CERTIFICATE\x2D\x2D\x2D\x2D\x2D\n([\s\S]+?)\n\x2D\x2D\x2D\x2D\x2DEND CERTIFICATE\x2D\x2D\x2D\x2D\x2D/g,n=[];null!==(t=r.exec(e));)n.push(t[1].replace(/\n/,""));return n},e}(),z=function(e){function r(t){var r;return(r=e.call(this,t)||this).setClientCredential(r.config),r}u(r,e);var n=r.prototype;return n.acquireTokenByClientCredential=function(){var e=c(f.mark((function e(r){var n,i,o,a;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return this.logger.info("acquireTokenByClientCredential called"),n=s({},r,this.initializeBaseRequest(r)),i=this.initializeServerTelemetryManager(p.acquireTokenByClientCredential,n.correlationId,n.skipCache),e.prev=3,e.next=6,this.buildOauthClientConfiguration(n.authority,i);case 6:return o=e.sent,this.logger.verbose("Auth client config generated"),a=new t.ClientCredentialClient(o),e.abrupt("return",a.acquireToken(n));case 12:throw e.prev=12,e.t0=e.catch(3),i.cacheFailedRequest(e.t0),e.t0;case 16:case"end":return e.stop()}}),e,this,[[3,12]])})));return function(t){return e.apply(this,arguments)}}(),n.acquireTokenOnBehalfOf=function(){var e=c(f.mark((function e(r){var n,i,o;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return this.logger.info("acquireTokenOnBehalfOf called"),n=s({},r,this.initializeBaseRequest(r)),e.next=4,this.buildOauthClientConfiguration(n.authority);case 4:return i=e.sent,this.logger.verbose("Auth client config generated"),o=new t.OnBehalfOfClient(i),e.abrupt("return",o.acquireToken(n));case 8:case"end":return e.stop()}}),e,this)})));return function(t){return e.apply(this,arguments)}}(),n.setClientCredential=function(e){var r=!t.StringUtils.isEmpty(e.auth.clientSecret),n=!t.StringUtils.isEmpty(e.auth.clientAssertion),i=e.auth.clientCertificate,o=!t.StringUtils.isEmpty(i.thumbprint)||!t.StringUtils.isEmpty(i.privateKey);if(r&&n||n&&o||r&&o)throw t.ClientAuthError.createInvalidCredentialError();if(r)this.clientSecret=e.auth.clientSecret;else if(n)this.clientAssertion=P.fromAssertion(e.auth.clientAssertion);else{if(!o)throw t.ClientAuthError.createInvalidCredentialError();var a;this.clientAssertion=P.fromCertificate(i.thumbprint,i.privateKey,null==(a=e.auth.clientCertificate)?void 0:a.x5c)}},r}(j);Object.defineProperty(exports, "AuthError", ({enumerable:!0,get:function(){return t.AuthError}})),Object.defineProperty(exports, "AuthErrorMessage", ({enumerable:!0,get:function(){return t.AuthErrorMessage}})),Object.defineProperty(exports, "ClientAuthError", ({enumerable:!0,get:function(){return t.ClientAuthError}})),Object.defineProperty(exports, "ClientAuthErrorMessage", ({enumerable:!0,get:function(){return t.ClientAuthErrorMessage}})),Object.defineProperty(exports, "ClientConfigurationError", ({enumerable:!0,get:function(){return t.ClientConfigurationError}})),Object.defineProperty(exports, "ClientConfigurationErrorMessage", ({enumerable:!0,get:function(){return t.ClientConfigurationErrorMessage}})),Object.defineProperty(exports, "InteractionRequiredAuthError", ({enumerable:!0,get:function(){return t.InteractionRequiredAuthError}})),Object.defineProperty(exports, "LogLevel", ({enumerable:!0,get:function(){return t.LogLevel}})),Object.defineProperty(exports, "Logger", ({enumerable:!0,get:function(){return t.Logger}})),Object.defineProperty(exports, "PromptValue", ({enumerable:!0,get:function(){return t.PromptValue}})),Object.defineProperty(exports, "ProtocolMode", ({enumerable:!0,get:function(){return t.ProtocolMode}})),Object.defineProperty(exports, "ResponseMode", ({enumerable:!0,get:function(){return t.ResponseMode}})),Object.defineProperty(exports, "ServerError", ({enumerable:!0,get:function(){return t.ServerError}})),Object.defineProperty(exports, "TokenCacheContext", ({enumerable:!0,get:function(){return t.TokenCacheContext}})),exports.ClientApplication=j,exports.ClientAssertion=P,exports.ConfidentialClientApplication=z,exports.CryptoProvider=A,exports.NodeStorage=E,exports.PublicClientApplication=q,exports.TokenCache=R,exports.buildAppConfiguration=k;
+function e(e){return e&&"object"==typeof e&&"default"in e?e.default:e}Object.defineProperty(exports, "__esModule", ({value:!0}));var t=__nccwpck_require__(5728),r=e(__nccwpck_require__(6545)),n=__nccwpck_require__(7176),i=e(__nccwpck_require__(6417)),o=__nccwpck_require__(7486);function a(e,t,r,n,i,o,a){try{var c=e[o](a),s=c.value}catch(e){return void r(e)}c.done?t(s):Promise.resolve(s).then(n,i)}function c(e){return function(){var t=this,r=arguments;return new Promise((function(n,i){var o=e.apply(t,r);function c(e){a(o,n,i,c,s,"next",e)}function s(e){a(o,n,i,c,s,"throw",e)}c(void 0)}))}}function s(){return(s=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var n in r)Object.prototype.hasOwnProperty.call(r,n)&&(e[n]=r[n])}return e}).apply(this,arguments)}function u(e,t){e.prototype=Object.create(t.prototype),e.prototype.constructor=e,e.__proto__=t}var h,l,f=(function(e){var t=function(e){var t=Object.prototype,r=t.hasOwnProperty,n="function"==typeof Symbol?Symbol:{},i=n.iterator||"@@iterator",o=n.asyncIterator||"@@asyncIterator",a=n.toStringTag||"@@toStringTag";function c(e,t,r){return Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}),e[t]}try{c({},"")}catch(e){c=function(e,t,r){return e[t]=r}}function s(e,t,r,n){var i=Object.create((t&&t.prototype instanceof l?t:l).prototype),o=new A(n||[]);return i._invoke=function(e,t,r){var n="suspendedStart";return function(i,o){if("executing"===n)throw new Error("Generator is already running");if("completed"===n){if("throw"===i)throw o;return{value:void 0,done:!0}}for(r.method=i,r.arg=o;;){var a=r.delegate;if(a){var c=C(a,r);if(c){if(c===h)continue;return c}}if("next"===r.method)r.sent=r._sent=r.arg;else if("throw"===r.method){if("suspendedStart"===n)throw n="completed",r.arg;r.dispatchException(r.arg)}else"return"===r.method&&r.abrupt("return",r.arg);n="executing";var s=u(e,t,r);if("normal"===s.type){if(n=r.done?"completed":"suspendedYield",s.arg===h)continue;return{value:s.arg,done:r.done}}"throw"===s.type&&(n="completed",r.method="throw",r.arg=s.arg)}}}(e,r,o),i}function u(e,t,r){try{return{type:"normal",arg:e.call(t,r)}}catch(e){return{type:"throw",arg:e}}}e.wrap=s;var h={};function l(){}function f(){}function p(){}var d={};d[i]=function(){return this};var g=Object.getPrototypeOf,y=g&&g(g(w([])));y&&y!==t&&r.call(y,i)&&(d=y);var v=p.prototype=l.prototype=Object.create(d);function m(e){["next","throw","return"].forEach((function(t){c(e,t,(function(e){return this._invoke(t,e)}))}))}function k(e,t){var n;this._invoke=function(i,o){function a(){return new t((function(n,a){!function n(i,o,a,c){var s=u(e[i],e,o);if("throw"!==s.type){var h=s.arg,l=h.value;return l&&"object"==typeof l&&r.call(l,"__await")?t.resolve(l.__await).then((function(e){n("next",e,a,c)}),(function(e){n("throw",e,a,c)})):t.resolve(l).then((function(e){h.value=e,a(h)}),(function(e){return n("throw",e,a,c)}))}c(s.arg)}(i,o,n,a)}))}return n=n?n.then(a,a):a()}}function C(e,t){var r=e.iterator[t.method];if(void 0===r){if(t.delegate=null,"throw"===t.method){if(e.iterator.return&&(t.method="return",t.arg=void 0,C(e,t),"throw"===t.method))return h;t.method="throw",t.arg=new TypeError("The iterator does not provide a 'throw' method")}return h}var n=u(r,e.iterator,t.arg);if("throw"===n.type)return t.method="throw",t.arg=n.arg,t.delegate=null,h;var i=n.arg;return i?i.done?(t[e.resultName]=i.value,t.next=e.nextLoc,"return"!==t.method&&(t.method="next",t.arg=void 0),t.delegate=null,h):i:(t.method="throw",t.arg=new TypeError("iterator result is not an object"),t.delegate=null,h)}function b(e){var t={tryLoc:e[0]};1 in e&&(t.catchLoc=e[1]),2 in e&&(t.finallyLoc=e[2],t.afterLoc=e[3]),this.tryEntries.push(t)}function T(e){var t=e.completion||{};t.type="normal",delete t.arg,e.completion=t}function A(e){this.tryEntries=[{tryLoc:"root"}],e.forEach(b,this),this.reset(!0)}function w(e){if(e){var t=e[i];if(t)return t.call(e);if("function"==typeof e.next)return e;if(!isNaN(e.length)){var n=-1,o=function t(){for(;++n<e.length;)if(r.call(e,n))return t.value=e[n],t.done=!1,t;return t.value=void 0,t.done=!0,t};return o.next=o}}return{next:x}}function x(){return{value:void 0,done:!0}}return f.prototype=v.constructor=p,p.constructor=f,f.displayName=c(p,a,"GeneratorFunction"),e.isGeneratorFunction=function(e){var t="function"==typeof e&&e.constructor;return!!t&&(t===f||"GeneratorFunction"===(t.displayName||t.name))},e.mark=function(e){return Object.setPrototypeOf?Object.setPrototypeOf(e,p):(e.__proto__=p,c(e,a,"GeneratorFunction")),e.prototype=Object.create(v),e},e.awrap=function(e){return{__await:e}},m(k.prototype),k.prototype[o]=function(){return this},e.AsyncIterator=k,e.async=function(t,r,n,i,o){void 0===o&&(o=Promise);var a=new k(s(t,r,n,i),o);return e.isGeneratorFunction(r)?a:a.next().then((function(e){return e.done?e.value:a.next()}))},m(v),c(v,a,"Generator"),v[i]=function(){return this},v.toString=function(){return"[object Generator]"},e.keys=function(e){var t=[];for(var r in e)t.push(r);return t.reverse(),function r(){for(;t.length;){var n=t.pop();if(n in e)return r.value=n,r.done=!1,r}return r.done=!0,r}},e.values=w,A.prototype={constructor:A,reset:function(e){if(this.prev=0,this.next=0,this.sent=this._sent=void 0,this.done=!1,this.delegate=null,this.method="next",this.arg=void 0,this.tryEntries.forEach(T),!e)for(var t in this)"t"===t.charAt(0)&&r.call(this,t)&&!isNaN(+t.slice(1))&&(this[t]=void 0)},stop:function(){this.done=!0;var e=this.tryEntries[0].completion;if("throw"===e.type)throw e.arg;return this.rval},dispatchException:function(e){if(this.done)throw e;var t=this;function n(r,n){return a.type="throw",a.arg=e,t.next=r,n&&(t.method="next",t.arg=void 0),!!n}for(var i=this.tryEntries.length-1;i>=0;--i){var o=this.tryEntries[i],a=o.completion;if("root"===o.tryLoc)return n("end");if(o.tryLoc<=this.prev){var c=r.call(o,"catchLoc"),s=r.call(o,"finallyLoc");if(c&&s){if(this.prev<o.catchLoc)return n(o.catchLoc,!0);if(this.prev<o.finallyLoc)return n(o.finallyLoc)}else if(c){if(this.prev<o.catchLoc)return n(o.catchLoc,!0)}else{if(!s)throw new Error("try statement without catch or finally");if(this.prev<o.finallyLoc)return n(o.finallyLoc)}}}},abrupt:function(e,t){for(var n=this.tryEntries.length-1;n>=0;--n){var i=this.tryEntries[n];if(i.tryLoc<=this.prev&&r.call(i,"finallyLoc")&&this.prev<i.finallyLoc){var o=i;break}}o&&("break"===e||"continue"===e)&&o.tryLoc<=t&&t<=o.finallyLoc&&(o=null);var a=o?o.completion:{};return a.type=e,a.arg=t,o?(this.method="next",this.next=o.finallyLoc,h):this.complete(a)},complete:function(e,t){if("throw"===e.type)throw e.arg;return"break"===e.type||"continue"===e.type?this.next=e.arg:"return"===e.type?(this.rval=this.arg=e.arg,this.method="return",this.next="end"):"normal"===e.type&&t&&(this.next=t),h},finish:function(e){for(var t=this.tryEntries.length-1;t>=0;--t){var r=this.tryEntries[t];if(r.finallyLoc===e)return this.complete(r.completion,r.afterLoc),T(r),h}},catch:function(e){for(var t=this.tryEntries.length-1;t>=0;--t){var r=this.tryEntries[t];if(r.tryLoc===e){var n=r.completion;if("throw"===n.type){var i=n.arg;T(r)}return i}}throw new Error("illegal catch attempt")},delegateYield:function(e,t,r){return this.delegate={iterator:w(e),resultName:t,nextLoc:r},"next"===this.method&&(this.arg=void 0),h}},e}(e.exports);try{regeneratorRuntime=t}catch(e){Function("r","regeneratorRuntime = r")(t)}}(l={exports:{}}),l.exports);!function(e){e.GET="get",e.POST="post"}(h||(h={}));var p,d="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";!function(e){e[e.acquireTokenSilent=62]="acquireTokenSilent",e[e.acquireTokenByUsernamePassword=371]="acquireTokenByUsernamePassword",e[e.acquireTokenByDeviceCode=671]="acquireTokenByDeviceCode",e[e.acquireTokenByClientCredential=771]="acquireTokenByClientCredential",e[e.acquireTokenByCode=871]="acquireTokenByCode",e[e.acquireTokenByRefreshToken=872]="acquireTokenByRefreshToken"}(p||(p={}));var g=function(){function e(){}var t=e.prototype;return t.sendGetRequestAsync=function(){var e=c(f.mark((function e(t,n){var i,o;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return i={method:h.GET,url:t,headers:n&&n.headers,validateStatus:function(){return!0}},e.next=3,r(i);case 3:return e.abrupt("return",{headers:(o=e.sent).headers,body:o.data,status:o.status});case 5:case"end":return e.stop()}}),e)})));return function(t,r){return e.apply(this,arguments)}}(),t.sendPostRequestAsync=function(){var e=c(f.mark((function e(t,n){var i,o;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return i={method:h.POST,url:t,data:n&&n.body||"",headers:n&&n.headers,validateStatus:function(){return!0}},e.next=3,r(i);case 3:return e.abrupt("return",{headers:(o=e.sent).headers,body:o.data,status:o.status});case 5:case"end":return e.stop()}}),e)})));return function(t,r){return e.apply(this,arguments)}}(),e}(),y={clientId:"",authority:t.Constants.DEFAULT_AUTHORITY,clientSecret:"",clientAssertion:"",clientCertificate:{thumbprint:"",privateKey:"",x5c:""},knownAuthorities:[],cloudDiscoveryMetadata:"",authorityMetadata:"",clientCapabilities:[],protocolMode:t.ProtocolMode.AAD},v={},m={loggerOptions:{loggerCallback:function(){},piiLoggingEnabled:!1,logLevel:t.LogLevel.Info},networkClient:function(){function e(){}return e.getNetworkClient=function(){return new g},e}().getNetworkClient()};function k(e){var t=e.cache,r=e.system;return{auth:s({},y,e.auth),cache:s({},v,t),system:s({},m,r)}}var C=function(){function e(){}return e.generateGuid=function(){return n.v4()},e.isGuid=function(e){return/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(e)},e}(),b=function(){function e(){}return e.base64Encode=function(e,t){return Buffer.from(e,t).toString("base64")},e.base64EncodeUrl=function(t,r){return e.base64Encode(t,r).replace(/=/g,"").replace(/\+/g,"-").replace(/\//g,"_")},e.base64Decode=function(e){return Buffer.from(e,"base64").toString("utf8")},e.base64DecodeUrl=function(t){for(var r=t.replace(/-/g,"+").replace(/_/g,"/");r.length%4;)r+="=";return e.base64Decode(r)},e}(),T=function(){function e(){}var t=e.prototype;return t.generatePkceCodes=function(){var e=c(f.mark((function e(){var t,r;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return t=this.generateCodeVerifier(),r=this.generateCodeChallengeFromVerifier(t),e.abrupt("return",{verifier:t,challenge:r});case 3:case"end":return e.stop()}}),e,this)})));return function(){return e.apply(this,arguments)}}(),t.generateCodeVerifier=function(){var e=i.randomBytes(32),t=this.bufferToCVString(e);return b.base64EncodeUrl(t)},t.generateCodeChallengeFromVerifier=function(e){return b.base64EncodeUrl(this.sha256(e).toString("base64"),"base64")},t.sha256=function(e){return i.createHash("sha256").update(e).digest()},t.bufferToCVString=function(e){for(var t=[],r=0;r<e.byteLength;r+=1)t.push(d[e[r]%d.length]);return t.join("")},e}(),A=function(){function e(){this.pkceGenerator=new T}var t=e.prototype;return t.createNewGuid=function(){return C.generateGuid()},t.base64Encode=function(e){return b.base64Encode(e)},t.base64Decode=function(e){return b.base64Decode(e)},t.generatePkceCodes=function(){return this.pkceGenerator.generatePkceCodes()},t.getPublicKeyThumbprint=function(){throw new Error("Method not implemented.")},t.signJwt=function(){throw new Error("Method not implemented.")},e}(),w=function(){function e(){}return e.deserializeJSONBlob=function(e){return t.StringUtils.isEmpty(e)?{}:JSON.parse(e)},e.deserializeAccounts=function(e){var r={};return e&&Object.keys(e).map((function(n){var i=e[n],o={homeAccountId:i.home_account_id,environment:i.environment,realm:i.realm,localAccountId:i.local_account_id,username:i.username,authorityType:i.authority_type,name:i.name,clientInfo:i.client_info,lastModificationTime:i.last_modification_time,lastModificationApp:i.last_modification_app},a=new t.AccountEntity;t.CacheManager.toObject(a,o),r[n]=a})),r},e.deserializeIdTokens=function(e){var r={};return e&&Object.keys(e).map((function(n){var i=e[n],o={homeAccountId:i.home_account_id,environment:i.environment,credentialType:i.credential_type,clientId:i.client_id,secret:i.secret,realm:i.realm},a=new t.IdTokenEntity;t.CacheManager.toObject(a,o),r[n]=a})),r},e.deserializeAccessTokens=function(e){var r={};return e&&Object.keys(e).map((function(n){var i=e[n],o={homeAccountId:i.home_account_id,environment:i.environment,credentialType:i.credential_type,clientId:i.client_id,secret:i.secret,realm:i.realm,target:i.target,cachedAt:i.cached_at,expiresOn:i.expires_on,extendedExpiresOn:i.extended_expires_on,refreshOn:i.refresh_on,keyId:i.key_id,tokenType:i.token_type},a=new t.AccessTokenEntity;t.CacheManager.toObject(a,o),r[n]=a})),r},e.deserializeRefreshTokens=function(e){var r={};return e&&Object.keys(e).map((function(n){var i=e[n],o={homeAccountId:i.home_account_id,environment:i.environment,credentialType:i.credential_type,clientId:i.client_id,secret:i.secret,familyId:i.family_id,target:i.target,realm:i.realm},a=new t.RefreshTokenEntity;t.CacheManager.toObject(a,o),r[n]=a})),r},e.deserializeAppMetadata=function(e){var r={};return e&&Object.keys(e).map((function(n){var i=e[n],o={clientId:i.client_id,environment:i.environment,familyId:i.family_id},a=new t.AppMetadataEntity;t.CacheManager.toObject(a,o),r[n]=a})),r},e.deserializeAllCache=function(e){return{accounts:e.Account?this.deserializeAccounts(e.Account):{},idTokens:e.IdToken?this.deserializeIdTokens(e.IdToken):{},accessTokens:e.AccessToken?this.deserializeAccessTokens(e.AccessToken):{},refreshTokens:e.RefreshToken?this.deserializeRefreshTokens(e.RefreshToken):{},appMetadata:e.AppMetadata?this.deserializeAppMetadata(e.AppMetadata):{}}},e}(),x=function(){function e(){}return e.serializeJSONBlob=function(e){return JSON.stringify(e)},e.serializeAccounts=function(e){var t={};return Object.keys(e).map((function(r){var n=e[r];t[r]={home_account_id:n.homeAccountId,environment:n.environment,realm:n.realm,local_account_id:n.localAccountId,username:n.username,authority_type:n.authorityType,name:n.name,client_info:n.clientInfo,last_modification_time:n.lastModificationTime,last_modification_app:n.lastModificationApp}})),t},e.serializeIdTokens=function(e){var t={};return Object.keys(e).map((function(r){var n=e[r];t[r]={home_account_id:n.homeAccountId,environment:n.environment,credential_type:n.credentialType,client_id:n.clientId,secret:n.secret,realm:n.realm}})),t},e.serializeAccessTokens=function(e){var t={};return Object.keys(e).map((function(r){var n=e[r];t[r]={home_account_id:n.homeAccountId,environment:n.environment,credential_type:n.credentialType,client_id:n.clientId,secret:n.secret,realm:n.realm,target:n.target,cached_at:n.cachedAt,expires_on:n.expiresOn,extended_expires_on:n.extendedExpiresOn,refresh_on:n.refreshOn,key_id:n.keyId,token_type:n.tokenType}})),t},e.serializeRefreshTokens=function(e){var t={};return Object.keys(e).map((function(r){var n=e[r];t[r]={home_account_id:n.homeAccountId,environment:n.environment,credential_type:n.credentialType,client_id:n.clientId,secret:n.secret,family_id:n.familyId,target:n.target,realm:n.realm}})),t},e.serializeAppMetadata=function(e){var t={};return Object.keys(e).map((function(r){var n=e[r];t[r]={client_id:n.clientId,environment:n.environment,family_id:n.familyId}})),t},e.serializeAllCache=function(e){return{Account:this.serializeAccounts(e.accounts),IdToken:this.serializeIdTokens(e.idTokens),AccessToken:this.serializeAccessTokens(e.accessTokens),RefreshToken:this.serializeRefreshTokens(e.refreshTokens),AppMetadata:this.serializeAppMetadata(e.appMetadata)}},e}(),E=function(e){function r(t,r,n){var i;return(i=e.call(this,r,n)||this).cache={},i.changeEmitters=[],i.logger=t,i}u(r,e);var n=r.prototype;return n.registerChangeEmitter=function(e){this.changeEmitters.push(e)},n.emitChange=function(){this.changeEmitters.forEach((function(e){return e.call(null)}))},n.cacheToInMemoryCache=function(e){var r={accounts:{},idTokens:{},accessTokens:{},refreshTokens:{},appMetadata:{}};for(var n in e)if(e[n]instanceof t.AccountEntity)r.accounts[n]=e[n];else if(e[n]instanceof t.IdTokenEntity)r.idTokens[n]=e[n];else if(e[n]instanceof t.AccessTokenEntity)r.accessTokens[n]=e[n];else if(e[n]instanceof t.RefreshTokenEntity)r.refreshTokens[n]=e[n];else{if(!(e[n]instanceof t.AppMetadataEntity))continue;r.appMetadata[n]=e[n]}return r},n.inMemoryCacheToCache=function(e){return this.getCache(),s({},e.accounts,e.idTokens,e.accessTokens,e.refreshTokens,e.appMetadata)},n.getInMemoryCache=function(){return this.logger.verbose("Getting in-memory cache"),this.cacheToInMemoryCache(this.getCache())},n.setInMemoryCache=function(e){this.logger.verbose("Setting in-memory cache");var t=this.inMemoryCacheToCache(e);this.setCache(t),this.emitChange()},n.getCache=function(){return this.logger.verbose("Getting cache key-value store"),this.cache},n.setCache=function(e){this.logger.verbose("Setting cache key value store"),this.cache=e,this.emitChange()},n.getItem=function(e){return this.logger.verbosePii("Item key: "+e),this.getCache()[e]},n.setItem=function(e,t){this.logger.verbosePii("Item key: "+e);var r=this.getCache();r[e]=t,this.setCache(r)},n.getAccount=function(e){var r=this.getItem(e);return t.AccountEntity.isAccountEntity(r)?r:null},n.setAccount=function(e){var t=e.generateAccountKey();this.setItem(t,e)},n.getIdTokenCredential=function(e){var r=this.getItem(e);return t.IdTokenEntity.isIdTokenEntity(r)?r:null},n.setIdTokenCredential=function(e){var t=e.generateCredentialKey();this.setItem(t,e)},n.getAccessTokenCredential=function(e){var r=this.getItem(e);return t.AccessTokenEntity.isAccessTokenEntity(r)?r:null},n.setAccessTokenCredential=function(e){var t=e.generateCredentialKey();this.setItem(t,e)},n.getRefreshTokenCredential=function(e){var r=this.getItem(e);return t.RefreshTokenEntity.isRefreshTokenEntity(r)?r:null},n.setRefreshTokenCredential=function(e){var t=e.generateCredentialKey();this.setItem(t,e)},n.getAppMetadata=function(e){var r=this.getItem(e);return t.AppMetadataEntity.isAppMetadataEntity(e,r)?r:null},n.setAppMetadata=function(e){var t=e.generateAppMetadataKey();this.setItem(t,e)},n.getServerTelemetry=function(e){var r=this.getItem(e);return r&&t.ServerTelemetryEntity.isServerTelemetryEntity(e,r)?r:null},n.setServerTelemetry=function(e,t){this.setItem(e,t)},n.getAuthorityMetadata=function(e){var r=this.getItem(e);return r&&t.AuthorityMetadataEntity.isAuthorityMetadataEntity(e,r)?r:null},n.getAuthorityMetadataKeys=function(){var e=this;return this.getKeys().filter((function(t){return e.isAuthorityMetadata(t)}))},n.setAuthorityMetadata=function(e,t){this.setItem(e,t)},n.getThrottlingCache=function(e){var r=this.getItem(e);return r&&t.ThrottlingEntity.isThrottlingEntity(e,r)?r:null},n.setThrottlingCache=function(e,t){this.setItem(e,t)},n.removeItem=function(e){this.logger.verbosePii("Item key: "+e);var t=!1,r=this.getCache();return r[e]&&(delete r[e],t=!0),t&&(this.setCache(r),this.emitChange()),t},n.containsKey=function(e){return this.getKeys().includes(e)},n.getKeys=function(){this.logger.verbose("Retrieving all cache keys");var e=this.getCache();return[].concat(Object.keys(e))},n.clear=function(){var e=this;this.logger.verbose("Clearing cache entries created by MSAL"),this.getKeys().forEach((function(t){e.removeItem(t)})),this.emitChange()},r.generateInMemoryCache=function(e){return w.deserializeAllCache(w.deserializeJSONBlob(e))},r.generateJsonCache=function(e){return x.serializeAllCache(e)},r}(t.CacheManager),I={},O={},_={},M={},S={},R=function(){function e(e,t,r){this.cacheHasChanged=!1,this.storage=e,this.storage.registerChangeEmitter(this.handleChangeEvent.bind(this)),r&&(this.persistence=r),this.logger=t}var r=e.prototype;return r.hasChanged=function(){return this.cacheHasChanged},r.serialize=function(){this.logger.verbose("Serializing in-memory cache");var e=x.serializeAllCache(this.storage.getInMemoryCache());return t.StringUtils.isEmpty(this.cacheSnapshot)?this.logger.verbose("No cache snapshot to merge"):(this.logger.verbose("Reading cache snapshot from disk"),e=this.mergeState(JSON.parse(this.cacheSnapshot),e)),this.cacheHasChanged=!1,JSON.stringify(e)},r.deserialize=function(e){if(this.logger.verbose("Deserializing JSON to in-memory cache"),this.cacheSnapshot=e,t.StringUtils.isEmpty(this.cacheSnapshot))this.logger.verbose("No cache snapshot to deserialize");else{this.logger.verbose("Reading cache snapshot from disk");var r=w.deserializeAllCache(this.overlayDefaults(JSON.parse(this.cacheSnapshot)));this.storage.setInMemoryCache(r)}},r.getKVStore=function(){return this.storage.getCache()},r.getAllAccounts=function(){var e=c(f.mark((function e(){var r;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:if(this.logger.verbose("getAllAccounts called"),e.prev=1,!this.persistence){e.next=6;break}return r=new t.TokenCacheContext(this,!1),e.next=6,this.persistence.beforeCacheAccess(r);case 6:return e.abrupt("return",this.storage.getAllAccounts());case 7:if(e.prev=7,!this.persistence||!r){e.next=11;break}return e.next=11,this.persistence.afterCacheAccess(r);case 11:return e.finish(7);case 12:case"end":return e.stop()}}),e,this,[[1,,7,12]])})));return function(){return e.apply(this,arguments)}}(),r.getAccountByHomeId=function(){var e=c(f.mark((function e(r){var n;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return e.next=2,this.getAllAccounts();case 2:if(n=e.sent,t.StringUtils.isEmpty(r)||!n||!n.length){e.next=7;break}return e.abrupt("return",n.filter((function(e){return e.homeAccountId===r}))[0]||null);case 7:return e.abrupt("return",null);case 8:case"end":return e.stop()}}),e,this)})));return function(t){return e.apply(this,arguments)}}(),r.getAccountByLocalId=function(){var e=c(f.mark((function e(r){var n;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return e.next=2,this.getAllAccounts();case 2:if(n=e.sent,t.StringUtils.isEmpty(r)||!n||!n.length){e.next=7;break}return e.abrupt("return",n.filter((function(e){return e.localAccountId===r}))[0]||null);case 7:return e.abrupt("return",null);case 8:case"end":return e.stop()}}),e,this)})));return function(t){return e.apply(this,arguments)}}(),r.removeAccount=function(){var e=c(f.mark((function e(r){var n;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:if(this.logger.verbose("removeAccount called"),e.prev=1,!this.persistence){e.next=6;break}return n=new t.TokenCacheContext(this,!0),e.next=6,this.persistence.beforeCacheAccess(n);case 6:this.storage.removeAccount(t.AccountEntity.generateAccountCacheKey(r));case 7:if(e.prev=7,!this.persistence||!n){e.next=11;break}return e.next=11,this.persistence.afterCacheAccess(n);case 11:return e.finish(7);case 12:case"end":return e.stop()}}),e,this,[[1,,7,12]])})));return function(t){return e.apply(this,arguments)}}(),r.handleChangeEvent=function(){this.cacheHasChanged=!0},r.mergeState=function(e,t){this.logger.verbose("Merging in-memory cache with cache snapshot");var r=this.mergeRemovals(e,t);return this.mergeUpdates(r,t)},r.mergeUpdates=function(e,t){var r=this;return Object.keys(t).forEach((function(n){var i=t[n];if(e.hasOwnProperty(n)){var o=null!==i,a="object"==typeof i,c=!Array.isArray(i);o&&a&&c&&null!=e[n]?r.mergeUpdates(e[n],i):e[n]=i}else null!==i&&(e[n]=i)})),e},r.mergeRemovals=function(e,t){return this.logger.verbose("Remove updated entries in cache"),s({},e,{Account:e.Account?this.mergeRemovalsDict(e.Account,t.Account):e.Account,AccessToken:e.AccessToken?this.mergeRemovalsDict(e.AccessToken,t.AccessToken):e.AccessToken,RefreshToken:e.RefreshToken?this.mergeRemovalsDict(e.RefreshToken,t.RefreshToken):e.RefreshToken,IdToken:e.IdToken?this.mergeRemovalsDict(e.IdToken,t.IdToken):e.IdToken,AppMetadata:e.AppMetadata?this.mergeRemovalsDict(e.AppMetadata,t.AppMetadata):e.AppMetadata})},r.mergeRemovalsDict=function(e,t){var r=s({},e);return Object.keys(e).forEach((function(e){t&&t.hasOwnProperty(e)||delete r[e]})),r},r.overlayDefaults=function(e){return this.logger.verbose("Overlaying input cache with the default cache"),{Account:s({},I,e.Account),IdToken:s({},O,e.IdToken),AccessToken:s({},_,e.AccessToken),RefreshToken:s({},M,e.RefreshToken),AppMetadata:s({},S,e.AppMetadata)}},e}(),j=function(){function e(e){this.config=k(e),this.cryptoProvider=new A,this.logger=new t.Logger(this.config.system.loggerOptions,"@azure/msal-node","1.0.0-beta.6"),this.storage=new E(this.logger,this.config.auth.clientId,this.cryptoProvider),this.tokenCache=new R(this.storage,this.logger,this.config.cache.cachePlugin)}var r=e.prototype;return r.getAuthCodeUrl=function(){var e=c(f.mark((function e(r){var n,i,o;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return this.logger.info("getAuthCodeUrl called"),n=s({},r,this.initializeBaseRequest(r),{responseMode:r.responseMode||t.ResponseMode.QUERY,authenticationScheme:t.AuthenticationScheme.BEARER}),e.next=4,this.buildOauthClientConfiguration(n.authority);case 4:return i=e.sent,this.logger.verbose("Auth client config generated"),o=new t.AuthorizationCodeClient(i),e.abrupt("return",o.getAuthCodeUrl(n));case 8:case"end":return e.stop()}}),e,this)})));return function(t){return e.apply(this,arguments)}}(),r.acquireTokenByCode=function(){var e=c(f.mark((function e(r){var n,i,o,a;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return this.logger.info("acquireTokenByCode called"),n=s({},r,this.initializeBaseRequest(r),{authenticationScheme:t.AuthenticationScheme.BEARER}),i=this.initializeServerTelemetryManager(p.acquireTokenByCode,n.correlationId),e.prev=3,e.next=6,this.buildOauthClientConfiguration(n.authority,i);case 6:return o=e.sent,this.logger.verbose("Auth client config generated"),a=new t.AuthorizationCodeClient(o),e.abrupt("return",a.acquireToken(n));case 12:throw e.prev=12,e.t0=e.catch(3),i.cacheFailedRequest(e.t0),e.t0;case 16:case"end":return e.stop()}}),e,this,[[3,12]])})));return function(t){return e.apply(this,arguments)}}(),r.acquireTokenByRefreshToken=function(){var e=c(f.mark((function e(r){var n,i,o,a;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return this.logger.info("acquireTokenByRefreshToken called"),n=s({},r,this.initializeBaseRequest(r),{authenticationScheme:t.AuthenticationScheme.BEARER}),i=this.initializeServerTelemetryManager(p.acquireTokenByRefreshToken,n.correlationId),e.prev=3,e.next=6,this.buildOauthClientConfiguration(n.authority,i);case 6:return o=e.sent,this.logger.verbose("Auth client config generated"),a=new t.RefreshTokenClient(o),e.abrupt("return",a.acquireToken(n));case 12:throw e.prev=12,e.t0=e.catch(3),i.cacheFailedRequest(e.t0),e.t0;case 16:case"end":return e.stop()}}),e,this,[[3,12]])})));return function(t){return e.apply(this,arguments)}}(),r.acquireTokenSilent=function(){var e=c(f.mark((function e(r){var n,i,o;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return n=s({},r,this.initializeBaseRequest(r),{forceRefresh:r.forceRefresh||!1}),i=this.initializeServerTelemetryManager(p.acquireTokenSilent,n.correlationId,n.forceRefresh),e.prev=2,e.next=5,this.buildOauthClientConfiguration(n.authority,i);case 5:return o=new t.SilentFlowClient(e.sent),e.abrupt("return",o.acquireToken(n));case 10:throw e.prev=10,e.t0=e.catch(2),i.cacheFailedRequest(e.t0),e.t0;case 14:case"end":return e.stop()}}),e,this,[[2,10]])})));return function(t){return e.apply(this,arguments)}}(),r.getTokenCache=function(){return this.logger.info("getTokenCache called"),this.tokenCache},r.getLogger=function(){return this.logger},r.setLogger=function(e){this.logger=e},r.buildOauthClientConfiguration=function(){var e=c(f.mark((function e(t,r){var n;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return this.logger.verbose("buildOauthClientConfiguration called"),e.next=3,this.createAuthority(t);case 3:return e.abrupt("return",{authOptions:{clientId:this.config.auth.clientId,authority:n=e.sent,clientCapabilities:this.config.auth.clientCapabilities},loggerOptions:{loggerCallback:this.config.system.loggerOptions.loggerCallback,piiLoggingEnabled:this.config.system.loggerOptions.piiLoggingEnabled},cryptoInterface:this.cryptoProvider,networkInterface:this.config.system.networkClient,storageInterface:this.storage,serverTelemetryManager:r,clientCredentials:{clientSecret:this.clientSecret,clientAssertion:this.clientAssertion?this.getClientAssertion(n):void 0},libraryInfo:{sku:"msal.js.node",version:"1.0.0-beta.6",cpu:process.arch||"",os:process.platform||""},persistencePlugin:this.config.cache.cachePlugin,serializableCache:this.tokenCache});case 5:case"end":return e.stop()}}),e,this)})));return function(t,r){return e.apply(this,arguments)}}(),r.getClientAssertion=function(e){return{assertion:this.clientAssertion.getJwt(this.cryptoProvider,this.config.auth.clientId,e.tokenEndpoint),assertionType:"urn:ietf:params:oauth:client-assertion-type:jwt-bearer"}},r.initializeBaseRequest=function(e){return this.logger.verbose("initializeRequestScopes called"),s({},e,{scopes:[].concat(e&&e.scopes||[],t.OIDC_DEFAULT_SCOPES),correlationId:e&&e.correlationId||this.cryptoProvider.createNewGuid(),authority:e.authority||this.config.auth.authority})},r.initializeServerTelemetryManager=function(e,r,n){return new t.ServerTelemetryManager({clientId:this.config.auth.clientId,correlationId:r,apiId:e,forceRefresh:n||!1},this.storage)},r.createAuthority=function(){var e=c(f.mark((function e(r){var n;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return this.logger.verbose("createAuthority called"),n={protocolMode:this.config.auth.protocolMode,knownAuthorities:this.config.auth.knownAuthorities,cloudDiscoveryMetadata:this.config.auth.cloudDiscoveryMetadata,authorityMetadata:this.config.auth.authorityMetadata},e.next=4,t.AuthorityFactory.createDiscoveredInstance(r,this.config.system.networkClient,this.storage,n);case 4:return e.abrupt("return",e.sent);case 5:case"end":return e.stop()}}),e,this)})));return function(t){return e.apply(this,arguments)}}(),e}(),q=function(e){function r(t){return e.call(this,t)||this}u(r,e);var n=r.prototype;return n.acquireTokenByDeviceCode=function(){var e=c(f.mark((function e(r){var n,i,o,a;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return this.logger.info("acquireTokenByDeviceCode called"),n=s({},r,this.initializeBaseRequest(r)),i=this.initializeServerTelemetryManager(p.acquireTokenByDeviceCode,n.correlationId),e.prev=3,e.next=6,this.buildOauthClientConfiguration(n.authority,i);case 6:return o=e.sent,this.logger.verbose("Auth client config generated"),a=new t.DeviceCodeClient(o),e.abrupt("return",a.acquireToken(n));case 12:throw e.prev=12,e.t0=e.catch(3),i.cacheFailedRequest(e.t0),e.t0;case 16:case"end":return e.stop()}}),e,this,[[3,12]])})));return function(t){return e.apply(this,arguments)}}(),n.acquireTokenByUsernamePassword=function(){var e=c(f.mark((function e(r){var n,i,o,a;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return this.logger.info("acquireTokenByUsernamePassword called"),n=s({},r,this.initializeBaseRequest(r)),i=this.initializeServerTelemetryManager(p.acquireTokenByUsernamePassword,n.correlationId),e.prev=3,e.next=6,this.buildOauthClientConfiguration(n.authority,i);case 6:return o=e.sent,this.logger.verbose("Auth client config generated"),a=new t.UsernamePasswordClient(o),e.abrupt("return",a.acquireToken(n));case 12:throw e.prev=12,e.t0=e.catch(3),i.cacheFailedRequest(e.t0),e.t0;case 16:case"end":return e.stop()}}),e,this,[[3,12]])})));return function(t){return e.apply(this,arguments)}}(),r}(j),P=function(){function e(){}e.fromAssertion=function(t){var r=new e;return r.jwt=t,r},e.fromCertificate=function(t,r,n){var i=new e;return i.privateKey=r,i.thumbprint=t,n&&(i.publicCertificate=this.parseCertificate(n)),i};var r=e.prototype;return r.getJwt=function(e,r,n){if(this.privateKey&&this.thumbprint)return this.jwt&&!this.isExpired()&&r===this.issuer&&n===this.jwtAudience?this.jwt:this.createJwt(e,r,n);if(this.jwt)return this.jwt;throw t.ClientAuthError.createInvalidAssertionError()},r.createJwt=function(e,r,n){var i,a;this.issuer=r,this.jwtAudience=n;var c=t.TimeUtils.nowSeconds();this.expirationTime=c+600;var s,u=((i={}).alg="RS256",i.x5t=b.base64EncodeUrl(this.thumbprint,"hex"),i);this.publicCertificate&&Object.assign(u,((s={}).x5c=this.publicCertificate,s));var h=((a={}).aud=this.jwtAudience,a.exp=this.expirationTime,a.iss=this.issuer,a.sub=this.issuer,a.nbf=c,a.jti=e.createNewGuid(),a);return this.jwt=o.sign(h,this.privateKey,{header:u}),this.jwt},r.isExpired=function(){return this.expirationTime<t.TimeUtils.nowSeconds()},e.parseCertificate=function(e){for(var t,r=/\x2D\x2D\x2D\x2D\x2DBEGIN CERTIFICATE\x2D\x2D\x2D\x2D\x2D\n([\s\S]+?)\n\x2D\x2D\x2D\x2D\x2DEND CERTIFICATE\x2D\x2D\x2D\x2D\x2D/g,n=[];null!==(t=r.exec(e));)n.push(t[1].replace(/\n/,""));return n},e}(),z=function(e){function r(t){var r;return(r=e.call(this,t)||this).setClientCredential(r.config),r}u(r,e);var n=r.prototype;return n.acquireTokenByClientCredential=function(){var e=c(f.mark((function e(r){var n,i,o,a;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return this.logger.info("acquireTokenByClientCredential called"),n=s({},r,this.initializeBaseRequest(r)),i=this.initializeServerTelemetryManager(p.acquireTokenByClientCredential,n.correlationId,n.skipCache),e.prev=3,e.next=6,this.buildOauthClientConfiguration(n.authority,i);case 6:return o=e.sent,this.logger.verbose("Auth client config generated"),a=new t.ClientCredentialClient(o),e.abrupt("return",a.acquireToken(n));case 12:throw e.prev=12,e.t0=e.catch(3),i.cacheFailedRequest(e.t0),e.t0;case 16:case"end":return e.stop()}}),e,this,[[3,12]])})));return function(t){return e.apply(this,arguments)}}(),n.acquireTokenOnBehalfOf=function(){var e=c(f.mark((function e(r){var n,i,o;return f.wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return this.logger.info("acquireTokenOnBehalfOf called"),n=s({},r,this.initializeBaseRequest(r)),e.next=4,this.buildOauthClientConfiguration(n.authority);case 4:return i=e.sent,this.logger.verbose("Auth client config generated"),o=new t.OnBehalfOfClient(i),e.abrupt("return",o.acquireToken(n));case 8:case"end":return e.stop()}}),e,this)})));return function(t){return e.apply(this,arguments)}}(),n.setClientCredential=function(e){var r=!t.StringUtils.isEmpty(e.auth.clientSecret),n=!t.StringUtils.isEmpty(e.auth.clientAssertion),i=e.auth.clientCertificate,o=!t.StringUtils.isEmpty(i.thumbprint)||!t.StringUtils.isEmpty(i.privateKey);if(r&&n||n&&o||r&&o)throw t.ClientAuthError.createInvalidCredentialError();if(r)this.clientSecret=e.auth.clientSecret;else if(n)this.clientAssertion=P.fromAssertion(e.auth.clientAssertion);else{if(!o)throw t.ClientAuthError.createInvalidCredentialError();var a;this.clientAssertion=P.fromCertificate(i.thumbprint,i.privateKey,null==(a=e.auth.clientCertificate)?void 0:a.x5c)}},r}(j);Object.defineProperty(exports, "AuthError", ({enumerable:!0,get:function(){return t.AuthError}})),Object.defineProperty(exports, "AuthErrorMessage", ({enumerable:!0,get:function(){return t.AuthErrorMessage}})),Object.defineProperty(exports, "ClientAuthError", ({enumerable:!0,get:function(){return t.ClientAuthError}})),Object.defineProperty(exports, "ClientAuthErrorMessage", ({enumerable:!0,get:function(){return t.ClientAuthErrorMessage}})),Object.defineProperty(exports, "ClientConfigurationError", ({enumerable:!0,get:function(){return t.ClientConfigurationError}})),Object.defineProperty(exports, "ClientConfigurationErrorMessage", ({enumerable:!0,get:function(){return t.ClientConfigurationErrorMessage}})),Object.defineProperty(exports, "InteractionRequiredAuthError", ({enumerable:!0,get:function(){return t.InteractionRequiredAuthError}})),Object.defineProperty(exports, "LogLevel", ({enumerable:!0,get:function(){return t.LogLevel}})),Object.defineProperty(exports, "Logger", ({enumerable:!0,get:function(){return t.Logger}})),Object.defineProperty(exports, "PromptValue", ({enumerable:!0,get:function(){return t.PromptValue}})),Object.defineProperty(exports, "ProtocolMode", ({enumerable:!0,get:function(){return t.ProtocolMode}})),Object.defineProperty(exports, "ResponseMode", ({enumerable:!0,get:function(){return t.ResponseMode}})),Object.defineProperty(exports, "ServerError", ({enumerable:!0,get:function(){return t.ServerError}})),Object.defineProperty(exports, "TokenCacheContext", ({enumerable:!0,get:function(){return t.TokenCacheContext}})),exports.ClientApplication=j,exports.ClientAssertion=P,exports.ConfidentialClientApplication=z,exports.CryptoProvider=A,exports.NodeStorage=E,exports.PublicClientApplication=q,exports.TokenCache=R,exports.buildAppConfiguration=k;
 //# sourceMappingURL=msal-node.cjs.production.min.js.map
 
 
 /***/ }),
 
-/***/ 3469:
+/***/ 7176:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -12978,29 +12978,29 @@ Object.defineProperty(exports, "parse", ({
   }
 }));
 
-var _v = _interopRequireDefault(__nccwpck_require__(4608));
+var _v = _interopRequireDefault(__nccwpck_require__(3236));
 
-var _v2 = _interopRequireDefault(__nccwpck_require__(9257));
+var _v2 = _interopRequireDefault(__nccwpck_require__(6474));
 
-var _v3 = _interopRequireDefault(__nccwpck_require__(8866));
+var _v3 = _interopRequireDefault(__nccwpck_require__(7945));
 
-var _v4 = _interopRequireDefault(__nccwpck_require__(330));
+var _v4 = _interopRequireDefault(__nccwpck_require__(5491));
 
-var _nil = _interopRequireDefault(__nccwpck_require__(804));
+var _nil = _interopRequireDefault(__nccwpck_require__(2384));
 
-var _version = _interopRequireDefault(__nccwpck_require__(8029));
+var _version = _interopRequireDefault(__nccwpck_require__(8748));
 
-var _validate = _interopRequireDefault(__nccwpck_require__(6457));
+var _validate = _interopRequireDefault(__nccwpck_require__(9922));
 
-var _stringify = _interopRequireDefault(__nccwpck_require__(7068));
+var _stringify = _interopRequireDefault(__nccwpck_require__(6430));
 
-var _parse = _interopRequireDefault(__nccwpck_require__(3100));
+var _parse = _interopRequireDefault(__nccwpck_require__(1682));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
 
-/***/ 826:
+/***/ 633:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -13030,7 +13030,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 804:
+/***/ 2384:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -13045,7 +13045,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 3100:
+/***/ 1682:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -13056,7 +13056,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _validate = _interopRequireDefault(__nccwpck_require__(6457));
+var _validate = _interopRequireDefault(__nccwpck_require__(9922));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13097,7 +13097,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 3266:
+/***/ 7866:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -13112,7 +13112,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 4746:
+/***/ 6568:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -13143,7 +13143,7 @@ function rng() {
 
 /***/ }),
 
-/***/ 1501:
+/***/ 2955:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -13173,7 +13173,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 7068:
+/***/ 6430:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -13184,7 +13184,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _validate = _interopRequireDefault(__nccwpck_require__(6457));
+var _validate = _interopRequireDefault(__nccwpck_require__(9922));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13219,7 +13219,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 4608:
+/***/ 3236:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -13230,9 +13230,9 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _rng = _interopRequireDefault(__nccwpck_require__(4746));
+var _rng = _interopRequireDefault(__nccwpck_require__(6568));
 
-var _stringify = _interopRequireDefault(__nccwpck_require__(7068));
+var _stringify = _interopRequireDefault(__nccwpck_require__(6430));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13333,7 +13333,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 9257:
+/***/ 6474:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -13344,9 +13344,9 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _v = _interopRequireDefault(__nccwpck_require__(1322));
+var _v = _interopRequireDefault(__nccwpck_require__(7328));
 
-var _md = _interopRequireDefault(__nccwpck_require__(826));
+var _md = _interopRequireDefault(__nccwpck_require__(633));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13356,7 +13356,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 1322:
+/***/ 7328:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -13368,9 +13368,9 @@ Object.defineProperty(exports, "__esModule", ({
 exports.default = _default;
 exports.URL = exports.DNS = void 0;
 
-var _stringify = _interopRequireDefault(__nccwpck_require__(7068));
+var _stringify = _interopRequireDefault(__nccwpck_require__(6430));
 
-var _parse = _interopRequireDefault(__nccwpck_require__(3100));
+var _parse = _interopRequireDefault(__nccwpck_require__(1682));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13441,7 +13441,7 @@ function _default(name, version, hashfunc) {
 
 /***/ }),
 
-/***/ 8866:
+/***/ 7945:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -13452,9 +13452,9 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _rng = _interopRequireDefault(__nccwpck_require__(4746));
+var _rng = _interopRequireDefault(__nccwpck_require__(6568));
 
-var _stringify = _interopRequireDefault(__nccwpck_require__(7068));
+var _stringify = _interopRequireDefault(__nccwpck_require__(6430));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13485,7 +13485,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 330:
+/***/ 5491:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -13496,9 +13496,9 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _v = _interopRequireDefault(__nccwpck_require__(1322));
+var _v = _interopRequireDefault(__nccwpck_require__(7328));
 
-var _sha = _interopRequireDefault(__nccwpck_require__(1501));
+var _sha = _interopRequireDefault(__nccwpck_require__(2955));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13508,7 +13508,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 6457:
+/***/ 9922:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -13519,7 +13519,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _regex = _interopRequireDefault(__nccwpck_require__(3266));
+var _regex = _interopRequireDefault(__nccwpck_require__(7866));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13532,7 +13532,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 8029:
+/***/ 8748:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -13543,7 +13543,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _validate = _interopRequireDefault(__nccwpck_require__(6457));
+var _validate = _interopRequireDefault(__nccwpck_require__(9922));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13560,7 +13560,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 6200:
+/***/ 3233:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -13570,7 +13570,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var tslib = __nccwpck_require__(6914);
+var tslib = __nccwpck_require__(4351);
 var util = _interopDefault(__nccwpck_require__(1669));
 var os = __nccwpck_require__(2087);
 
@@ -13848,7 +13848,7 @@ exports.setLogLevel = setLogLevel;
 
 /***/ }),
 
-/***/ 3065:
+/***/ 5728:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -20901,7 +20901,7 @@ exports.UsernamePasswordClient = UsernamePasswordClient;
 
 /***/ }),
 
-/***/ 2120:
+/***/ 2884:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
@@ -20909,15 +20909,15 @@ exports.UsernamePasswordClient = UsernamePasswordClient;
 
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __nccwpck_require__(2588)
+  module.exports = __nccwpck_require__(9802)
 } else {
-  module.exports = __nccwpck_require__(8963)
+  module.exports = __nccwpck_require__(5674)
 }
 
 
 /***/ }),
 
-/***/ 8963:
+/***/ 5674:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -20927,11 +20927,11 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var msalCommon = __nccwpck_require__(3065);
-var axios = _interopDefault(__nccwpck_require__(3343));
-var uuid = __nccwpck_require__(9655);
+var msalCommon = __nccwpck_require__(5728);
+var axios = _interopDefault(__nccwpck_require__(6545));
+var uuid = __nccwpck_require__(8786);
 var crypto = _interopDefault(__nccwpck_require__(6417));
-var jsonwebtoken = __nccwpck_require__(963);
+var jsonwebtoken = __nccwpck_require__(7486);
 
 /*
  * Copyright (c) Microsoft Corporation. All rights reserved.
@@ -23116,17 +23116,17 @@ exports.buildAppConfiguration = buildAppConfiguration;
 
 /***/ }),
 
-/***/ 2588:
+/***/ 9802:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
-function e(e){return e&&"object"==typeof e&&"default"in e?e.default:e}Object.defineProperty(exports, "__esModule", ({value:!0}));var t,i=__nccwpck_require__(3065),r=e(__nccwpck_require__(3343)),n=__nccwpck_require__(9655),a=e(__nccwpck_require__(6417)),s=__nccwpck_require__(963);!function(e){e.GET="get",e.POST="post"}(t||(t={}));const o="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";var c;!function(e){e[e.acquireTokenSilent=62]="acquireTokenSilent",e[e.acquireTokenByUsernamePassword=371]="acquireTokenByUsernamePassword",e[e.acquireTokenByDeviceCode=671]="acquireTokenByDeviceCode",e[e.acquireTokenByClientCredential=771]="acquireTokenByClientCredential",e[e.acquireTokenByCode=871]="acquireTokenByCode",e[e.acquireTokenByRefreshToken=872]="acquireTokenByRefreshToken"}(c||(c={}));class l{async sendGetRequestAsync(e,i){const n={method:t.GET,url:e,headers:i&&i.headers,validateStatus:()=>!0},a=await r(n);return{headers:a.headers,body:a.data,status:a.status}}async sendPostRequestAsync(e,i,n){const a={method:t.POST,url:e,data:i&&i.body||"",timeout:n,headers:i&&i.headers,validateStatus:()=>!0},s=await r(a);return{headers:s.headers,body:s.data,status:s.status}}}const h={clientId:"",authority:i.Constants.DEFAULT_AUTHORITY,clientSecret:"",clientAssertion:"",clientCertificate:{thumbprint:"",privateKey:"",x5c:""},knownAuthorities:[],cloudDiscoveryMetadata:"",authorityMetadata:"",clientCapabilities:[],protocolMode:i.ProtocolMode.AAD},u={},d={loggerOptions:{loggerCallback:()=>{},piiLoggingEnabled:!1,logLevel:i.LogLevel.Info},networkClient:class{static getNetworkClient(){return new l}}.getNetworkClient()};function g({auth:e,cache:t,system:i}){return{auth:{...h,...e},cache:{...u,...t},system:{...d,...i}}}class p{static base64Encode(e,t){return Buffer.from(e,t).toString("base64")}static base64EncodeUrl(e,t){return p.base64Encode(e,t).replace(/=/g,"").replace(/\+/g,"-").replace(/\//g,"_")}static base64Decode(e){return Buffer.from(e,"base64").toString("utf8")}static base64DecodeUrl(e){let t=e.replace(/-/g,"+").replace(/_/g,"/");for(;t.length%4;)t+="=";return p.base64Decode(t)}}class y{async generatePkceCodes(){const e=this.generateCodeVerifier();return{verifier:e,challenge:this.generateCodeChallengeFromVerifier(e)}}generateCodeVerifier(){const e=a.randomBytes(32),t=this.bufferToCVString(e);return p.base64EncodeUrl(t)}generateCodeChallengeFromVerifier(e){return p.base64EncodeUrl(this.sha256(e).toString("base64"),"base64")}sha256(e){return a.createHash("sha256").update(e).digest()}bufferToCVString(e){const t=[];for(let i=0;i<e.byteLength;i+=1)t.push(o[e[i]%o.length]);return t.join("")}}class m{constructor(){this.pkceGenerator=new y}createNewGuid(){return class{static generateGuid(){return n.v4()}static isGuid(e){return/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(e)}}.generateGuid()}base64Encode(e){return p.base64Encode(e)}base64Decode(e){return p.base64Decode(e)}generatePkceCodes(){return this.pkceGenerator.generatePkceCodes()}getPublicKeyThumbprint(){throw new Error("Method not implemented.")}signJwt(){throw new Error("Method not implemented.")}}class f{static deserializeJSONBlob(e){return i.StringUtils.isEmpty(e)?{}:JSON.parse(e)}static deserializeAccounts(e){const t={};return e&&Object.keys(e).map((function(r){const n=e[r],a={homeAccountId:n.home_account_id,environment:n.environment,realm:n.realm,localAccountId:n.local_account_id,username:n.username,authorityType:n.authority_type,name:n.name,clientInfo:n.client_info,lastModificationTime:n.last_modification_time,lastModificationApp:n.last_modification_app},s=new i.AccountEntity;i.CacheManager.toObject(s,a),t[r]=s})),t}static deserializeIdTokens(e){const t={};return e&&Object.keys(e).map((function(r){const n=e[r],a={homeAccountId:n.home_account_id,environment:n.environment,credentialType:n.credential_type,clientId:n.client_id,secret:n.secret,realm:n.realm},s=new i.IdTokenEntity;i.CacheManager.toObject(s,a),t[r]=s})),t}static deserializeAccessTokens(e){const t={};return e&&Object.keys(e).map((function(r){const n=e[r],a={homeAccountId:n.home_account_id,environment:n.environment,credentialType:n.credential_type,clientId:n.client_id,secret:n.secret,realm:n.realm,target:n.target,cachedAt:n.cached_at,expiresOn:n.expires_on,extendedExpiresOn:n.extended_expires_on,refreshOn:n.refresh_on,keyId:n.key_id,tokenType:n.token_type},s=new i.AccessTokenEntity;i.CacheManager.toObject(s,a),t[r]=s})),t}static deserializeRefreshTokens(e){const t={};return e&&Object.keys(e).map((function(r){const n=e[r],a={homeAccountId:n.home_account_id,environment:n.environment,credentialType:n.credential_type,clientId:n.client_id,secret:n.secret,familyId:n.family_id,target:n.target,realm:n.realm},s=new i.RefreshTokenEntity;i.CacheManager.toObject(s,a),t[r]=s})),t}static deserializeAppMetadata(e){const t={};return e&&Object.keys(e).map((function(r){const n=e[r],a={clientId:n.client_id,environment:n.environment,familyId:n.family_id},s=new i.AppMetadataEntity;i.CacheManager.toObject(s,a),t[r]=s})),t}static deserializeAllCache(e){return{accounts:e.Account?this.deserializeAccounts(e.Account):{},idTokens:e.IdToken?this.deserializeIdTokens(e.IdToken):{},accessTokens:e.AccessToken?this.deserializeAccessTokens(e.AccessToken):{},refreshTokens:e.RefreshToken?this.deserializeRefreshTokens(e.RefreshToken):{},appMetadata:e.AppMetadata?this.deserializeAppMetadata(e.AppMetadata):{}}}}class C{static serializeJSONBlob(e){return JSON.stringify(e)}static serializeAccounts(e){const t={};return Object.keys(e).map((function(i){const r=e[i];t[i]={home_account_id:r.homeAccountId,environment:r.environment,realm:r.realm,local_account_id:r.localAccountId,username:r.username,authority_type:r.authorityType,name:r.name,client_info:r.clientInfo,last_modification_time:r.lastModificationTime,last_modification_app:r.lastModificationApp}})),t}static serializeIdTokens(e){const t={};return Object.keys(e).map((function(i){const r=e[i];t[i]={home_account_id:r.homeAccountId,environment:r.environment,credential_type:r.credentialType,client_id:r.clientId,secret:r.secret,realm:r.realm}})),t}static serializeAccessTokens(e){const t={};return Object.keys(e).map((function(i){const r=e[i];t[i]={home_account_id:r.homeAccountId,environment:r.environment,credential_type:r.credentialType,client_id:r.clientId,secret:r.secret,realm:r.realm,target:r.target,cached_at:r.cachedAt,expires_on:r.expiresOn,extended_expires_on:r.extendedExpiresOn,refresh_on:r.refreshOn,key_id:r.keyId,token_type:r.tokenType}})),t}static serializeRefreshTokens(e){const t={};return Object.keys(e).map((function(i){const r=e[i];t[i]={home_account_id:r.homeAccountId,environment:r.environment,credential_type:r.credentialType,client_id:r.clientId,secret:r.secret,family_id:r.familyId,target:r.target,realm:r.realm}})),t}static serializeAppMetadata(e){const t={};return Object.keys(e).map((function(i){const r=e[i];t[i]={client_id:r.clientId,environment:r.environment,family_id:r.familyId}})),t}static serializeAllCache(e){return{Account:this.serializeAccounts(e.accounts),IdToken:this.serializeIdTokens(e.idTokens),AccessToken:this.serializeAccessTokens(e.accessTokens),RefreshToken:this.serializeRefreshTokens(e.refreshTokens),AppMetadata:this.serializeAppMetadata(e.appMetadata)}}}class A extends i.CacheManager{constructor(e,t,i){super(t,i),this.cache={},this.changeEmitters=[],this.logger=e}registerChangeEmitter(e){this.changeEmitters.push(e)}emitChange(){this.changeEmitters.forEach(e=>e.call(null))}cacheToInMemoryCache(e){const t={accounts:{},idTokens:{},accessTokens:{},refreshTokens:{},appMetadata:{}};for(const r in e)if(e[r]instanceof i.AccountEntity)t.accounts[r]=e[r];else if(e[r]instanceof i.IdTokenEntity)t.idTokens[r]=e[r];else if(e[r]instanceof i.AccessTokenEntity)t.accessTokens[r]=e[r];else if(e[r]instanceof i.RefreshTokenEntity)t.refreshTokens[r]=e[r];else{if(!(e[r]instanceof i.AppMetadataEntity))continue;t.appMetadata[r]=e[r]}return t}inMemoryCacheToCache(e){let t=this.getCache();return t={...e.accounts,...e.idTokens,...e.accessTokens,...e.refreshTokens,...e.appMetadata},t}getInMemoryCache(){return this.logger.trace("Getting in-memory cache"),this.cacheToInMemoryCache(this.getCache())}setInMemoryCache(e){this.logger.trace("Setting in-memory cache");const t=this.inMemoryCacheToCache(e);this.setCache(t),this.emitChange()}getCache(){return this.logger.trace("Getting cache key-value store"),this.cache}setCache(e){this.logger.trace("Setting cache key value store"),this.cache=e,this.emitChange()}getItem(e){return this.logger.tracePii("Item key: "+e),this.getCache()[e]}setItem(e,t){this.logger.tracePii("Item key: "+e);const i=this.getCache();i[e]=t,this.setCache(i)}getAccount(e){const t=this.getItem(e);return i.AccountEntity.isAccountEntity(t)?t:null}setAccount(e){const t=e.generateAccountKey();this.setItem(t,e)}getIdTokenCredential(e){const t=this.getItem(e);return i.IdTokenEntity.isIdTokenEntity(t)?t:null}setIdTokenCredential(e){const t=e.generateCredentialKey();this.setItem(t,e)}getAccessTokenCredential(e){const t=this.getItem(e);return i.AccessTokenEntity.isAccessTokenEntity(t)?t:null}setAccessTokenCredential(e){const t=e.generateCredentialKey();this.setItem(t,e)}getRefreshTokenCredential(e){const t=this.getItem(e);return i.RefreshTokenEntity.isRefreshTokenEntity(t)?t:null}setRefreshTokenCredential(e){const t=e.generateCredentialKey();this.setItem(t,e)}getAppMetadata(e){const t=this.getItem(e);return i.AppMetadataEntity.isAppMetadataEntity(e,t)?t:null}setAppMetadata(e){const t=e.generateAppMetadataKey();this.setItem(t,e)}getServerTelemetry(e){const t=this.getItem(e);return t&&i.ServerTelemetryEntity.isServerTelemetryEntity(e,t)?t:null}setServerTelemetry(e,t){this.setItem(e,t)}getAuthorityMetadata(e){const t=this.getItem(e);return t&&i.AuthorityMetadataEntity.isAuthorityMetadataEntity(e,t)?t:null}getAuthorityMetadataKeys(){return this.getKeys().filter(e=>this.isAuthorityMetadata(e))}setAuthorityMetadata(e,t){this.setItem(e,t)}getThrottlingCache(e){const t=this.getItem(e);return t&&i.ThrottlingEntity.isThrottlingEntity(e,t)?t:null}setThrottlingCache(e,t){this.setItem(e,t)}removeItem(e){this.logger.tracePii("Item key: "+e);let t=!1;const i=this.getCache();return i[e]&&(delete i[e],t=!0),t&&(this.setCache(i),this.emitChange()),t}containsKey(e){return this.getKeys().includes(e)}getKeys(){this.logger.trace("Retrieving all cache keys");const e=this.getCache();return[...Object.keys(e)]}clear(){this.logger.trace("Clearing cache entries created by MSAL"),this.getKeys().forEach(e=>{this.removeItem(e)}),this.emitChange()}static generateInMemoryCache(e){return f.deserializeAllCache(f.deserializeJSONBlob(e))}static generateJsonCache(e){return C.serializeAllCache(e)}}const k={},T={},I={},b={},v={};class E{constructor(e,t,i){this.cacheHasChanged=!1,this.storage=e,this.storage.registerChangeEmitter(this.handleChangeEvent.bind(this)),i&&(this.persistence=i),this.logger=t}hasChanged(){return this.cacheHasChanged}serialize(){this.logger.trace("Serializing in-memory cache");let e=C.serializeAllCache(this.storage.getInMemoryCache());return i.StringUtils.isEmpty(this.cacheSnapshot)?this.logger.trace("No cache snapshot to merge"):(this.logger.trace("Reading cache snapshot from disk"),e=this.mergeState(JSON.parse(this.cacheSnapshot),e)),this.cacheHasChanged=!1,JSON.stringify(e)}deserialize(e){if(this.logger.trace("Deserializing JSON to in-memory cache"),this.cacheSnapshot=e,i.StringUtils.isEmpty(this.cacheSnapshot))this.logger.trace("No cache snapshot to deserialize");else{this.logger.trace("Reading cache snapshot from disk");const e=f.deserializeAllCache(this.overlayDefaults(JSON.parse(this.cacheSnapshot)));this.storage.setInMemoryCache(e)}}getKVStore(){return this.storage.getCache()}async getAllAccounts(){let e;this.logger.trace("getAllAccounts called");try{return this.persistence&&(e=new i.TokenCacheContext(this,!1),await this.persistence.beforeCacheAccess(e)),this.storage.getAllAccounts()}finally{this.persistence&&e&&await this.persistence.afterCacheAccess(e)}}async getAccountByHomeId(e){const t=await this.getAllAccounts();return!i.StringUtils.isEmpty(e)&&t&&t.length&&t.filter(t=>t.homeAccountId===e)[0]||null}async getAccountByLocalId(e){const t=await this.getAllAccounts();return!i.StringUtils.isEmpty(e)&&t&&t.length&&t.filter(t=>t.localAccountId===e)[0]||null}async removeAccount(e){let t;this.logger.trace("removeAccount called");try{this.persistence&&(t=new i.TokenCacheContext(this,!0),await this.persistence.beforeCacheAccess(t)),this.storage.removeAccount(i.AccountEntity.generateAccountCacheKey(e))}finally{this.persistence&&t&&await this.persistence.afterCacheAccess(t)}}handleChangeEvent(){this.cacheHasChanged=!0}mergeState(e,t){this.logger.trace("Merging in-memory cache with cache snapshot");const i=this.mergeRemovals(e,t);return this.mergeUpdates(i,t)}mergeUpdates(e,t){return Object.keys(t).forEach(i=>{const r=t[i];if(e.hasOwnProperty(i)){const t=null!==r,n="object"==typeof r,a=!Array.isArray(r),s=null!=e[i];t&&n&&a&&s?this.mergeUpdates(e[i],r):e[i]=r}else null!==r&&(e[i]=r)}),e}mergeRemovals(e,t){this.logger.trace("Remove updated entries in cache");const i=e.Account?this.mergeRemovalsDict(e.Account,t.Account):e.Account,r=e.AccessToken?this.mergeRemovalsDict(e.AccessToken,t.AccessToken):e.AccessToken,n=e.RefreshToken?this.mergeRemovalsDict(e.RefreshToken,t.RefreshToken):e.RefreshToken,a=e.IdToken?this.mergeRemovalsDict(e.IdToken,t.IdToken):e.IdToken,s=e.AppMetadata?this.mergeRemovalsDict(e.AppMetadata,t.AppMetadata):e.AppMetadata;return{...e,Account:i,AccessToken:r,RefreshToken:n,IdToken:a,AppMetadata:s}}mergeRemovalsDict(e,t){const i={...e};return Object.keys(e).forEach(e=>{t&&t.hasOwnProperty(e)||delete i[e]}),i}overlayDefaults(e){return this.logger.trace("Overlaying input cache with the default cache"),{Account:{...k,...e.Account},IdToken:{...T,...e.IdToken},AccessToken:{...I,...e.AccessToken},RefreshToken:{...b,...e.RefreshToken},AppMetadata:{...v,...e.AppMetadata}}}}class w{constructor(e){this.config=g(e),this.cryptoProvider=new m,this.logger=new i.Logger(this.config.system.loggerOptions,"@azure/msal-node","1.3.0"),this.storage=new A(this.logger,this.config.auth.clientId,this.cryptoProvider),this.tokenCache=new E(this.storage,this.logger,this.config.cache.cachePlugin)}async getAuthCodeUrl(e){this.logger.info("getAuthCodeUrl called",e.correlationId);const t={...e,...this.initializeBaseRequest(e),responseMode:e.responseMode||i.ResponseMode.QUERY,authenticationScheme:i.AuthenticationScheme.BEARER},r=await this.buildOauthClientConfiguration(t.authority,t.correlationId),n=new i.AuthorizationCodeClient(r);return this.logger.verbose("Auth code client created",t.correlationId),n.getAuthCodeUrl(t)}async acquireTokenByCode(e){this.logger.info("acquireTokenByCode called",e.correlationId);const t={...e,...this.initializeBaseRequest(e),authenticationScheme:i.AuthenticationScheme.BEARER},r=this.initializeServerTelemetryManager(c.acquireTokenByCode,t.correlationId);try{const e=await this.buildOauthClientConfiguration(t.authority,t.correlationId,r),n=new i.AuthorizationCodeClient(e);return this.logger.verbose("Auth code client created",t.correlationId),n.acquireToken(t)}catch(e){throw r.cacheFailedRequest(e),e}}async acquireTokenByRefreshToken(e){this.logger.info("acquireTokenByRefreshToken called",e.correlationId);const t={...e,...this.initializeBaseRequest(e),authenticationScheme:i.AuthenticationScheme.BEARER},r=this.initializeServerTelemetryManager(c.acquireTokenByRefreshToken,t.correlationId);try{const e=await this.buildOauthClientConfiguration(t.authority,t.correlationId,r),n=new i.RefreshTokenClient(e);return this.logger.verbose("Refresh token client created",t.correlationId),n.acquireToken(t)}catch(e){throw r.cacheFailedRequest(e),e}}async acquireTokenSilent(e){const t={...e,...this.initializeBaseRequest(e),forceRefresh:e.forceRefresh||!1},r=this.initializeServerTelemetryManager(c.acquireTokenSilent,t.correlationId,t.forceRefresh);try{const e=await this.buildOauthClientConfiguration(t.authority,t.correlationId,r),n=new i.SilentFlowClient(e);return this.logger.verbose("Silent flow client created",t.correlationId),n.acquireToken(t)}catch(e){throw r.cacheFailedRequest(e),e}}async acquireTokenByUsernamePassword(e){this.logger.info("acquireTokenByUsernamePassword called",e.correlationId);const t={...e,...this.initializeBaseRequest(e)},r=this.initializeServerTelemetryManager(c.acquireTokenByUsernamePassword,t.correlationId);try{const e=await this.buildOauthClientConfiguration(t.authority,t.correlationId,r),n=new i.UsernamePasswordClient(e);return this.logger.verbose("Username password client created",t.correlationId),n.acquireToken(t)}catch(e){throw r.cacheFailedRequest(e),e}}getTokenCache(){return this.logger.info("getTokenCache called"),this.tokenCache}getLogger(){return this.logger}setLogger(e){this.logger=e}async buildOauthClientConfiguration(e,t,i,r){this.logger.verbose("buildOauthClientConfiguration called",t),this.logger.verbose("building oauth client configuration with the authority: "+e,t);const n=await this.createAuthority(e,r,t);return null==i||i.updateRegionDiscoveryMetadata(n.regionDiscoveryMetadata),{authOptions:{clientId:this.config.auth.clientId,authority:n,clientCapabilities:this.config.auth.clientCapabilities},loggerOptions:{logLevel:this.config.system.loggerOptions.logLevel,loggerCallback:this.config.system.loggerOptions.loggerCallback,piiLoggingEnabled:this.config.system.loggerOptions.piiLoggingEnabled,correlationId:t},cryptoInterface:this.cryptoProvider,networkInterface:this.config.system.networkClient,storageInterface:this.storage,serverTelemetryManager:i,clientCredentials:{clientSecret:this.clientSecret,clientAssertion:this.clientAssertion?this.getClientAssertion(n):void 0},libraryInfo:{sku:"msal.js.node",version:"1.3.0",cpu:process.arch||"",os:process.platform||""},persistencePlugin:this.config.cache.cachePlugin,serializableCache:this.tokenCache}}getClientAssertion(e){return{assertion:this.clientAssertion.getJwt(this.cryptoProvider,this.config.auth.clientId,e.tokenEndpoint),assertionType:"urn:ietf:params:oauth:client-assertion-type:jwt-bearer"}}initializeBaseRequest(e){return this.logger.verbose("initializeRequestScopes called",e.correlationId),e.authenticationScheme&&e.authenticationScheme===i.AuthenticationScheme.POP&&this.logger.verbose("Authentication Scheme 'pop' is not supported yet, setting Authentication Scheme to 'Bearer' for request",e.correlationId),e.authenticationScheme=i.AuthenticationScheme.BEARER,{...e,scopes:[...e&&e.scopes||[],...i.OIDC_DEFAULT_SCOPES],correlationId:e&&e.correlationId||this.cryptoProvider.createNewGuid(),authority:e.authority||this.config.auth.authority}}initializeServerTelemetryManager(e,t,r){return new i.ServerTelemetryManager({clientId:this.config.auth.clientId,correlationId:t,apiId:e,forceRefresh:r||!1},this.storage)}async createAuthority(e,t,r){this.logger.verbose("createAuthority called",r);const n={protocolMode:this.config.auth.protocolMode,knownAuthorities:this.config.auth.knownAuthorities,cloudDiscoveryMetadata:this.config.auth.cloudDiscoveryMetadata,authorityMetadata:this.config.auth.authorityMetadata,azureRegionConfiguration:t};return await i.AuthorityFactory.createDiscoveredInstance(e,this.config.system.networkClient,this.storage,n)}}class M{static fromAssertion(e){const t=new M;return t.jwt=e,t}static fromCertificate(e,t,i){const r=new M;return r.privateKey=t,r.thumbprint=e,i&&(r.publicCertificate=this.parseCertificate(i)),r}getJwt(e,t,r){if(this.privateKey&&this.thumbprint)return this.jwt&&!this.isExpired()&&t===this.issuer&&r===this.jwtAudience?this.jwt:this.createJwt(e,t,r);if(this.jwt)return this.jwt;throw i.ClientAuthError.createInvalidAssertionError()}createJwt(e,t,r){this.issuer=t,this.jwtAudience=r;const n=i.TimeUtils.nowSeconds();this.expirationTime=n+600;const a={alg:"RS256",x5t:p.base64EncodeUrl(this.thumbprint,"hex")};this.publicCertificate&&Object.assign(a,{x5c:this.publicCertificate});const o={aud:this.jwtAudience,exp:this.expirationTime,iss:this.issuer,sub:this.issuer,nbf:n,jti:e.createNewGuid()};return this.jwt=s.sign(o,this.privateKey,{header:a}),this.jwt}isExpired(){return this.expirationTime<i.TimeUtils.nowSeconds()}static parseCertificate(e){const t=/-----BEGIN CERTIFICATE-----\n(.+?)\n-----END CERTIFICATE-----/gs,i=[];let r;for(;null!==(r=t.exec(e));)i.push(r[1].replace(/\n/,""));return i}}Object.defineProperty(exports, "AuthError", ({enumerable:!0,get:function(){return i.AuthError}})),Object.defineProperty(exports, "AuthErrorMessage", ({enumerable:!0,get:function(){return i.AuthErrorMessage}})),Object.defineProperty(exports, "ClientAuthError", ({enumerable:!0,get:function(){return i.ClientAuthError}})),Object.defineProperty(exports, "ClientAuthErrorMessage", ({enumerable:!0,get:function(){return i.ClientAuthErrorMessage}})),Object.defineProperty(exports, "ClientConfigurationError", ({enumerable:!0,get:function(){return i.ClientConfigurationError}})),Object.defineProperty(exports, "ClientConfigurationErrorMessage", ({enumerable:!0,get:function(){return i.ClientConfigurationErrorMessage}})),Object.defineProperty(exports, "InteractionRequiredAuthError", ({enumerable:!0,get:function(){return i.InteractionRequiredAuthError}})),Object.defineProperty(exports, "LogLevel", ({enumerable:!0,get:function(){return i.LogLevel}})),Object.defineProperty(exports, "Logger", ({enumerable:!0,get:function(){return i.Logger}})),Object.defineProperty(exports, "PromptValue", ({enumerable:!0,get:function(){return i.PromptValue}})),Object.defineProperty(exports, "ProtocolMode", ({enumerable:!0,get:function(){return i.ProtocolMode}})),Object.defineProperty(exports, "ResponseMode", ({enumerable:!0,get:function(){return i.ResponseMode}})),Object.defineProperty(exports, "ServerError", ({enumerable:!0,get:function(){return i.ServerError}})),Object.defineProperty(exports, "TokenCacheContext", ({enumerable:!0,get:function(){return i.TokenCacheContext}})),exports.ClientApplication=w,exports.ClientAssertion=M,exports.ConfidentialClientApplication=class extends w{constructor(e){super(e),this.setClientCredential(this.config)}async acquireTokenByClientCredential(e){this.logger.info("acquireTokenByClientCredential called",e.correlationId);const t={...e,...this.initializeBaseRequest(e)},r={azureRegion:t.azureRegion,environmentRegion:process.env.REGION_NAME},n=this.initializeServerTelemetryManager(c.acquireTokenByClientCredential,t.correlationId,t.skipCache);try{const e=await this.buildOauthClientConfiguration(t.authority,t.correlationId,n,r),a=new i.ClientCredentialClient(e);return this.logger.verbose("Client credential client created",t.correlationId),a.acquireToken(t)}catch(e){throw n.cacheFailedRequest(e),e}}async acquireTokenOnBehalfOf(e){this.logger.info("acquireTokenOnBehalfOf called",e.correlationId);const t={...e,...this.initializeBaseRequest(e)},r=await this.buildOauthClientConfiguration(t.authority,t.correlationId),n=new i.OnBehalfOfClient(r);return this.logger.verbose("On behalf of client created",t.correlationId),n.acquireToken(t)}setClientCredential(e){const t=!i.StringUtils.isEmpty(e.auth.clientSecret),r=!i.StringUtils.isEmpty(e.auth.clientAssertion),n=e.auth.clientCertificate,a=!i.StringUtils.isEmpty(n.thumbprint)||!i.StringUtils.isEmpty(n.privateKey);if(t&&r||r&&a||t&&a)throw i.ClientAuthError.createInvalidCredentialError();if(t)this.clientSecret=e.auth.clientSecret;else if(r)this.clientAssertion=M.fromAssertion(e.auth.clientAssertion);else{if(!a)throw i.ClientAuthError.createInvalidCredentialError();var s;this.clientAssertion=M.fromCertificate(n.thumbprint,n.privateKey,null==(s=e.auth.clientCertificate)?void 0:s.x5c)}}},exports.CryptoProvider=m,exports.NodeStorage=A,exports.PublicClientApplication=class extends w{constructor(e){super(e)}async acquireTokenByDeviceCode(e){this.logger.info("acquireTokenByDeviceCode called",e.correlationId);const t=Object.assign(e,this.initializeBaseRequest(e)),r=this.initializeServerTelemetryManager(c.acquireTokenByDeviceCode,t.correlationId);try{const e=await this.buildOauthClientConfiguration(t.authority,t.correlationId,r),n=new i.DeviceCodeClient(e);return this.logger.verbose("Device code client created",t.correlationId),n.acquireToken(t)}catch(e){throw r.cacheFailedRequest(e),e}}},exports.TokenCache=E,exports.buildAppConfiguration=g;
+function e(e){return e&&"object"==typeof e&&"default"in e?e.default:e}Object.defineProperty(exports, "__esModule", ({value:!0}));var t,i=__nccwpck_require__(5728),r=e(__nccwpck_require__(6545)),n=__nccwpck_require__(8786),a=e(__nccwpck_require__(6417)),s=__nccwpck_require__(7486);!function(e){e.GET="get",e.POST="post"}(t||(t={}));const o="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";var c;!function(e){e[e.acquireTokenSilent=62]="acquireTokenSilent",e[e.acquireTokenByUsernamePassword=371]="acquireTokenByUsernamePassword",e[e.acquireTokenByDeviceCode=671]="acquireTokenByDeviceCode",e[e.acquireTokenByClientCredential=771]="acquireTokenByClientCredential",e[e.acquireTokenByCode=871]="acquireTokenByCode",e[e.acquireTokenByRefreshToken=872]="acquireTokenByRefreshToken"}(c||(c={}));class l{async sendGetRequestAsync(e,i){const n={method:t.GET,url:e,headers:i&&i.headers,validateStatus:()=>!0},a=await r(n);return{headers:a.headers,body:a.data,status:a.status}}async sendPostRequestAsync(e,i,n){const a={method:t.POST,url:e,data:i&&i.body||"",timeout:n,headers:i&&i.headers,validateStatus:()=>!0},s=await r(a);return{headers:s.headers,body:s.data,status:s.status}}}const h={clientId:"",authority:i.Constants.DEFAULT_AUTHORITY,clientSecret:"",clientAssertion:"",clientCertificate:{thumbprint:"",privateKey:"",x5c:""},knownAuthorities:[],cloudDiscoveryMetadata:"",authorityMetadata:"",clientCapabilities:[],protocolMode:i.ProtocolMode.AAD},u={},d={loggerOptions:{loggerCallback:()=>{},piiLoggingEnabled:!1,logLevel:i.LogLevel.Info},networkClient:class{static getNetworkClient(){return new l}}.getNetworkClient()};function g({auth:e,cache:t,system:i}){return{auth:{...h,...e},cache:{...u,...t},system:{...d,...i}}}class p{static base64Encode(e,t){return Buffer.from(e,t).toString("base64")}static base64EncodeUrl(e,t){return p.base64Encode(e,t).replace(/=/g,"").replace(/\+/g,"-").replace(/\//g,"_")}static base64Decode(e){return Buffer.from(e,"base64").toString("utf8")}static base64DecodeUrl(e){let t=e.replace(/-/g,"+").replace(/_/g,"/");for(;t.length%4;)t+="=";return p.base64Decode(t)}}class y{async generatePkceCodes(){const e=this.generateCodeVerifier();return{verifier:e,challenge:this.generateCodeChallengeFromVerifier(e)}}generateCodeVerifier(){const e=a.randomBytes(32),t=this.bufferToCVString(e);return p.base64EncodeUrl(t)}generateCodeChallengeFromVerifier(e){return p.base64EncodeUrl(this.sha256(e).toString("base64"),"base64")}sha256(e){return a.createHash("sha256").update(e).digest()}bufferToCVString(e){const t=[];for(let i=0;i<e.byteLength;i+=1)t.push(o[e[i]%o.length]);return t.join("")}}class m{constructor(){this.pkceGenerator=new y}createNewGuid(){return class{static generateGuid(){return n.v4()}static isGuid(e){return/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(e)}}.generateGuid()}base64Encode(e){return p.base64Encode(e)}base64Decode(e){return p.base64Decode(e)}generatePkceCodes(){return this.pkceGenerator.generatePkceCodes()}getPublicKeyThumbprint(){throw new Error("Method not implemented.")}signJwt(){throw new Error("Method not implemented.")}}class f{static deserializeJSONBlob(e){return i.StringUtils.isEmpty(e)?{}:JSON.parse(e)}static deserializeAccounts(e){const t={};return e&&Object.keys(e).map((function(r){const n=e[r],a={homeAccountId:n.home_account_id,environment:n.environment,realm:n.realm,localAccountId:n.local_account_id,username:n.username,authorityType:n.authority_type,name:n.name,clientInfo:n.client_info,lastModificationTime:n.last_modification_time,lastModificationApp:n.last_modification_app},s=new i.AccountEntity;i.CacheManager.toObject(s,a),t[r]=s})),t}static deserializeIdTokens(e){const t={};return e&&Object.keys(e).map((function(r){const n=e[r],a={homeAccountId:n.home_account_id,environment:n.environment,credentialType:n.credential_type,clientId:n.client_id,secret:n.secret,realm:n.realm},s=new i.IdTokenEntity;i.CacheManager.toObject(s,a),t[r]=s})),t}static deserializeAccessTokens(e){const t={};return e&&Object.keys(e).map((function(r){const n=e[r],a={homeAccountId:n.home_account_id,environment:n.environment,credentialType:n.credential_type,clientId:n.client_id,secret:n.secret,realm:n.realm,target:n.target,cachedAt:n.cached_at,expiresOn:n.expires_on,extendedExpiresOn:n.extended_expires_on,refreshOn:n.refresh_on,keyId:n.key_id,tokenType:n.token_type},s=new i.AccessTokenEntity;i.CacheManager.toObject(s,a),t[r]=s})),t}static deserializeRefreshTokens(e){const t={};return e&&Object.keys(e).map((function(r){const n=e[r],a={homeAccountId:n.home_account_id,environment:n.environment,credentialType:n.credential_type,clientId:n.client_id,secret:n.secret,familyId:n.family_id,target:n.target,realm:n.realm},s=new i.RefreshTokenEntity;i.CacheManager.toObject(s,a),t[r]=s})),t}static deserializeAppMetadata(e){const t={};return e&&Object.keys(e).map((function(r){const n=e[r],a={clientId:n.client_id,environment:n.environment,familyId:n.family_id},s=new i.AppMetadataEntity;i.CacheManager.toObject(s,a),t[r]=s})),t}static deserializeAllCache(e){return{accounts:e.Account?this.deserializeAccounts(e.Account):{},idTokens:e.IdToken?this.deserializeIdTokens(e.IdToken):{},accessTokens:e.AccessToken?this.deserializeAccessTokens(e.AccessToken):{},refreshTokens:e.RefreshToken?this.deserializeRefreshTokens(e.RefreshToken):{},appMetadata:e.AppMetadata?this.deserializeAppMetadata(e.AppMetadata):{}}}}class C{static serializeJSONBlob(e){return JSON.stringify(e)}static serializeAccounts(e){const t={};return Object.keys(e).map((function(i){const r=e[i];t[i]={home_account_id:r.homeAccountId,environment:r.environment,realm:r.realm,local_account_id:r.localAccountId,username:r.username,authority_type:r.authorityType,name:r.name,client_info:r.clientInfo,last_modification_time:r.lastModificationTime,last_modification_app:r.lastModificationApp}})),t}static serializeIdTokens(e){const t={};return Object.keys(e).map((function(i){const r=e[i];t[i]={home_account_id:r.homeAccountId,environment:r.environment,credential_type:r.credentialType,client_id:r.clientId,secret:r.secret,realm:r.realm}})),t}static serializeAccessTokens(e){const t={};return Object.keys(e).map((function(i){const r=e[i];t[i]={home_account_id:r.homeAccountId,environment:r.environment,credential_type:r.credentialType,client_id:r.clientId,secret:r.secret,realm:r.realm,target:r.target,cached_at:r.cachedAt,expires_on:r.expiresOn,extended_expires_on:r.extendedExpiresOn,refresh_on:r.refreshOn,key_id:r.keyId,token_type:r.tokenType}})),t}static serializeRefreshTokens(e){const t={};return Object.keys(e).map((function(i){const r=e[i];t[i]={home_account_id:r.homeAccountId,environment:r.environment,credential_type:r.credentialType,client_id:r.clientId,secret:r.secret,family_id:r.familyId,target:r.target,realm:r.realm}})),t}static serializeAppMetadata(e){const t={};return Object.keys(e).map((function(i){const r=e[i];t[i]={client_id:r.clientId,environment:r.environment,family_id:r.familyId}})),t}static serializeAllCache(e){return{Account:this.serializeAccounts(e.accounts),IdToken:this.serializeIdTokens(e.idTokens),AccessToken:this.serializeAccessTokens(e.accessTokens),RefreshToken:this.serializeRefreshTokens(e.refreshTokens),AppMetadata:this.serializeAppMetadata(e.appMetadata)}}}class A extends i.CacheManager{constructor(e,t,i){super(t,i),this.cache={},this.changeEmitters=[],this.logger=e}registerChangeEmitter(e){this.changeEmitters.push(e)}emitChange(){this.changeEmitters.forEach(e=>e.call(null))}cacheToInMemoryCache(e){const t={accounts:{},idTokens:{},accessTokens:{},refreshTokens:{},appMetadata:{}};for(const r in e)if(e[r]instanceof i.AccountEntity)t.accounts[r]=e[r];else if(e[r]instanceof i.IdTokenEntity)t.idTokens[r]=e[r];else if(e[r]instanceof i.AccessTokenEntity)t.accessTokens[r]=e[r];else if(e[r]instanceof i.RefreshTokenEntity)t.refreshTokens[r]=e[r];else{if(!(e[r]instanceof i.AppMetadataEntity))continue;t.appMetadata[r]=e[r]}return t}inMemoryCacheToCache(e){let t=this.getCache();return t={...e.accounts,...e.idTokens,...e.accessTokens,...e.refreshTokens,...e.appMetadata},t}getInMemoryCache(){return this.logger.trace("Getting in-memory cache"),this.cacheToInMemoryCache(this.getCache())}setInMemoryCache(e){this.logger.trace("Setting in-memory cache");const t=this.inMemoryCacheToCache(e);this.setCache(t),this.emitChange()}getCache(){return this.logger.trace("Getting cache key-value store"),this.cache}setCache(e){this.logger.trace("Setting cache key value store"),this.cache=e,this.emitChange()}getItem(e){return this.logger.tracePii("Item key: "+e),this.getCache()[e]}setItem(e,t){this.logger.tracePii("Item key: "+e);const i=this.getCache();i[e]=t,this.setCache(i)}getAccount(e){const t=this.getItem(e);return i.AccountEntity.isAccountEntity(t)?t:null}setAccount(e){const t=e.generateAccountKey();this.setItem(t,e)}getIdTokenCredential(e){const t=this.getItem(e);return i.IdTokenEntity.isIdTokenEntity(t)?t:null}setIdTokenCredential(e){const t=e.generateCredentialKey();this.setItem(t,e)}getAccessTokenCredential(e){const t=this.getItem(e);return i.AccessTokenEntity.isAccessTokenEntity(t)?t:null}setAccessTokenCredential(e){const t=e.generateCredentialKey();this.setItem(t,e)}getRefreshTokenCredential(e){const t=this.getItem(e);return i.RefreshTokenEntity.isRefreshTokenEntity(t)?t:null}setRefreshTokenCredential(e){const t=e.generateCredentialKey();this.setItem(t,e)}getAppMetadata(e){const t=this.getItem(e);return i.AppMetadataEntity.isAppMetadataEntity(e,t)?t:null}setAppMetadata(e){const t=e.generateAppMetadataKey();this.setItem(t,e)}getServerTelemetry(e){const t=this.getItem(e);return t&&i.ServerTelemetryEntity.isServerTelemetryEntity(e,t)?t:null}setServerTelemetry(e,t){this.setItem(e,t)}getAuthorityMetadata(e){const t=this.getItem(e);return t&&i.AuthorityMetadataEntity.isAuthorityMetadataEntity(e,t)?t:null}getAuthorityMetadataKeys(){return this.getKeys().filter(e=>this.isAuthorityMetadata(e))}setAuthorityMetadata(e,t){this.setItem(e,t)}getThrottlingCache(e){const t=this.getItem(e);return t&&i.ThrottlingEntity.isThrottlingEntity(e,t)?t:null}setThrottlingCache(e,t){this.setItem(e,t)}removeItem(e){this.logger.tracePii("Item key: "+e);let t=!1;const i=this.getCache();return i[e]&&(delete i[e],t=!0),t&&(this.setCache(i),this.emitChange()),t}containsKey(e){return this.getKeys().includes(e)}getKeys(){this.logger.trace("Retrieving all cache keys");const e=this.getCache();return[...Object.keys(e)]}clear(){this.logger.trace("Clearing cache entries created by MSAL"),this.getKeys().forEach(e=>{this.removeItem(e)}),this.emitChange()}static generateInMemoryCache(e){return f.deserializeAllCache(f.deserializeJSONBlob(e))}static generateJsonCache(e){return C.serializeAllCache(e)}}const k={},T={},I={},b={},v={};class E{constructor(e,t,i){this.cacheHasChanged=!1,this.storage=e,this.storage.registerChangeEmitter(this.handleChangeEvent.bind(this)),i&&(this.persistence=i),this.logger=t}hasChanged(){return this.cacheHasChanged}serialize(){this.logger.trace("Serializing in-memory cache");let e=C.serializeAllCache(this.storage.getInMemoryCache());return i.StringUtils.isEmpty(this.cacheSnapshot)?this.logger.trace("No cache snapshot to merge"):(this.logger.trace("Reading cache snapshot from disk"),e=this.mergeState(JSON.parse(this.cacheSnapshot),e)),this.cacheHasChanged=!1,JSON.stringify(e)}deserialize(e){if(this.logger.trace("Deserializing JSON to in-memory cache"),this.cacheSnapshot=e,i.StringUtils.isEmpty(this.cacheSnapshot))this.logger.trace("No cache snapshot to deserialize");else{this.logger.trace("Reading cache snapshot from disk");const e=f.deserializeAllCache(this.overlayDefaults(JSON.parse(this.cacheSnapshot)));this.storage.setInMemoryCache(e)}}getKVStore(){return this.storage.getCache()}async getAllAccounts(){let e;this.logger.trace("getAllAccounts called");try{return this.persistence&&(e=new i.TokenCacheContext(this,!1),await this.persistence.beforeCacheAccess(e)),this.storage.getAllAccounts()}finally{this.persistence&&e&&await this.persistence.afterCacheAccess(e)}}async getAccountByHomeId(e){const t=await this.getAllAccounts();return!i.StringUtils.isEmpty(e)&&t&&t.length&&t.filter(t=>t.homeAccountId===e)[0]||null}async getAccountByLocalId(e){const t=await this.getAllAccounts();return!i.StringUtils.isEmpty(e)&&t&&t.length&&t.filter(t=>t.localAccountId===e)[0]||null}async removeAccount(e){let t;this.logger.trace("removeAccount called");try{this.persistence&&(t=new i.TokenCacheContext(this,!0),await this.persistence.beforeCacheAccess(t)),this.storage.removeAccount(i.AccountEntity.generateAccountCacheKey(e))}finally{this.persistence&&t&&await this.persistence.afterCacheAccess(t)}}handleChangeEvent(){this.cacheHasChanged=!0}mergeState(e,t){this.logger.trace("Merging in-memory cache with cache snapshot");const i=this.mergeRemovals(e,t);return this.mergeUpdates(i,t)}mergeUpdates(e,t){return Object.keys(t).forEach(i=>{const r=t[i];if(e.hasOwnProperty(i)){const t=null!==r,n="object"==typeof r,a=!Array.isArray(r),s=null!=e[i];t&&n&&a&&s?this.mergeUpdates(e[i],r):e[i]=r}else null!==r&&(e[i]=r)}),e}mergeRemovals(e,t){this.logger.trace("Remove updated entries in cache");const i=e.Account?this.mergeRemovalsDict(e.Account,t.Account):e.Account,r=e.AccessToken?this.mergeRemovalsDict(e.AccessToken,t.AccessToken):e.AccessToken,n=e.RefreshToken?this.mergeRemovalsDict(e.RefreshToken,t.RefreshToken):e.RefreshToken,a=e.IdToken?this.mergeRemovalsDict(e.IdToken,t.IdToken):e.IdToken,s=e.AppMetadata?this.mergeRemovalsDict(e.AppMetadata,t.AppMetadata):e.AppMetadata;return{...e,Account:i,AccessToken:r,RefreshToken:n,IdToken:a,AppMetadata:s}}mergeRemovalsDict(e,t){const i={...e};return Object.keys(e).forEach(e=>{t&&t.hasOwnProperty(e)||delete i[e]}),i}overlayDefaults(e){return this.logger.trace("Overlaying input cache with the default cache"),{Account:{...k,...e.Account},IdToken:{...T,...e.IdToken},AccessToken:{...I,...e.AccessToken},RefreshToken:{...b,...e.RefreshToken},AppMetadata:{...v,...e.AppMetadata}}}}class w{constructor(e){this.config=g(e),this.cryptoProvider=new m,this.logger=new i.Logger(this.config.system.loggerOptions,"@azure/msal-node","1.3.0"),this.storage=new A(this.logger,this.config.auth.clientId,this.cryptoProvider),this.tokenCache=new E(this.storage,this.logger,this.config.cache.cachePlugin)}async getAuthCodeUrl(e){this.logger.info("getAuthCodeUrl called",e.correlationId);const t={...e,...this.initializeBaseRequest(e),responseMode:e.responseMode||i.ResponseMode.QUERY,authenticationScheme:i.AuthenticationScheme.BEARER},r=await this.buildOauthClientConfiguration(t.authority,t.correlationId),n=new i.AuthorizationCodeClient(r);return this.logger.verbose("Auth code client created",t.correlationId),n.getAuthCodeUrl(t)}async acquireTokenByCode(e){this.logger.info("acquireTokenByCode called",e.correlationId);const t={...e,...this.initializeBaseRequest(e),authenticationScheme:i.AuthenticationScheme.BEARER},r=this.initializeServerTelemetryManager(c.acquireTokenByCode,t.correlationId);try{const e=await this.buildOauthClientConfiguration(t.authority,t.correlationId,r),n=new i.AuthorizationCodeClient(e);return this.logger.verbose("Auth code client created",t.correlationId),n.acquireToken(t)}catch(e){throw r.cacheFailedRequest(e),e}}async acquireTokenByRefreshToken(e){this.logger.info("acquireTokenByRefreshToken called",e.correlationId);const t={...e,...this.initializeBaseRequest(e),authenticationScheme:i.AuthenticationScheme.BEARER},r=this.initializeServerTelemetryManager(c.acquireTokenByRefreshToken,t.correlationId);try{const e=await this.buildOauthClientConfiguration(t.authority,t.correlationId,r),n=new i.RefreshTokenClient(e);return this.logger.verbose("Refresh token client created",t.correlationId),n.acquireToken(t)}catch(e){throw r.cacheFailedRequest(e),e}}async acquireTokenSilent(e){const t={...e,...this.initializeBaseRequest(e),forceRefresh:e.forceRefresh||!1},r=this.initializeServerTelemetryManager(c.acquireTokenSilent,t.correlationId,t.forceRefresh);try{const e=await this.buildOauthClientConfiguration(t.authority,t.correlationId,r),n=new i.SilentFlowClient(e);return this.logger.verbose("Silent flow client created",t.correlationId),n.acquireToken(t)}catch(e){throw r.cacheFailedRequest(e),e}}async acquireTokenByUsernamePassword(e){this.logger.info("acquireTokenByUsernamePassword called",e.correlationId);const t={...e,...this.initializeBaseRequest(e)},r=this.initializeServerTelemetryManager(c.acquireTokenByUsernamePassword,t.correlationId);try{const e=await this.buildOauthClientConfiguration(t.authority,t.correlationId,r),n=new i.UsernamePasswordClient(e);return this.logger.verbose("Username password client created",t.correlationId),n.acquireToken(t)}catch(e){throw r.cacheFailedRequest(e),e}}getTokenCache(){return this.logger.info("getTokenCache called"),this.tokenCache}getLogger(){return this.logger}setLogger(e){this.logger=e}async buildOauthClientConfiguration(e,t,i,r){this.logger.verbose("buildOauthClientConfiguration called",t),this.logger.verbose("building oauth client configuration with the authority: "+e,t);const n=await this.createAuthority(e,r,t);return null==i||i.updateRegionDiscoveryMetadata(n.regionDiscoveryMetadata),{authOptions:{clientId:this.config.auth.clientId,authority:n,clientCapabilities:this.config.auth.clientCapabilities},loggerOptions:{logLevel:this.config.system.loggerOptions.logLevel,loggerCallback:this.config.system.loggerOptions.loggerCallback,piiLoggingEnabled:this.config.system.loggerOptions.piiLoggingEnabled,correlationId:t},cryptoInterface:this.cryptoProvider,networkInterface:this.config.system.networkClient,storageInterface:this.storage,serverTelemetryManager:i,clientCredentials:{clientSecret:this.clientSecret,clientAssertion:this.clientAssertion?this.getClientAssertion(n):void 0},libraryInfo:{sku:"msal.js.node",version:"1.3.0",cpu:process.arch||"",os:process.platform||""},persistencePlugin:this.config.cache.cachePlugin,serializableCache:this.tokenCache}}getClientAssertion(e){return{assertion:this.clientAssertion.getJwt(this.cryptoProvider,this.config.auth.clientId,e.tokenEndpoint),assertionType:"urn:ietf:params:oauth:client-assertion-type:jwt-bearer"}}initializeBaseRequest(e){return this.logger.verbose("initializeRequestScopes called",e.correlationId),e.authenticationScheme&&e.authenticationScheme===i.AuthenticationScheme.POP&&this.logger.verbose("Authentication Scheme 'pop' is not supported yet, setting Authentication Scheme to 'Bearer' for request",e.correlationId),e.authenticationScheme=i.AuthenticationScheme.BEARER,{...e,scopes:[...e&&e.scopes||[],...i.OIDC_DEFAULT_SCOPES],correlationId:e&&e.correlationId||this.cryptoProvider.createNewGuid(),authority:e.authority||this.config.auth.authority}}initializeServerTelemetryManager(e,t,r){return new i.ServerTelemetryManager({clientId:this.config.auth.clientId,correlationId:t,apiId:e,forceRefresh:r||!1},this.storage)}async createAuthority(e,t,r){this.logger.verbose("createAuthority called",r);const n={protocolMode:this.config.auth.protocolMode,knownAuthorities:this.config.auth.knownAuthorities,cloudDiscoveryMetadata:this.config.auth.cloudDiscoveryMetadata,authorityMetadata:this.config.auth.authorityMetadata,azureRegionConfiguration:t};return await i.AuthorityFactory.createDiscoveredInstance(e,this.config.system.networkClient,this.storage,n)}}class M{static fromAssertion(e){const t=new M;return t.jwt=e,t}static fromCertificate(e,t,i){const r=new M;return r.privateKey=t,r.thumbprint=e,i&&(r.publicCertificate=this.parseCertificate(i)),r}getJwt(e,t,r){if(this.privateKey&&this.thumbprint)return this.jwt&&!this.isExpired()&&t===this.issuer&&r===this.jwtAudience?this.jwt:this.createJwt(e,t,r);if(this.jwt)return this.jwt;throw i.ClientAuthError.createInvalidAssertionError()}createJwt(e,t,r){this.issuer=t,this.jwtAudience=r;const n=i.TimeUtils.nowSeconds();this.expirationTime=n+600;const a={alg:"RS256",x5t:p.base64EncodeUrl(this.thumbprint,"hex")};this.publicCertificate&&Object.assign(a,{x5c:this.publicCertificate});const o={aud:this.jwtAudience,exp:this.expirationTime,iss:this.issuer,sub:this.issuer,nbf:n,jti:e.createNewGuid()};return this.jwt=s.sign(o,this.privateKey,{header:a}),this.jwt}isExpired(){return this.expirationTime<i.TimeUtils.nowSeconds()}static parseCertificate(e){const t=/-----BEGIN CERTIFICATE-----\n(.+?)\n-----END CERTIFICATE-----/gs,i=[];let r;for(;null!==(r=t.exec(e));)i.push(r[1].replace(/\n/,""));return i}}Object.defineProperty(exports, "AuthError", ({enumerable:!0,get:function(){return i.AuthError}})),Object.defineProperty(exports, "AuthErrorMessage", ({enumerable:!0,get:function(){return i.AuthErrorMessage}})),Object.defineProperty(exports, "ClientAuthError", ({enumerable:!0,get:function(){return i.ClientAuthError}})),Object.defineProperty(exports, "ClientAuthErrorMessage", ({enumerable:!0,get:function(){return i.ClientAuthErrorMessage}})),Object.defineProperty(exports, "ClientConfigurationError", ({enumerable:!0,get:function(){return i.ClientConfigurationError}})),Object.defineProperty(exports, "ClientConfigurationErrorMessage", ({enumerable:!0,get:function(){return i.ClientConfigurationErrorMessage}})),Object.defineProperty(exports, "InteractionRequiredAuthError", ({enumerable:!0,get:function(){return i.InteractionRequiredAuthError}})),Object.defineProperty(exports, "LogLevel", ({enumerable:!0,get:function(){return i.LogLevel}})),Object.defineProperty(exports, "Logger", ({enumerable:!0,get:function(){return i.Logger}})),Object.defineProperty(exports, "PromptValue", ({enumerable:!0,get:function(){return i.PromptValue}})),Object.defineProperty(exports, "ProtocolMode", ({enumerable:!0,get:function(){return i.ProtocolMode}})),Object.defineProperty(exports, "ResponseMode", ({enumerable:!0,get:function(){return i.ResponseMode}})),Object.defineProperty(exports, "ServerError", ({enumerable:!0,get:function(){return i.ServerError}})),Object.defineProperty(exports, "TokenCacheContext", ({enumerable:!0,get:function(){return i.TokenCacheContext}})),exports.ClientApplication=w,exports.ClientAssertion=M,exports.ConfidentialClientApplication=class extends w{constructor(e){super(e),this.setClientCredential(this.config)}async acquireTokenByClientCredential(e){this.logger.info("acquireTokenByClientCredential called",e.correlationId);const t={...e,...this.initializeBaseRequest(e)},r={azureRegion:t.azureRegion,environmentRegion:process.env.REGION_NAME},n=this.initializeServerTelemetryManager(c.acquireTokenByClientCredential,t.correlationId,t.skipCache);try{const e=await this.buildOauthClientConfiguration(t.authority,t.correlationId,n,r),a=new i.ClientCredentialClient(e);return this.logger.verbose("Client credential client created",t.correlationId),a.acquireToken(t)}catch(e){throw n.cacheFailedRequest(e),e}}async acquireTokenOnBehalfOf(e){this.logger.info("acquireTokenOnBehalfOf called",e.correlationId);const t={...e,...this.initializeBaseRequest(e)},r=await this.buildOauthClientConfiguration(t.authority,t.correlationId),n=new i.OnBehalfOfClient(r);return this.logger.verbose("On behalf of client created",t.correlationId),n.acquireToken(t)}setClientCredential(e){const t=!i.StringUtils.isEmpty(e.auth.clientSecret),r=!i.StringUtils.isEmpty(e.auth.clientAssertion),n=e.auth.clientCertificate,a=!i.StringUtils.isEmpty(n.thumbprint)||!i.StringUtils.isEmpty(n.privateKey);if(t&&r||r&&a||t&&a)throw i.ClientAuthError.createInvalidCredentialError();if(t)this.clientSecret=e.auth.clientSecret;else if(r)this.clientAssertion=M.fromAssertion(e.auth.clientAssertion);else{if(!a)throw i.ClientAuthError.createInvalidCredentialError();var s;this.clientAssertion=M.fromCertificate(n.thumbprint,n.privateKey,null==(s=e.auth.clientCertificate)?void 0:s.x5c)}}},exports.CryptoProvider=m,exports.NodeStorage=A,exports.PublicClientApplication=class extends w{constructor(e){super(e)}async acquireTokenByDeviceCode(e){this.logger.info("acquireTokenByDeviceCode called",e.correlationId);const t=Object.assign(e,this.initializeBaseRequest(e)),r=this.initializeServerTelemetryManager(c.acquireTokenByDeviceCode,t.correlationId);try{const e=await this.buildOauthClientConfiguration(t.authority,t.correlationId,r),n=new i.DeviceCodeClient(e);return this.logger.verbose("Device code client created",t.correlationId),n.acquireToken(t)}catch(e){throw r.cacheFailedRequest(e),e}}},exports.TokenCache=E,exports.buildAppConfiguration=g;
 //# sourceMappingURL=msal-node.cjs.production.min.js.map
 
 
 /***/ }),
 
-/***/ 9655:
+/***/ 8786:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -23190,29 +23190,29 @@ Object.defineProperty(exports, "parse", ({
   }
 }));
 
-var _v = _interopRequireDefault(__nccwpck_require__(2401));
+var _v = _interopRequireDefault(__nccwpck_require__(2040));
 
-var _v2 = _interopRequireDefault(__nccwpck_require__(53));
+var _v2 = _interopRequireDefault(__nccwpck_require__(6856));
 
-var _v3 = _interopRequireDefault(__nccwpck_require__(1189));
+var _v3 = _interopRequireDefault(__nccwpck_require__(3661));
 
-var _v4 = _interopRequireDefault(__nccwpck_require__(1094));
+var _v4 = _interopRequireDefault(__nccwpck_require__(5233));
 
-var _nil = _interopRequireDefault(__nccwpck_require__(1522));
+var _nil = _interopRequireDefault(__nccwpck_require__(6619));
 
-var _version = _interopRequireDefault(__nccwpck_require__(7104));
+var _version = _interopRequireDefault(__nccwpck_require__(4721));
 
-var _validate = _interopRequireDefault(__nccwpck_require__(5407));
+var _validate = _interopRequireDefault(__nccwpck_require__(8392));
 
-var _stringify = _interopRequireDefault(__nccwpck_require__(8547));
+var _stringify = _interopRequireDefault(__nccwpck_require__(2127));
 
-var _parse = _interopRequireDefault(__nccwpck_require__(4180));
+var _parse = _interopRequireDefault(__nccwpck_require__(115));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
 
-/***/ 6757:
+/***/ 9057:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -23242,7 +23242,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 1522:
+/***/ 6619:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -23257,7 +23257,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 4180:
+/***/ 115:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -23268,7 +23268,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _validate = _interopRequireDefault(__nccwpck_require__(5407));
+var _validate = _interopRequireDefault(__nccwpck_require__(8392));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23309,7 +23309,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 8309:
+/***/ 1134:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -23324,7 +23324,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 1403:
+/***/ 8634:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -23355,7 +23355,7 @@ function rng() {
 
 /***/ }),
 
-/***/ 7232:
+/***/ 4764:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -23385,7 +23385,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 8547:
+/***/ 2127:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -23396,7 +23396,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _validate = _interopRequireDefault(__nccwpck_require__(5407));
+var _validate = _interopRequireDefault(__nccwpck_require__(8392));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23431,7 +23431,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 2401:
+/***/ 2040:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -23442,9 +23442,9 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _rng = _interopRequireDefault(__nccwpck_require__(1403));
+var _rng = _interopRequireDefault(__nccwpck_require__(8634));
 
-var _stringify = _interopRequireDefault(__nccwpck_require__(8547));
+var _stringify = _interopRequireDefault(__nccwpck_require__(2127));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23545,7 +23545,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 53:
+/***/ 6856:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -23556,9 +23556,9 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _v = _interopRequireDefault(__nccwpck_require__(3827));
+var _v = _interopRequireDefault(__nccwpck_require__(432));
 
-var _md = _interopRequireDefault(__nccwpck_require__(6757));
+var _md = _interopRequireDefault(__nccwpck_require__(9057));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23568,7 +23568,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 3827:
+/***/ 432:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -23580,9 +23580,9 @@ Object.defineProperty(exports, "__esModule", ({
 exports.default = _default;
 exports.URL = exports.DNS = void 0;
 
-var _stringify = _interopRequireDefault(__nccwpck_require__(8547));
+var _stringify = _interopRequireDefault(__nccwpck_require__(2127));
 
-var _parse = _interopRequireDefault(__nccwpck_require__(4180));
+var _parse = _interopRequireDefault(__nccwpck_require__(115));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23653,7 +23653,7 @@ function _default(name, version, hashfunc) {
 
 /***/ }),
 
-/***/ 1189:
+/***/ 3661:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -23664,9 +23664,9 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _rng = _interopRequireDefault(__nccwpck_require__(1403));
+var _rng = _interopRequireDefault(__nccwpck_require__(8634));
 
-var _stringify = _interopRequireDefault(__nccwpck_require__(8547));
+var _stringify = _interopRequireDefault(__nccwpck_require__(2127));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23697,7 +23697,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 1094:
+/***/ 5233:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -23708,9 +23708,9 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _v = _interopRequireDefault(__nccwpck_require__(3827));
+var _v = _interopRequireDefault(__nccwpck_require__(432));
 
-var _sha = _interopRequireDefault(__nccwpck_require__(7232));
+var _sha = _interopRequireDefault(__nccwpck_require__(4764));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23720,7 +23720,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 5407:
+/***/ 8392:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -23731,7 +23731,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _regex = _interopRequireDefault(__nccwpck_require__(8309));
+var _regex = _interopRequireDefault(__nccwpck_require__(1134));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23744,7 +23744,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 7104:
+/***/ 4721:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -23755,7 +23755,7 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.default = void 0;
 
-var _validate = _interopRequireDefault(__nccwpck_require__(5407));
+var _validate = _interopRequireDefault(__nccwpck_require__(8392));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23772,7 +23772,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 6865:
+/***/ 334:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -23829,7 +23829,7 @@ exports.createTokenAuth = createTokenAuth;
 
 /***/ }),
 
-/***/ 6529:
+/***/ 6762:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -23837,11 +23837,11 @@ exports.createTokenAuth = createTokenAuth;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 
-var universalUserAgent = __nccwpck_require__(2909);
-var beforeAfterHook = __nccwpck_require__(6632);
-var request = __nccwpck_require__(501);
-var graphql = __nccwpck_require__(1513);
-var authToken = __nccwpck_require__(6865);
+var universalUserAgent = __nccwpck_require__(5030);
+var beforeAfterHook = __nccwpck_require__(3682);
+var request = __nccwpck_require__(6234);
+var graphql = __nccwpck_require__(8467);
+var authToken = __nccwpck_require__(334);
 
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
@@ -24013,7 +24013,7 @@ exports.Octokit = Octokit;
 
 /***/ }),
 
-/***/ 5698:
+/***/ 9440:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -24021,8 +24021,8 @@ exports.Octokit = Octokit;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 
-var isPlainObject = __nccwpck_require__(6594);
-var universalUserAgent = __nccwpck_require__(2909);
+var isPlainObject = __nccwpck_require__(3287);
+var universalUserAgent = __nccwpck_require__(5030);
 
 function lowercaseKeys(object) {
   if (!object) {
@@ -24411,7 +24411,7 @@ exports.endpoint = endpoint;
 
 /***/ }),
 
-/***/ 1513:
+/***/ 8467:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -24419,8 +24419,8 @@ exports.endpoint = endpoint;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 
-var request = __nccwpck_require__(501);
-var universalUserAgent = __nccwpck_require__(2909);
+var request = __nccwpck_require__(6234);
+var universalUserAgent = __nccwpck_require__(5030);
 
 const VERSION = "4.6.4";
 
@@ -24535,7 +24535,7 @@ exports.withCustomRequest = withCustomRequest;
 
 /***/ }),
 
-/***/ 7261:
+/***/ 4193:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -24760,7 +24760,7 @@ exports.paginatingEndpoints = paginatingEndpoints;
 
 /***/ }),
 
-/***/ 5935:
+/***/ 3044:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -26030,7 +26030,7 @@ exports.restEndpointMethods = restEndpointMethods;
 
 /***/ }),
 
-/***/ 240:
+/***/ 537:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -26040,8 +26040,8 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var deprecation = __nccwpck_require__(9364);
-var once = _interopDefault(__nccwpck_require__(7825));
+var deprecation = __nccwpck_require__(8932);
+var once = _interopDefault(__nccwpck_require__(1223));
 
 const logOnceCode = once(deprecation => console.warn(deprecation));
 const logOnceHeaders = once(deprecation => console.warn(deprecation));
@@ -26112,7 +26112,7 @@ exports.RequestError = RequestError;
 
 /***/ }),
 
-/***/ 501:
+/***/ 6234:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -26122,11 +26122,11 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var endpoint = __nccwpck_require__(5698);
-var universalUserAgent = __nccwpck_require__(2909);
-var isPlainObject = __nccwpck_require__(6594);
-var nodeFetch = _interopDefault(__nccwpck_require__(3663));
-var requestError = __nccwpck_require__(240);
+var endpoint = __nccwpck_require__(9440);
+var universalUserAgent = __nccwpck_require__(5030);
+var isPlainObject = __nccwpck_require__(3287);
+var nodeFetch = _interopDefault(__nccwpck_require__(467));
+var requestError = __nccwpck_require__(537);
 
 const VERSION = "5.6.1";
 
@@ -26297,7 +26297,7 @@ exports.request = request;
 
 /***/ }),
 
-/***/ 9957:
+/***/ 7171:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -26324,9 +26324,9 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ContextAPI = void 0;
-var NoopContextManager_1 = __nccwpck_require__(6130);
-var global_utils_1 = __nccwpck_require__(9149);
-var diag_1 = __nccwpck_require__(5086);
+var NoopContextManager_1 = __nccwpck_require__(4118);
+var global_utils_1 = __nccwpck_require__(5135);
+var diag_1 = __nccwpck_require__(1877);
 var API_NAME = 'context';
 var NOOP_CONTEXT_MANAGER = new NoopContextManager_1.NoopContextManager();
 /**
@@ -26397,7 +26397,7 @@ exports.ContextAPI = ContextAPI;
 
 /***/ }),
 
-/***/ 5086:
+/***/ 1877:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -26419,10 +26419,10 @@ exports.ContextAPI = ContextAPI;
  */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DiagAPI = void 0;
-var ComponentLogger_1 = __nccwpck_require__(4010);
-var logLevelLogger_1 = __nccwpck_require__(1893);
-var types_1 = __nccwpck_require__(7618);
-var global_utils_1 = __nccwpck_require__(9149);
+var ComponentLogger_1 = __nccwpck_require__(7978);
+var logLevelLogger_1 = __nccwpck_require__(9639);
+var types_1 = __nccwpck_require__(8077);
+var global_utils_1 = __nccwpck_require__(5135);
 var API_NAME = 'diag';
 /**
  * Singleton object which represents the entry point to the OpenTelemetry internal
@@ -26496,7 +26496,7 @@ exports.DiagAPI = DiagAPI;
 
 /***/ }),
 
-/***/ 5374:
+/***/ 9909:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -26518,12 +26518,12 @@ exports.DiagAPI = DiagAPI;
  */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PropagationAPI = void 0;
-var global_utils_1 = __nccwpck_require__(9149);
-var NoopTextMapPropagator_1 = __nccwpck_require__(1542);
-var TextMapPropagator_1 = __nccwpck_require__(1831);
-var context_helpers_1 = __nccwpck_require__(5795);
-var utils_1 = __nccwpck_require__(4452);
-var diag_1 = __nccwpck_require__(5086);
+var global_utils_1 = __nccwpck_require__(5135);
+var NoopTextMapPropagator_1 = __nccwpck_require__(2368);
+var TextMapPropagator_1 = __nccwpck_require__(865);
+var context_helpers_1 = __nccwpck_require__(7682);
+var utils_1 = __nccwpck_require__(8136);
+var diag_1 = __nccwpck_require__(1877);
 var API_NAME = 'propagation';
 var NOOP_TEXT_MAP_PROPAGATOR = new NoopTextMapPropagator_1.NoopTextMapPropagator();
 /**
@@ -26594,7 +26594,7 @@ exports.PropagationAPI = PropagationAPI;
 
 /***/ }),
 
-/***/ 5057:
+/***/ 1539:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -26616,11 +26616,11 @@ exports.PropagationAPI = PropagationAPI;
  */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TraceAPI = void 0;
-var global_utils_1 = __nccwpck_require__(9149);
-var ProxyTracerProvider_1 = __nccwpck_require__(5249);
-var spancontext_utils_1 = __nccwpck_require__(1374);
-var context_utils_1 = __nccwpck_require__(6923);
-var diag_1 = __nccwpck_require__(5086);
+var global_utils_1 = __nccwpck_require__(5135);
+var ProxyTracerProvider_1 = __nccwpck_require__(2285);
+var spancontext_utils_1 = __nccwpck_require__(9745);
+var context_utils_1 = __nccwpck_require__(3326);
+var diag_1 = __nccwpck_require__(1877);
 var API_NAME = 'trace';
 /**
  * Singleton object which represents the entry point to the OpenTelemetry Tracing API
@@ -26680,7 +26680,7 @@ exports.TraceAPI = TraceAPI;
 
 /***/ }),
 
-/***/ 5795:
+/***/ 7682:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -26702,7 +26702,7 @@ exports.TraceAPI = TraceAPI;
  */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.deleteBaggage = exports.setBaggage = exports.getBaggage = void 0;
-var context_1 = __nccwpck_require__(9989);
+var context_1 = __nccwpck_require__(8242);
 /**
  * Baggage key
  */
@@ -26740,7 +26740,7 @@ exports.deleteBaggage = deleteBaggage;
 
 /***/ }),
 
-/***/ 7212:
+/***/ 4811:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -26811,7 +26811,7 @@ exports.BaggageImpl = BaggageImpl;
 
 /***/ }),
 
-/***/ 9502:
+/***/ 3542:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -26841,7 +26841,7 @@ exports.baggageEntryMetadataSymbol = Symbol('BaggageEntryMetadata');
 
 /***/ }),
 
-/***/ 4246:
+/***/ 1508:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -26866,7 +26866,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 4452:
+/***/ 8136:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -26888,9 +26888,9 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
  */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.baggageEntryMetadataFromString = exports.createBaggage = void 0;
-var __1 = __nccwpck_require__(3529);
-var baggage_impl_1 = __nccwpck_require__(7212);
-var symbol_1 = __nccwpck_require__(9502);
+var __1 = __nccwpck_require__(5163);
+var baggage_impl_1 = __nccwpck_require__(4811);
+var symbol_1 = __nccwpck_require__(3542);
 /**
  * Create a new Baggage with optional entries
  *
@@ -26924,7 +26924,7 @@ exports.baggageEntryMetadataFromString = baggageEntryMetadataFromString;
 
 /***/ }),
 
-/***/ 8804:
+/***/ 4447:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -26949,7 +26949,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 8681:
+/***/ 2358:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -26959,7 +26959,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 6130:
+/***/ 4118:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -26986,7 +26986,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.NoopContextManager = void 0;
-var context_1 = __nccwpck_require__(9989);
+var context_1 = __nccwpck_require__(8242);
 var NoopContextManager = /** @class */ (function () {
     function NoopContextManager() {
     }
@@ -27016,7 +27016,7 @@ exports.NoopContextManager = NoopContextManager;
 
 /***/ }),
 
-/***/ 9989:
+/***/ 8242:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -27079,7 +27079,7 @@ exports.ROOT_CONTEXT = new BaseContext();
 
 /***/ }),
 
-/***/ 7765:
+/***/ 6504:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -27104,7 +27104,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 4010:
+/***/ 7978:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -27126,7 +27126,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
  */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DiagComponentLogger = void 0;
-var global_utils_1 = __nccwpck_require__(9149);
+var global_utils_1 = __nccwpck_require__(5135);
 /**
  * Component Logger which is meant to be used as part of any component which
  * will add automatically additional namespace in front of the log message.
@@ -27191,7 +27191,7 @@ function logProxy(funcName, namespace, args) {
 
 /***/ }),
 
-/***/ 440:
+/***/ 3041:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -27255,7 +27255,7 @@ exports.DiagConsoleLogger = DiagConsoleLogger;
 
 /***/ }),
 
-/***/ 7882:
+/***/ 1634:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -27286,13 +27286,13 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-__exportStar(__nccwpck_require__(440), exports);
-__exportStar(__nccwpck_require__(7618), exports);
+__exportStar(__nccwpck_require__(3041), exports);
+__exportStar(__nccwpck_require__(8077), exports);
 //# sourceMappingURL=index.js.map
 
 /***/ }),
 
-/***/ 1893:
+/***/ 9639:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -27314,7 +27314,7 @@ __exportStar(__nccwpck_require__(7618), exports);
  */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.createLogLevelDiagLogger = void 0;
-var types_1 = __nccwpck_require__(7618);
+var types_1 = __nccwpck_require__(8077);
 function createLogLevelDiagLogger(maxLevel, logger) {
     if (maxLevel < types_1.DiagLogLevel.NONE) {
         maxLevel = types_1.DiagLogLevel.NONE;
@@ -27344,7 +27344,7 @@ exports.createLogLevelDiagLogger = createLogLevelDiagLogger;
 
 /***/ }),
 
-/***/ 7618:
+/***/ 8077:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -27395,7 +27395,7 @@ var DiagLogLevel;
 
 /***/ }),
 
-/***/ 3529:
+/***/ 5163:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -27427,47 +27427,47 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.diag = exports.propagation = exports.trace = exports.context = exports.isValidSpanId = exports.isValidTraceId = exports.isSpanContextValid = exports.INVALID_SPAN_CONTEXT = exports.INVALID_TRACEID = exports.INVALID_SPANID = exports.baggageEntryMetadataFromString = void 0;
-__exportStar(__nccwpck_require__(4246), exports);
-var utils_1 = __nccwpck_require__(4452);
+__exportStar(__nccwpck_require__(1508), exports);
+var utils_1 = __nccwpck_require__(8136);
 Object.defineProperty(exports, "baggageEntryMetadataFromString", ({ enumerable: true, get: function () { return utils_1.baggageEntryMetadataFromString; } }));
-__exportStar(__nccwpck_require__(8804), exports);
-__exportStar(__nccwpck_require__(8681), exports);
-__exportStar(__nccwpck_require__(7882), exports);
-__exportStar(__nccwpck_require__(1831), exports);
+__exportStar(__nccwpck_require__(4447), exports);
+__exportStar(__nccwpck_require__(2358), exports);
+__exportStar(__nccwpck_require__(1634), exports);
+__exportStar(__nccwpck_require__(865), exports);
+__exportStar(__nccwpck_require__(7492), exports);
+__exportStar(__nccwpck_require__(4023), exports);
+__exportStar(__nccwpck_require__(3503), exports);
+__exportStar(__nccwpck_require__(2285), exports);
+__exportStar(__nccwpck_require__(9671), exports);
+__exportStar(__nccwpck_require__(3209), exports);
+__exportStar(__nccwpck_require__(5769), exports);
+__exportStar(__nccwpck_require__(1424), exports);
+__exportStar(__nccwpck_require__(4416), exports);
+__exportStar(__nccwpck_require__(955), exports);
+__exportStar(__nccwpck_require__(8845), exports);
+__exportStar(__nccwpck_require__(6905), exports);
+__exportStar(__nccwpck_require__(8384), exports);
 __exportStar(__nccwpck_require__(891), exports);
-__exportStar(__nccwpck_require__(7568), exports);
-__exportStar(__nccwpck_require__(9587), exports);
-__exportStar(__nccwpck_require__(5249), exports);
-__exportStar(__nccwpck_require__(9463), exports);
-__exportStar(__nccwpck_require__(6748), exports);
-__exportStar(__nccwpck_require__(834), exports);
-__exportStar(__nccwpck_require__(4218), exports);
-__exportStar(__nccwpck_require__(3705), exports);
-__exportStar(__nccwpck_require__(8550), exports);
-__exportStar(__nccwpck_require__(2340), exports);
-__exportStar(__nccwpck_require__(7856), exports);
-__exportStar(__nccwpck_require__(2964), exports);
-__exportStar(__nccwpck_require__(7082), exports);
-__exportStar(__nccwpck_require__(6295), exports);
-var spancontext_utils_1 = __nccwpck_require__(1374);
+__exportStar(__nccwpck_require__(3168), exports);
+var spancontext_utils_1 = __nccwpck_require__(9745);
 Object.defineProperty(exports, "INVALID_SPANID", ({ enumerable: true, get: function () { return spancontext_utils_1.INVALID_SPANID; } }));
 Object.defineProperty(exports, "INVALID_TRACEID", ({ enumerable: true, get: function () { return spancontext_utils_1.INVALID_TRACEID; } }));
 Object.defineProperty(exports, "INVALID_SPAN_CONTEXT", ({ enumerable: true, get: function () { return spancontext_utils_1.INVALID_SPAN_CONTEXT; } }));
 Object.defineProperty(exports, "isSpanContextValid", ({ enumerable: true, get: function () { return spancontext_utils_1.isSpanContextValid; } }));
 Object.defineProperty(exports, "isValidTraceId", ({ enumerable: true, get: function () { return spancontext_utils_1.isValidTraceId; } }));
 Object.defineProperty(exports, "isValidSpanId", ({ enumerable: true, get: function () { return spancontext_utils_1.isValidSpanId; } }));
-__exportStar(__nccwpck_require__(9989), exports);
-__exportStar(__nccwpck_require__(7765), exports);
-var context_1 = __nccwpck_require__(9957);
+__exportStar(__nccwpck_require__(8242), exports);
+__exportStar(__nccwpck_require__(6504), exports);
+var context_1 = __nccwpck_require__(7171);
 /** Entrypoint for context API */
 exports.context = context_1.ContextAPI.getInstance();
-var trace_1 = __nccwpck_require__(5057);
+var trace_1 = __nccwpck_require__(1539);
 /** Entrypoint for trace API */
 exports.trace = trace_1.TraceAPI.getInstance();
-var propagation_1 = __nccwpck_require__(5374);
+var propagation_1 = __nccwpck_require__(9909);
 /** Entrypoint for propagation API */
 exports.propagation = propagation_1.PropagationAPI.getInstance();
-var diag_1 = __nccwpck_require__(5086);
+var diag_1 = __nccwpck_require__(1877);
 /**
  * Entrypoint for Diag API.
  * Defines Diagnostic handler used for internal diagnostic logging operations.
@@ -27485,7 +27485,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 9149:
+/***/ 5135:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -27507,9 +27507,9 @@ exports.default = {
  */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.unregisterGlobal = exports.getGlobal = exports.registerGlobal = void 0;
-var platform_1 = __nccwpck_require__(2968);
-var version_1 = __nccwpck_require__(8830);
-var semver_1 = __nccwpck_require__(8949);
+var platform_1 = __nccwpck_require__(9957);
+var version_1 = __nccwpck_require__(8996);
+var semver_1 = __nccwpck_require__(1522);
 var major = version_1.VERSION.split('.')[0];
 var GLOBAL_OPENTELEMETRY_API_KEY = Symbol.for("opentelemetry.js.api." + major);
 var _global = platform_1._globalThis;
@@ -27557,7 +27557,7 @@ exports.unregisterGlobal = unregisterGlobal;
 
 /***/ }),
 
-/***/ 8949:
+/***/ 1522:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -27579,7 +27579,7 @@ exports.unregisterGlobal = unregisterGlobal;
  */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.isCompatible = exports._makeCompatibilityCheck = void 0;
-var version_1 = __nccwpck_require__(8830);
+var version_1 = __nccwpck_require__(8996);
 var re = /^(\d+)\.(\d+)\.(\d+)(-(.+))?$/;
 /**
  * Create a function to test an API version to see if it is compatible with the provided ownVersion.
@@ -27686,7 +27686,7 @@ exports.isCompatible = _makeCompatibilityCheck(version_1.VERSION);
 
 /***/ }),
 
-/***/ 2968:
+/***/ 9957:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -27717,12 +27717,12 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-__exportStar(__nccwpck_require__(5421), exports);
+__exportStar(__nccwpck_require__(7200), exports);
 //# sourceMappingURL=index.js.map
 
 /***/ }),
 
-/***/ 2108:
+/***/ 9406:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -27751,7 +27751,7 @@ exports._globalThis = typeof globalThis === 'object' ? globalThis : global;
 
 /***/ }),
 
-/***/ 5421:
+/***/ 7200:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -27782,12 +27782,12 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-__exportStar(__nccwpck_require__(2108), exports);
+__exportStar(__nccwpck_require__(9406), exports);
 //# sourceMappingURL=index.js.map
 
 /***/ }),
 
-/***/ 1542:
+/***/ 2368:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -27831,7 +27831,7 @@ exports.NoopTextMapPropagator = NoopTextMapPropagator;
 
 /***/ }),
 
-/***/ 1831:
+/***/ 865:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -27879,7 +27879,7 @@ exports.defaultTextMapSetter = {
 
 /***/ }),
 
-/***/ 7033:
+/***/ 1462:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -27901,7 +27901,7 @@ exports.defaultTextMapSetter = {
  */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.NonRecordingSpan = void 0;
-var spancontext_utils_1 = __nccwpck_require__(1374);
+var spancontext_utils_1 = __nccwpck_require__(9745);
 /**
  * The NonRecordingSpan is the default {@link Span} that is used when no Span
  * implementation is available. All operations are no-op including context
@@ -27951,7 +27951,7 @@ exports.NonRecordingSpan = NonRecordingSpan;
 
 /***/ }),
 
-/***/ 9327:
+/***/ 7606:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -27973,10 +27973,10 @@ exports.NonRecordingSpan = NonRecordingSpan;
  */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.NoopTracer = void 0;
-var __1 = __nccwpck_require__(3529);
-var context_utils_1 = __nccwpck_require__(6923);
-var NonRecordingSpan_1 = __nccwpck_require__(7033);
-var spancontext_utils_1 = __nccwpck_require__(1374);
+var __1 = __nccwpck_require__(5163);
+var context_utils_1 = __nccwpck_require__(3326);
+var NonRecordingSpan_1 = __nccwpck_require__(1462);
+var spancontext_utils_1 = __nccwpck_require__(9745);
 /**
  * No-op implementations of {@link Tracer}.
  */
@@ -28035,7 +28035,7 @@ function isSpanContext(spanContext) {
 
 /***/ }),
 
-/***/ 7951:
+/***/ 3259:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -28057,7 +28057,7 @@ function isSpanContext(spanContext) {
  */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.NoopTracerProvider = void 0;
-var NoopTracer_1 = __nccwpck_require__(9327);
+var NoopTracer_1 = __nccwpck_require__(7606);
 /**
  * An implementation of the {@link TracerProvider} which returns an impotent
  * Tracer for all calls to `getTracer`.
@@ -28077,7 +28077,7 @@ exports.NoopTracerProvider = NoopTracerProvider;
 
 /***/ }),
 
-/***/ 9587:
+/***/ 3503:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -28099,7 +28099,7 @@ exports.NoopTracerProvider = NoopTracerProvider;
  */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ProxyTracer = void 0;
-var NoopTracer_1 = __nccwpck_require__(9327);
+var NoopTracer_1 = __nccwpck_require__(7606);
 var NOOP_TRACER = new NoopTracer_1.NoopTracer();
 /**
  * Proxy tracer provided by the proxy tracer provider
@@ -28139,7 +28139,7 @@ exports.ProxyTracer = ProxyTracer;
 
 /***/ }),
 
-/***/ 5249:
+/***/ 2285:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -28161,8 +28161,8 @@ exports.ProxyTracer = ProxyTracer;
  */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ProxyTracerProvider = void 0;
-var ProxyTracer_1 = __nccwpck_require__(9587);
-var NoopTracerProvider_1 = __nccwpck_require__(7951);
+var ProxyTracer_1 = __nccwpck_require__(3503);
+var NoopTracerProvider_1 = __nccwpck_require__(3259);
 var NOOP_TRACER_PROVIDER = new NoopTracerProvider_1.NoopTracerProvider();
 /**
  * Tracer provider which provides {@link ProxyTracer}s.
@@ -28203,7 +28203,7 @@ exports.ProxyTracerProvider = ProxyTracerProvider;
 
 /***/ }),
 
-/***/ 9463:
+/***/ 9671:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -28228,7 +28228,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 6748:
+/***/ 3209:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -28276,7 +28276,7 @@ var SamplingDecision;
 
 /***/ }),
 
-/***/ 8550:
+/***/ 955:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -28301,7 +28301,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 891:
+/***/ 7492:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -28326,7 +28326,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 6923:
+/***/ 3326:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -28348,8 +28348,8 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
  */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getSpanContext = exports.setSpanContext = exports.deleteSpan = exports.setSpan = exports.getSpan = void 0;
-var context_1 = __nccwpck_require__(9989);
-var NonRecordingSpan_1 = __nccwpck_require__(7033);
+var context_1 = __nccwpck_require__(8242);
+var NonRecordingSpan_1 = __nccwpck_require__(1462);
 /**
  * span key
  */
@@ -28407,7 +28407,7 @@ exports.getSpanContext = getSpanContext;
 
 /***/ }),
 
-/***/ 7568:
+/***/ 4023:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -28432,7 +28432,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 3705:
+/***/ 4416:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -28457,7 +28457,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 834:
+/***/ 5769:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -28482,7 +28482,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 4218:
+/***/ 1424:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -28535,7 +28535,7 @@ var SpanKind;
 
 /***/ }),
 
-/***/ 1374:
+/***/ 9745:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -28557,8 +28557,8 @@ exports.wrapSpanContext = exports.isSpanContextValid = exports.isValidSpanId = e
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var NonRecordingSpan_1 = __nccwpck_require__(7033);
-var trace_flags_1 = __nccwpck_require__(7856);
+var NonRecordingSpan_1 = __nccwpck_require__(1462);
+var trace_flags_1 = __nccwpck_require__(6905);
 var VALID_TRACEID_REGEX = /^([0-9a-f]{32})$/i;
 var VALID_SPANID_REGEX = /^[0-9a-f]{16}$/i;
 exports.INVALID_SPANID = '0000000000000000';
@@ -28598,7 +28598,7 @@ exports.wrapSpanContext = wrapSpanContext;
 
 /***/ }),
 
-/***/ 2340:
+/***/ 8845:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -28628,7 +28628,7 @@ var SpanStatusCode;
 
 /***/ }),
 
-/***/ 7856:
+/***/ 6905:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -28661,7 +28661,7 @@ var TraceFlags;
 
 /***/ }),
 
-/***/ 2964:
+/***/ 8384:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -28686,7 +28686,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 6295:
+/***/ 3168:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -28711,7 +28711,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 7082:
+/***/ 891:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -28736,7 +28736,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
-/***/ 8830:
+/***/ 8996:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -28764,7 +28764,7 @@ exports.VERSION = '1.0.2';
 
 /***/ }),
 
-/***/ 3892:
+/***/ 1040:
 /***/ ((module) => {
 
 "use strict";
@@ -28810,7 +28810,7 @@ module.exports = once;
 
 /***/ }),
 
-/***/ 3898:
+/***/ 9690:
 /***/ (function(module, __unused_webpack_exports, __nccwpck_require__) {
 
 "use strict";
@@ -28819,8 +28819,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 const events_1 = __nccwpck_require__(8614);
-const debug_1 = __importDefault(__nccwpck_require__(8027));
-const promisify_1 = __importDefault(__nccwpck_require__(9943));
+const debug_1 = __importDefault(__nccwpck_require__(8237));
+const promisify_1 = __importDefault(__nccwpck_require__(6570));
 const debug = debug_1.default('agent-base');
 function isAgent(v) {
     return Boolean(v) && typeof v.addRequest === 'function';
@@ -29020,7 +29020,7 @@ module.exports = createAgent;
 
 /***/ }),
 
-/***/ 9943:
+/***/ 6570:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -29045,20 +29045,20 @@ exports.default = promisify;
 
 /***/ }),
 
-/***/ 8271:
+/***/ 4812:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 module.exports =
 {
-  parallel      : __nccwpck_require__(1320),
-  serial        : __nccwpck_require__(1851),
-  serialOrdered : __nccwpck_require__(9348)
+  parallel      : __nccwpck_require__(8210),
+  serial        : __nccwpck_require__(445),
+  serialOrdered : __nccwpck_require__(3578)
 };
 
 
 /***/ }),
 
-/***/ 7446:
+/***/ 1700:
 /***/ ((module) => {
 
 // API
@@ -29094,10 +29094,10 @@ function clean(key)
 
 /***/ }),
 
-/***/ 8906:
+/***/ 2794:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var defer = __nccwpck_require__(458);
+var defer = __nccwpck_require__(5295);
 
 // API
 module.exports = async;
@@ -29135,7 +29135,7 @@ function async(callback)
 
 /***/ }),
 
-/***/ 458:
+/***/ 5295:
 /***/ ((module) => {
 
 module.exports = defer;
@@ -29168,11 +29168,11 @@ function defer(fn)
 
 /***/ }),
 
-/***/ 6395:
+/***/ 9023:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var async = __nccwpck_require__(8906)
-  , abort = __nccwpck_require__(7446)
+var async = __nccwpck_require__(2794)
+  , abort = __nccwpck_require__(1700)
   ;
 
 // API
@@ -29250,7 +29250,7 @@ function runJob(iterator, key, item, callback)
 
 /***/ }),
 
-/***/ 6219:
+/***/ 2474:
 /***/ ((module) => {
 
 // API
@@ -29294,11 +29294,11 @@ function state(list, sortMethod)
 
 /***/ }),
 
-/***/ 7309:
+/***/ 7942:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var abort = __nccwpck_require__(7446)
-  , async = __nccwpck_require__(8906)
+var abort = __nccwpck_require__(1700)
+  , async = __nccwpck_require__(2794)
   ;
 
 // API
@@ -29330,12 +29330,12 @@ function terminator(callback)
 
 /***/ }),
 
-/***/ 1320:
+/***/ 8210:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var iterate    = __nccwpck_require__(6395)
-  , initState  = __nccwpck_require__(6219)
-  , terminator = __nccwpck_require__(7309)
+var iterate    = __nccwpck_require__(9023)
+  , initState  = __nccwpck_require__(2474)
+  , terminator = __nccwpck_require__(7942)
   ;
 
 // Public API
@@ -29380,10 +29380,10 @@ function parallel(list, iterator, callback)
 
 /***/ }),
 
-/***/ 1851:
+/***/ 445:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var serialOrdered = __nccwpck_require__(9348);
+var serialOrdered = __nccwpck_require__(3578);
 
 // Public API
 module.exports = serial;
@@ -29404,12 +29404,12 @@ function serial(list, iterator, callback)
 
 /***/ }),
 
-/***/ 9348:
+/***/ 3578:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var iterate    = __nccwpck_require__(6395)
-  , initState  = __nccwpck_require__(6219)
-  , terminator = __nccwpck_require__(7309)
+var iterate    = __nccwpck_require__(9023)
+  , initState  = __nccwpck_require__(2474)
+  , terminator = __nccwpck_require__(7942)
   ;
 
 // Public API
@@ -29486,32 +29486,32 @@ function descending(a, b)
 
 /***/ }),
 
-/***/ 3343:
+/***/ 6545:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-module.exports = __nccwpck_require__(3903);
+module.exports = __nccwpck_require__(2618);
 
 /***/ }),
 
-/***/ 2288:
+/***/ 8104:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(2572);
-var settle = __nccwpck_require__(2557);
-var buildFullPath = __nccwpck_require__(8315);
-var buildURL = __nccwpck_require__(8162);
+var utils = __nccwpck_require__(328);
+var settle = __nccwpck_require__(3211);
+var buildFullPath = __nccwpck_require__(1934);
+var buildURL = __nccwpck_require__(646);
 var http = __nccwpck_require__(8605);
 var https = __nccwpck_require__(7211);
-var httpFollow = __nccwpck_require__(6025).http;
-var httpsFollow = __nccwpck_require__(6025).https;
+var httpFollow = __nccwpck_require__(7707).http;
+var httpsFollow = __nccwpck_require__(7707).https;
 var url = __nccwpck_require__(8835);
 var zlib = __nccwpck_require__(8761);
 var pkg = __nccwpck_require__(696);
-var createError = __nccwpck_require__(3997);
-var enhanceError = __nccwpck_require__(6303);
+var createError = __nccwpck_require__(5226);
+var enhanceError = __nccwpck_require__(1516);
 
 var isHttps = /https:?/;
 
@@ -29804,20 +29804,20 @@ module.exports = function httpAdapter(config) {
 
 /***/ }),
 
-/***/ 1559:
+/***/ 3454:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(2572);
-var settle = __nccwpck_require__(2557);
-var cookies = __nccwpck_require__(9206);
-var buildURL = __nccwpck_require__(8162);
-var buildFullPath = __nccwpck_require__(8315);
-var parseHeaders = __nccwpck_require__(5548);
-var isURLSameOrigin = __nccwpck_require__(2661);
-var createError = __nccwpck_require__(3997);
+var utils = __nccwpck_require__(328);
+var settle = __nccwpck_require__(3211);
+var cookies = __nccwpck_require__(1545);
+var buildURL = __nccwpck_require__(646);
+var buildFullPath = __nccwpck_require__(1934);
+var parseHeaders = __nccwpck_require__(6455);
+var isURLSameOrigin = __nccwpck_require__(3608);
+var createError = __nccwpck_require__(5226);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -29991,17 +29991,17 @@ module.exports = function xhrAdapter(config) {
 
 /***/ }),
 
-/***/ 3903:
+/***/ 2618:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(2572);
-var bind = __nccwpck_require__(2430);
-var Axios = __nccwpck_require__(5230);
-var mergeConfig = __nccwpck_require__(2494);
-var defaults = __nccwpck_require__(1213);
+var utils = __nccwpck_require__(328);
+var bind = __nccwpck_require__(7065);
+var Axios = __nccwpck_require__(8178);
+var mergeConfig = __nccwpck_require__(4831);
+var defaults = __nccwpck_require__(8190);
 
 /**
  * Create an instance of Axios
@@ -30034,18 +30034,18 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __nccwpck_require__(5068);
-axios.CancelToken = __nccwpck_require__(5054);
-axios.isCancel = __nccwpck_require__(10);
+axios.Cancel = __nccwpck_require__(8875);
+axios.CancelToken = __nccwpck_require__(1587);
+axios.isCancel = __nccwpck_require__(4057);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __nccwpck_require__(5668);
+axios.spread = __nccwpck_require__(4850);
 
 // Expose isAxiosError
-axios.isAxiosError = __nccwpck_require__(9822);
+axios.isAxiosError = __nccwpck_require__(650);
 
 module.exports = axios;
 
@@ -30055,7 +30055,7 @@ module.exports.default = axios;
 
 /***/ }),
 
-/***/ 5068:
+/***/ 8875:
 /***/ ((module) => {
 
 "use strict";
@@ -30082,13 +30082,13 @@ module.exports = Cancel;
 
 /***/ }),
 
-/***/ 5054:
+/***/ 1587:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var Cancel = __nccwpck_require__(5068);
+var Cancel = __nccwpck_require__(8875);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -30147,7 +30147,7 @@ module.exports = CancelToken;
 
 /***/ }),
 
-/***/ 10:
+/***/ 4057:
 /***/ ((module) => {
 
 "use strict";
@@ -30160,17 +30160,17 @@ module.exports = function isCancel(value) {
 
 /***/ }),
 
-/***/ 5230:
+/***/ 8178:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(2572);
-var buildURL = __nccwpck_require__(8162);
-var InterceptorManager = __nccwpck_require__(2085);
-var dispatchRequest = __nccwpck_require__(1784);
-var mergeConfig = __nccwpck_require__(2494);
+var utils = __nccwpck_require__(328);
+var buildURL = __nccwpck_require__(646);
+var InterceptorManager = __nccwpck_require__(3214);
+var dispatchRequest = __nccwpck_require__(5062);
+var mergeConfig = __nccwpck_require__(4831);
 
 /**
  * Create a new instance of Axios
@@ -30263,13 +30263,13 @@ module.exports = Axios;
 
 /***/ }),
 
-/***/ 2085:
+/***/ 3214:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(2572);
+var utils = __nccwpck_require__(328);
 
 function InterceptorManager() {
   this.handlers = [];
@@ -30323,14 +30323,14 @@ module.exports = InterceptorManager;
 
 /***/ }),
 
-/***/ 8315:
+/***/ 1934:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var isAbsoluteURL = __nccwpck_require__(5132);
-var combineURLs = __nccwpck_require__(1269);
+var isAbsoluteURL = __nccwpck_require__(1301);
+var combineURLs = __nccwpck_require__(7189);
 
 /**
  * Creates a new URL by combining the baseURL with the requestedURL,
@@ -30351,13 +30351,13 @@ module.exports = function buildFullPath(baseURL, requestedURL) {
 
 /***/ }),
 
-/***/ 3997:
+/***/ 5226:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var enhanceError = __nccwpck_require__(6303);
+var enhanceError = __nccwpck_require__(1516);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -30377,16 +30377,16 @@ module.exports = function createError(message, config, code, request, response) 
 
 /***/ }),
 
-/***/ 1784:
+/***/ 5062:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(2572);
-var transformData = __nccwpck_require__(1993);
-var isCancel = __nccwpck_require__(10);
-var defaults = __nccwpck_require__(1213);
+var utils = __nccwpck_require__(328);
+var transformData = __nccwpck_require__(9812);
+var isCancel = __nccwpck_require__(4057);
+var defaults = __nccwpck_require__(8190);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -30464,7 +30464,7 @@ module.exports = function dispatchRequest(config) {
 
 /***/ }),
 
-/***/ 6303:
+/***/ 1516:
 /***/ ((module) => {
 
 "use strict";
@@ -30514,13 +30514,13 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 /***/ }),
 
-/***/ 2494:
+/***/ 4831:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(2572);
+var utils = __nccwpck_require__(328);
 
 /**
  * Config-specific merge-function which creates a new config-object
@@ -30609,13 +30609,13 @@ module.exports = function mergeConfig(config1, config2) {
 
 /***/ }),
 
-/***/ 2557:
+/***/ 3211:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var createError = __nccwpck_require__(3997);
+var createError = __nccwpck_require__(5226);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -30642,13 +30642,13 @@ module.exports = function settle(resolve, reject, response) {
 
 /***/ }),
 
-/***/ 1993:
+/***/ 9812:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(2572);
+var utils = __nccwpck_require__(328);
 
 /**
  * Transform the data for a request or a response
@@ -30670,14 +30670,14 @@ module.exports = function transformData(data, headers, fns) {
 
 /***/ }),
 
-/***/ 1213:
+/***/ 8190:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(2572);
-var normalizeHeaderName = __nccwpck_require__(2692);
+var utils = __nccwpck_require__(328);
+var normalizeHeaderName = __nccwpck_require__(6240);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -30693,10 +30693,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __nccwpck_require__(1559);
+    adapter = __nccwpck_require__(3454);
   } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
     // For node use HTTP adapter
-    adapter = __nccwpck_require__(2288);
+    adapter = __nccwpck_require__(8104);
   }
   return adapter;
 }
@@ -30776,7 +30776,7 @@ module.exports = defaults;
 
 /***/ }),
 
-/***/ 2430:
+/***/ 7065:
 /***/ ((module) => {
 
 "use strict";
@@ -30795,13 +30795,13 @@ module.exports = function bind(fn, thisArg) {
 
 /***/ }),
 
-/***/ 8162:
+/***/ 646:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(2572);
+var utils = __nccwpck_require__(328);
 
 function encode(val) {
   return encodeURIComponent(val).
@@ -30873,7 +30873,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 /***/ }),
 
-/***/ 1269:
+/***/ 7189:
 /***/ ((module) => {
 
 "use strict";
@@ -30895,13 +30895,13 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 /***/ }),
 
-/***/ 9206:
+/***/ 1545:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(2572);
+var utils = __nccwpck_require__(328);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -30956,7 +30956,7 @@ module.exports = (
 
 /***/ }),
 
-/***/ 5132:
+/***/ 1301:
 /***/ ((module) => {
 
 "use strict";
@@ -30978,7 +30978,7 @@ module.exports = function isAbsoluteURL(url) {
 
 /***/ }),
 
-/***/ 9822:
+/***/ 650:
 /***/ ((module) => {
 
 "use strict";
@@ -30997,13 +30997,13 @@ module.exports = function isAxiosError(payload) {
 
 /***/ }),
 
-/***/ 2661:
+/***/ 3608:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(2572);
+var utils = __nccwpck_require__(328);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -31073,13 +31073,13 @@ module.exports = (
 
 /***/ }),
 
-/***/ 2692:
+/***/ 6240:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(2572);
+var utils = __nccwpck_require__(328);
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -31093,13 +31093,13 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 /***/ }),
 
-/***/ 5548:
+/***/ 6455:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(2572);
+var utils = __nccwpck_require__(328);
 
 // Headers whose duplicates are ignored by node
 // c.f. https://nodejs.org/api/http.html#http_message_headers
@@ -31154,7 +31154,7 @@ module.exports = function parseHeaders(headers) {
 
 /***/ }),
 
-/***/ 5668:
+/***/ 4850:
 /***/ ((module) => {
 
 "use strict";
@@ -31189,13 +31189,13 @@ module.exports = function spread(callback) {
 
 /***/ }),
 
-/***/ 2572:
+/***/ 328:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var bind = __nccwpck_require__(2430);
+var bind = __nccwpck_require__(7065);
 
 /*global toString:true*/
 
@@ -31548,7 +31548,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 2272:
+/***/ 1138:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -31561,17 +31561,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.KustoConnectionStringBuilder = exports.ClientRequestProperties = exports.Client = void 0;
-const client_1 = __importDefault(__nccwpck_require__(289));
+const client_1 = __importDefault(__nccwpck_require__(374));
 exports.Client = client_1.default;
-const clientRequestProperties_1 = __importDefault(__nccwpck_require__(5825));
+const clientRequestProperties_1 = __importDefault(__nccwpck_require__(8184));
 exports.ClientRequestProperties = clientRequestProperties_1.default;
-const connectionBuilder_1 = __importDefault(__nccwpck_require__(3195));
+const connectionBuilder_1 = __importDefault(__nccwpck_require__(142));
 exports.KustoConnectionStringBuilder = connectionBuilder_1.default;
 //# sourceMappingURL=index.js.map
 
 /***/ }),
 
-/***/ 289:
+/***/ 374:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -31592,13 +31592,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.KustoClient = void 0;
-const moment_1 = __importDefault(__nccwpck_require__(4958));
-const uuid_1 = __importDefault(__nccwpck_require__(5313));
-const security_1 = __importDefault(__nccwpck_require__(5802));
-const response_1 = __nccwpck_require__(6851);
-const connectionBuilder_1 = __importDefault(__nccwpck_require__(3195));
+const moment_1 = __importDefault(__nccwpck_require__(9623));
+const uuid_1 = __importDefault(__nccwpck_require__(2155));
+const security_1 = __importDefault(__nccwpck_require__(5485));
+const response_1 = __nccwpck_require__(8029);
+const connectionBuilder_1 = __importDefault(__nccwpck_require__(142));
 const package_json_1 = __importDefault(__nccwpck_require__(1196));
-const axios_1 = __importDefault(__nccwpck_require__(3343));
+const axios_1 = __importDefault(__nccwpck_require__(6545));
 const http_1 = __importDefault(__nccwpck_require__(8605));
 const https_1 = __importDefault(__nccwpck_require__(7211));
 const COMMAND_TIMEOUT_IN_MILLISECS = moment_1.default.duration(10.5, "minutes").asMilliseconds();
@@ -31641,18 +31641,13 @@ class KustoClient {
         return __awaiter(this, void 0, void 0, function* () {
             query = query.trim();
             if (query.startsWith(MGMT_PREFIX)) {
-                
-        console.log(1234);
                 return this.executeMgmt(db, query, properties);
             }
-            
-       
             return this.executeQuery(db, query, properties);
         });
     }
     executeQuery(db, query, properties) {
         return __awaiter(this, void 0, void 0, function* () {
-           
             return this._execute(this.endpoints[ExecutionType.Query], ExecutionType.Query, db, query, null, properties);
         });
     }
@@ -31677,7 +31672,6 @@ class KustoClient {
     }
     _execute(endpoint, executionType, db, query, stream, properties) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(1233333);
             const headers = {};
             let payload;
             let clientRequestPrefix = "";
@@ -31716,7 +31710,6 @@ class KustoClient {
     }
     _doRequest(endpoint, executionType, headers, payload, timeout, properties) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(3311);
             const axiosConfig = {
                 headers,
                 timeout,
@@ -31726,9 +31719,7 @@ class KustoClient {
                 axiosResponse = yield this.axiosInstance.post(endpoint, payload, axiosConfig);
             }
             catch (error) {
-                console.log(error.response.data.error)
                 if (error.response) {
-                    console.log(333111)
                     throw error.response.data.error;
                 }
                 throw error;
@@ -31737,7 +31728,6 @@ class KustoClient {
         });
     }
     _parseResponse(response, executionType, properties, status) {
-
         const { raw } = properties || {};
         if (raw === true || executionType == ExecutionType.Ingest) {
             return response;
@@ -31757,7 +31747,6 @@ class KustoClient {
         if (kustoResponse.getErrorsCount().errors > 0) {
             throw new Error(`Kusto request had errors. ${kustoResponse.getExceptions()}`);
         }
-        
         return kustoResponse;
     }
     _getClientTimeout(executionType, properties) {
@@ -31780,7 +31769,7 @@ exports.default = KustoClient;
 
 /***/ }),
 
-/***/ 5825:
+/***/ 8184:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -31865,7 +31854,7 @@ exports.default = ClientRequestProperties;
 
 /***/ }),
 
-/***/ 2931:
+/***/ 289:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -31886,7 +31875,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CloudSettings = void 0;
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-const axios_1 = __importDefault(__nccwpck_require__(3343));
+const axios_1 = __importDefault(__nccwpck_require__(6545));
 /**
  * This class holds data for all cloud instances, and returns the specific data instance by parsing the dns suffix from a URL
  */
@@ -31945,7 +31934,7 @@ exports.CloudSettings = CloudSettings;
 
 /***/ }),
 
-/***/ 3195:
+/***/ 142:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -32094,7 +32083,7 @@ exports.default = KustoConnectionStringBuilder;
 
 /***/ }),
 
-/***/ 5182:
+/***/ 7100:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -32106,7 +32095,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.KustoResultTable = exports.KustoResultColumn = exports.KustoResultRow = exports.WellKnownDataSet = void 0;
-const moment_1 = __importDefault(__nccwpck_require__(4958));
+const moment_1 = __importDefault(__nccwpck_require__(9623));
 var WellKnownDataSet;
 (function (WellKnownDataSet) {
     WellKnownDataSet["PrimaryResult"] = "PrimaryResult";
@@ -32201,7 +32190,7 @@ exports.KustoResultTable = KustoResultTable;
 
 /***/ }),
 
-/***/ 6851:
+/***/ 8029:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -32210,7 +32199,7 @@ exports.KustoResultTable = KustoResultTable;
 // Licensed under the MIT License.
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.KustoResponseDataSetV2 = exports.KustoResponseDataSetV1 = exports.KustoResponseDataSet = void 0;
-const models_1 = __nccwpck_require__(5182);
+const models_1 = __nccwpck_require__(7100);
 var ErrorLevels;
 (function (ErrorLevels) {
     ErrorLevels[ErrorLevels["Warning"] = 3] = "Warning";
@@ -32377,7 +32366,7 @@ exports.KustoResponseDataSetV2 = KustoResponseDataSetV2;
 
 /***/ }),
 
-/***/ 5802:
+/***/ 5485:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -32412,8 +32401,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AadHelper = void 0;
-__nccwpck_require__(8158);
-const TokenProvider = __importStar(__nccwpck_require__(8158));
+__nccwpck_require__(4618);
+const TokenProvider = __importStar(__nccwpck_require__(4618));
 class AadHelper {
     constructor(kcsb) {
         if (!kcsb.dataSource) {
@@ -32461,7 +32450,7 @@ exports.default = AadHelper;
 
 /***/ }),
 
-/***/ 8158:
+/***/ 4618:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -32479,9 +32468,9 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApplicationCertificateTokenProvider = exports.ApplicationKeyTokenProvider = exports.DeviceLoginTokenProvider = exports.UserPassTokenProvider = exports.AzCliTokenProvider = exports.MsiTokenProvider = exports.CallbackTokenProvider = exports.BasicTokenProvider = exports.TokenProviderBase = void 0;
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
-const msal_node_1 = __nccwpck_require__(2120);
-const identity_1 = __nccwpck_require__(1565);
-const cloudSettings_1 = __nccwpck_require__(2931);
+const msal_node_1 = __nccwpck_require__(2884);
+const identity_1 = __nccwpck_require__(3084);
+const cloudSettings_1 = __nccwpck_require__(289);
 const BEARER_TYPE = "Bearer";
 /**
  * This base class abstracts token acquisition for all implementations.
@@ -32732,12 +32721,12 @@ exports.ApplicationCertificateTokenProvider = ApplicationCertificateTokenProvide
 
 /***/ }),
 
-/***/ 6632:
+/***/ 3682:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var register = __nccwpck_require__(7159)
-var addHook = __nccwpck_require__(9859)
-var removeHook = __nccwpck_require__(3518)
+var register = __nccwpck_require__(4670)
+var addHook = __nccwpck_require__(5549)
+var removeHook = __nccwpck_require__(6819)
 
 // bind with array of arguments: https://stackoverflow.com/a/21792913
 var bind = Function.bind
@@ -32796,7 +32785,7 @@ module.exports.Collection = Hook.Collection
 
 /***/ }),
 
-/***/ 9859:
+/***/ 5549:
 /***/ ((module) => {
 
 module.exports = addHook;
@@ -32849,7 +32838,7 @@ function addHook(state, kind, name, hook) {
 
 /***/ }),
 
-/***/ 7159:
+/***/ 4670:
 /***/ ((module) => {
 
 module.exports = register;
@@ -32883,7 +32872,7 @@ function register(state, name, method, options) {
 
 /***/ }),
 
-/***/ 3518:
+/***/ 6819:
 /***/ ((module) => {
 
 module.exports = removeHook;
@@ -32909,7 +32898,7 @@ function removeHook(state, name, method) {
 
 /***/ }),
 
-/***/ 9658:
+/***/ 9239:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
@@ -32958,15 +32947,15 @@ bufferEq.restore = function() {
 
 /***/ }),
 
-/***/ 7709:
+/***/ 8803:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var GetIntrinsic = __nccwpck_require__(51);
+var GetIntrinsic = __nccwpck_require__(4538);
 
-var callBind = __nccwpck_require__(9313);
+var callBind = __nccwpck_require__(2977);
 
 var $indexOf = callBind(GetIntrinsic('String.prototype.indexOf'));
 
@@ -32981,14 +32970,14 @@ module.exports = function callBoundIntrinsic(name, allowMissing) {
 
 /***/ }),
 
-/***/ 9313:
+/***/ 2977:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var bind = __nccwpck_require__(7731);
-var GetIntrinsic = __nccwpck_require__(51);
+var bind = __nccwpck_require__(8334);
+var GetIntrinsic = __nccwpck_require__(4538);
 
 var $apply = GetIntrinsic('%Function.prototype.apply%');
 var $call = GetIntrinsic('%Function.prototype.call%');
@@ -33036,12 +33025,12 @@ if ($defineProperty) {
 
 /***/ }),
 
-/***/ 8227:
+/***/ 5443:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 var util = __nccwpck_require__(1669);
 var Stream = __nccwpck_require__(2413).Stream;
-var DelayedStream = __nccwpck_require__(9853);
+var DelayedStream = __nccwpck_require__(8611);
 
 module.exports = CombinedStream;
 function CombinedStream() {
@@ -33251,7 +33240,7 @@ CombinedStream.prototype._emitError = function(err) {
 
 /***/ }),
 
-/***/ 3556:
+/***/ 8222:
 /***/ ((module, exports, __nccwpck_require__) => {
 
 /* eslint-env browser */
@@ -33508,7 +33497,7 @@ function localstorage() {
 	}
 }
 
-module.exports = __nccwpck_require__(9265)(exports);
+module.exports = __nccwpck_require__(6243)(exports);
 
 const {formatters} = module.exports;
 
@@ -33527,7 +33516,7 @@ formatters.j = function (v) {
 
 /***/ }),
 
-/***/ 9265:
+/***/ 6243:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 
@@ -33543,7 +33532,7 @@ function setup(env) {
 	createDebug.disable = disable;
 	createDebug.enable = enable;
 	createDebug.enabled = enabled;
-	createDebug.humanize = __nccwpck_require__(1575);
+	createDebug.humanize = __nccwpck_require__(900);
 	createDebug.destroy = destroy;
 
 	Object.keys(env).forEach(key => {
@@ -33808,7 +33797,7 @@ module.exports = setup;
 
 /***/ }),
 
-/***/ 8027:
+/***/ 8237:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 /**
@@ -33817,15 +33806,15 @@ module.exports = setup;
  */
 
 if (typeof process === 'undefined' || process.type === 'renderer' || process.browser === true || process.__nwjs) {
-	module.exports = __nccwpck_require__(3556);
+	module.exports = __nccwpck_require__(8222);
 } else {
-	module.exports = __nccwpck_require__(8840);
+	module.exports = __nccwpck_require__(5332);
 }
 
 
 /***/ }),
 
-/***/ 8840:
+/***/ 5332:
 /***/ ((module, exports, __nccwpck_require__) => {
 
 /**
@@ -33859,7 +33848,7 @@ exports.colors = [6, 2, 3, 4, 5, 1];
 try {
 	// Optional dependency (as in, doesn't need to be installed, NOT like optionalDependencies in package.json)
 	// eslint-disable-next-line import/no-extraneous-dependencies
-	const supportsColor = __nccwpck_require__(9440);
+	const supportsColor = __nccwpck_require__(132);
 
 	if (supportsColor && (supportsColor.stderr || supportsColor).level >= 2) {
 		exports.colors = [
@@ -34067,7 +34056,7 @@ function init(debug) {
 	}
 }
 
-module.exports = __nccwpck_require__(9265)(exports);
+module.exports = __nccwpck_require__(6243)(exports);
 
 const {formatters} = module.exports;
 
@@ -34095,7 +34084,7 @@ formatters.O = function (v) {
 
 /***/ }),
 
-/***/ 9853:
+/***/ 8611:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 var Stream = __nccwpck_require__(2413).Stream;
@@ -34209,7 +34198,7 @@ DelayedStream.prototype._checkIfMaxDataSizeExceeded = function() {
 
 /***/ }),
 
-/***/ 9364:
+/***/ 8932:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -34237,15 +34226,15 @@ exports.Deprecation = Deprecation;
 
 /***/ }),
 
-/***/ 4435:
+/***/ 1728:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var Buffer = __nccwpck_require__(3964).Buffer;
+var Buffer = __nccwpck_require__(1867).Buffer;
 
-var getParamBytesForAlg = __nccwpck_require__(9402);
+var getParamBytesForAlg = __nccwpck_require__(528);
 
 var MAX_OCTET = 0x80,
 	CLASS_UNIVERSAL = 0,
@@ -34432,7 +34421,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 9402:
+/***/ 528:
 /***/ ((module) => {
 
 "use strict";
@@ -34463,7 +34452,7 @@ module.exports = getParamBytesForAlg;
 
 /***/ }),
 
-/***/ 2278:
+/***/ 1133:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 var debug;
@@ -34472,7 +34461,7 @@ module.exports = function () {
   if (!debug) {
     try {
       /* eslint global-require: off */
-      debug = __nccwpck_require__(8027)("follow-redirects");
+      debug = __nccwpck_require__(8237)("follow-redirects");
     }
     catch (error) { /* */ }
     if (typeof debug !== "function") {
@@ -34485,7 +34474,7 @@ module.exports = function () {
 
 /***/ }),
 
-/***/ 6025:
+/***/ 7707:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 var url = __nccwpck_require__(8835);
@@ -34494,7 +34483,7 @@ var http = __nccwpck_require__(8605);
 var https = __nccwpck_require__(7211);
 var Writable = __nccwpck_require__(2413).Writable;
 var assert = __nccwpck_require__(2357);
-var debug = __nccwpck_require__(2278);
+var debug = __nccwpck_require__(1133);
 
 // Create handlers that pass events from native requests
 var events = ["abort", "aborted", "connect", "error", "socket", "timeout"];
@@ -35023,19 +35012,19 @@ module.exports.wrap = wrap;
 
 /***/ }),
 
-/***/ 3603:
+/***/ 1826:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var CombinedStream = __nccwpck_require__(8227);
+var CombinedStream = __nccwpck_require__(5443);
 var util = __nccwpck_require__(1669);
 var path = __nccwpck_require__(5622);
 var http = __nccwpck_require__(8605);
 var https = __nccwpck_require__(7211);
 var parseUrl = __nccwpck_require__(8835).parse;
 var fs = __nccwpck_require__(5747);
-var mime = __nccwpck_require__(626);
-var asynckit = __nccwpck_require__(8271);
-var populate = __nccwpck_require__(1941);
+var mime = __nccwpck_require__(3583);
+var asynckit = __nccwpck_require__(4812);
+var populate = __nccwpck_require__(7142);
 
 // Public API
 module.exports = FormData;
@@ -35528,7 +35517,7 @@ FormData.prototype.toString = function () {
 
 /***/ }),
 
-/***/ 1941:
+/***/ 7142:
 /***/ ((module) => {
 
 // populates missing values
@@ -35545,7 +35534,7 @@ module.exports = function(dst, src) {
 
 /***/ }),
 
-/***/ 4571:
+/***/ 9320:
 /***/ ((module) => {
 
 "use strict";
@@ -35605,20 +35594,20 @@ module.exports = function bind(that) {
 
 /***/ }),
 
-/***/ 7731:
+/***/ 8334:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var implementation = __nccwpck_require__(4571);
+var implementation = __nccwpck_require__(9320);
 
 module.exports = Function.prototype.bind || implementation;
 
 
 /***/ }),
 
-/***/ 51:
+/***/ 4538:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
@@ -35666,7 +35655,7 @@ var ThrowTypeError = $gOPD
 	}())
 	: throwTypeError;
 
-var hasSymbols = __nccwpck_require__(4447)();
+var hasSymbols = __nccwpck_require__(587)();
 
 var getProto = Object.getPrototypeOf || function (x) { return x.__proto__; }; // eslint-disable-line no-proto
 
@@ -35820,8 +35809,8 @@ var LEGACY_ALIASES = {
 	'%WeakSetPrototype%': ['WeakSet', 'prototype']
 };
 
-var bind = __nccwpck_require__(7731);
-var hasOwn = __nccwpck_require__(9708);
+var bind = __nccwpck_require__(8334);
+var hasOwn = __nccwpck_require__(6339);
 var $concat = bind.call(Function.call, Array.prototype.concat);
 var $spliceApply = bind.call(Function.apply, Array.prototype.splice);
 var $replace = bind.call(Function.call, String.prototype.replace);
@@ -35956,14 +35945,14 @@ module.exports = function GetIntrinsic(name, allowMissing) {
 
 /***/ }),
 
-/***/ 4447:
+/***/ 587:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
 var origSymbol = typeof Symbol !== 'undefined' && Symbol;
-var hasSymbolSham = __nccwpck_require__(1760);
+var hasSymbolSham = __nccwpck_require__(7747);
 
 module.exports = function hasNativeSymbols() {
 	if (typeof origSymbol !== 'function') { return false; }
@@ -35977,7 +35966,7 @@ module.exports = function hasNativeSymbols() {
 
 /***/ }),
 
-/***/ 1760:
+/***/ 7747:
 /***/ ((module) => {
 
 "use strict";
@@ -36027,20 +36016,20 @@ module.exports = function hasSymbols() {
 
 /***/ }),
 
-/***/ 9708:
+/***/ 6339:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var bind = __nccwpck_require__(7731);
+var bind = __nccwpck_require__(8334);
 
 module.exports = bind.call(Function.call, Object.prototype.hasOwnProperty);
 
 
 /***/ }),
 
-/***/ 7925:
+/***/ 1825:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -36061,9 +36050,9 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const net_1 = __importDefault(__nccwpck_require__(1631));
 const tls_1 = __importDefault(__nccwpck_require__(4016));
 const url_1 = __importDefault(__nccwpck_require__(8835));
-const debug_1 = __importDefault(__nccwpck_require__(8027));
-const once_1 = __importDefault(__nccwpck_require__(3892));
-const agent_base_1 = __nccwpck_require__(3898);
+const debug_1 = __importDefault(__nccwpck_require__(8237));
+const once_1 = __importDefault(__nccwpck_require__(1040));
+const agent_base_1 = __nccwpck_require__(9690);
 const debug = debug_1.default('http-proxy-agent');
 function isHTTPS(protocol) {
     return typeof protocol === 'string' ? /^https:?$/i.test(protocol) : false;
@@ -36192,7 +36181,7 @@ exports.default = HttpProxyAgent;
 
 /***/ }),
 
-/***/ 32:
+/***/ 3764:
 /***/ (function(module, __unused_webpack_exports, __nccwpck_require__) {
 
 "use strict";
@@ -36200,7 +36189,7 @@ exports.default = HttpProxyAgent;
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-const agent_1 = __importDefault(__nccwpck_require__(7925));
+const agent_1 = __importDefault(__nccwpck_require__(1825));
 function createHttpProxyAgent(opts) {
     return new agent_1.default(opts);
 }
@@ -36213,7 +36202,7 @@ module.exports = createHttpProxyAgent;
 
 /***/ }),
 
-/***/ 4133:
+/***/ 5098:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -36235,9 +36224,9 @@ const net_1 = __importDefault(__nccwpck_require__(1631));
 const tls_1 = __importDefault(__nccwpck_require__(4016));
 const url_1 = __importDefault(__nccwpck_require__(8835));
 const assert_1 = __importDefault(__nccwpck_require__(2357));
-const debug_1 = __importDefault(__nccwpck_require__(8027));
-const agent_base_1 = __nccwpck_require__(3898);
-const parse_proxy_response_1 = __importDefault(__nccwpck_require__(4330));
+const debug_1 = __importDefault(__nccwpck_require__(8237));
+const agent_base_1 = __nccwpck_require__(9690);
+const parse_proxy_response_1 = __importDefault(__nccwpck_require__(595));
 const debug = debug_1.default('https-proxy-agent:agent');
 /**
  * The `HttpsProxyAgent` implements an HTTP Agent subclass that connects to
@@ -36400,7 +36389,7 @@ function omit(obj, ...keys) {
 
 /***/ }),
 
-/***/ 5346:
+/***/ 7219:
 /***/ (function(module, __unused_webpack_exports, __nccwpck_require__) {
 
 "use strict";
@@ -36408,7 +36397,7 @@ function omit(obj, ...keys) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-const agent_1 = __importDefault(__nccwpck_require__(4133));
+const agent_1 = __importDefault(__nccwpck_require__(5098));
 function createHttpsProxyAgent(opts) {
     return new agent_1.default(opts);
 }
@@ -36421,7 +36410,7 @@ module.exports = createHttpsProxyAgent;
 
 /***/ }),
 
-/***/ 4330:
+/***/ 595:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -36430,7 +36419,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const debug_1 = __importDefault(__nccwpck_require__(8027));
+const debug_1 = __importDefault(__nccwpck_require__(8237));
 const debug = debug_1.default('https-proxy-agent:parse-proxy-response');
 function parseProxyResponse(socket) {
     return new Promise((resolve, reject) => {
@@ -36494,7 +36483,7 @@ exports.default = parseProxyResponse;
 
 /***/ }),
 
-/***/ 8665:
+/***/ 8768:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
@@ -36531,7 +36520,7 @@ module.exports = () => {
 
 /***/ }),
 
-/***/ 6594:
+/***/ 3287:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -36577,14 +36566,14 @@ exports.isPlainObject = isPlainObject;
 
 /***/ }),
 
-/***/ 8431:
+/***/ 2559:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 const os = __nccwpck_require__(2087);
 const fs = __nccwpck_require__(5747);
-const isDocker = __nccwpck_require__(8665);
+const isDocker = __nccwpck_require__(8768);
 
 const isWsl = () => {
 	if (process.platform !== 'linux') {
@@ -36616,10 +36605,10 @@ if (process.env.__IS_WSL_TEST__) {
 
 /***/ }),
 
-/***/ 6822:
+/***/ 3359:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var jws = __nccwpck_require__(6596);
+var jws = __nccwpck_require__(2597);
 
 module.exports = function (jwt, options) {
   options = options || {};
@@ -36653,22 +36642,22 @@ module.exports = function (jwt, options) {
 
 /***/ }),
 
-/***/ 963:
+/***/ 7486:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 module.exports = {
-  decode: __nccwpck_require__(6822),
-  verify: __nccwpck_require__(6241),
-  sign: __nccwpck_require__(1789),
-  JsonWebTokenError: __nccwpck_require__(9328),
-  NotBeforeError: __nccwpck_require__(163),
-  TokenExpiredError: __nccwpck_require__(6655),
+  decode: __nccwpck_require__(3359),
+  verify: __nccwpck_require__(2327),
+  sign: __nccwpck_require__(2022),
+  JsonWebTokenError: __nccwpck_require__(405),
+  NotBeforeError: __nccwpck_require__(4383),
+  TokenExpiredError: __nccwpck_require__(6637),
 };
 
 
 /***/ }),
 
-/***/ 9328:
+/***/ 405:
 /***/ ((module) => {
 
 var JsonWebTokenError = function (message, error) {
@@ -36689,10 +36678,10 @@ module.exports = JsonWebTokenError;
 
 /***/ }),
 
-/***/ 163:
+/***/ 4383:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var JsonWebTokenError = __nccwpck_require__(9328);
+var JsonWebTokenError = __nccwpck_require__(405);
 
 var NotBeforeError = function (message, date) {
   JsonWebTokenError.call(this, message);
@@ -36708,10 +36697,10 @@ module.exports = NotBeforeError;
 
 /***/ }),
 
-/***/ 6655:
+/***/ 6637:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var JsonWebTokenError = __nccwpck_require__(9328);
+var JsonWebTokenError = __nccwpck_require__(405);
 
 var TokenExpiredError = function (message, expiredAt) {
   JsonWebTokenError.call(this, message);
@@ -36727,20 +36716,20 @@ module.exports = TokenExpiredError;
 
 /***/ }),
 
-/***/ 9935:
+/***/ 9085:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var semver = __nccwpck_require__(4371);
+var semver = __nccwpck_require__(5911);
 
 module.exports = semver.satisfies(process.version, '^6.12.0 || >=8.0.0');
 
 
 /***/ }),
 
-/***/ 2203:
+/***/ 6098:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var ms = __nccwpck_require__(1575);
+var ms = __nccwpck_require__(900);
 
 module.exports = function (time, iat) {
   var timestamp = iat || Math.floor(Date.now() / 1000);
@@ -36761,12 +36750,12 @@ module.exports = function (time, iat) {
 
 /***/ }),
 
-/***/ 6596:
+/***/ 2597:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 /*global exports*/
-var SignStream = __nccwpck_require__(2998);
-var VerifyStream = __nccwpck_require__(6076);
+var SignStream = __nccwpck_require__(5070);
+var VerifyStream = __nccwpck_require__(3974);
 
 var ALGORITHMS = [
   'HS256', 'HS384', 'HS512',
@@ -36790,11 +36779,11 @@ exports.createVerify = function createVerify(opts) {
 
 /***/ }),
 
-/***/ 4150:
+/***/ 704:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 /*global module, process*/
-var Buffer = __nccwpck_require__(3964).Buffer;
+var Buffer = __nccwpck_require__(1867).Buffer;
 var Stream = __nccwpck_require__(2413);
 var util = __nccwpck_require__(1669);
 
@@ -36852,15 +36841,15 @@ module.exports = DataStream;
 
 /***/ }),
 
-/***/ 2998:
+/***/ 5070:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 /*global module*/
-var Buffer = __nccwpck_require__(3964).Buffer;
-var DataStream = __nccwpck_require__(4150);
-var jwa = __nccwpck_require__(6799);
+var Buffer = __nccwpck_require__(1867).Buffer;
+var DataStream = __nccwpck_require__(704);
+var jwa = __nccwpck_require__(6010);
 var Stream = __nccwpck_require__(2413);
-var toString = __nccwpck_require__(3785);
+var toString = __nccwpck_require__(6206);
 var util = __nccwpck_require__(1669);
 
 function base64url(string, encoding) {
@@ -36937,7 +36926,7 @@ module.exports = SignStream;
 
 /***/ }),
 
-/***/ 3785:
+/***/ 6206:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 /*global module*/
@@ -36954,15 +36943,15 @@ module.exports = function toString(obj) {
 
 /***/ }),
 
-/***/ 6076:
+/***/ 3974:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 /*global module*/
-var Buffer = __nccwpck_require__(3964).Buffer;
-var DataStream = __nccwpck_require__(4150);
-var jwa = __nccwpck_require__(6799);
+var Buffer = __nccwpck_require__(1867).Buffer;
+var DataStream = __nccwpck_require__(704);
+var jwa = __nccwpck_require__(6010);
 var Stream = __nccwpck_require__(2413);
-var toString = __nccwpck_require__(3785);
+var toString = __nccwpck_require__(6206);
 var util = __nccwpck_require__(1669);
 var JWS_REGEX = /^[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)?$/;
 
@@ -37081,19 +37070,19 @@ module.exports = VerifyStream;
 
 /***/ }),
 
-/***/ 1789:
+/***/ 2022:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var timespan = __nccwpck_require__(2203);
-var PS_SUPPORTED = __nccwpck_require__(9935);
-var jws = __nccwpck_require__(6596);
-var includes = __nccwpck_require__(4702);
-var isBoolean = __nccwpck_require__(4722);
-var isInteger = __nccwpck_require__(6911);
-var isNumber = __nccwpck_require__(8981);
-var isPlainObject = __nccwpck_require__(7255);
-var isString = __nccwpck_require__(2075);
-var once = __nccwpck_require__(8530);
+var timespan = __nccwpck_require__(6098);
+var PS_SUPPORTED = __nccwpck_require__(9085);
+var jws = __nccwpck_require__(2597);
+var includes = __nccwpck_require__(7931);
+var isBoolean = __nccwpck_require__(6501);
+var isInteger = __nccwpck_require__(1441);
+var isNumber = __nccwpck_require__(298);
+var isPlainObject = __nccwpck_require__(5723);
+var isString = __nccwpck_require__(5180);
+var once = __nccwpck_require__(4499);
 
 var SUPPORTED_ALGS = ['RS256', 'RS384', 'RS512', 'ES256', 'ES384', 'ES512', 'HS256', 'HS384', 'HS512', 'none']
 if (PS_SUPPORTED) {
@@ -37294,16 +37283,16 @@ module.exports = function (payload, secretOrPrivateKey, options, callback) {
 
 /***/ }),
 
-/***/ 6241:
+/***/ 2327:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var JsonWebTokenError = __nccwpck_require__(9328);
-var NotBeforeError    = __nccwpck_require__(163);
-var TokenExpiredError = __nccwpck_require__(6655);
-var decode            = __nccwpck_require__(6822);
-var timespan          = __nccwpck_require__(2203);
-var PS_SUPPORTED      = __nccwpck_require__(9935);
-var jws               = __nccwpck_require__(6596);
+var JsonWebTokenError = __nccwpck_require__(405);
+var NotBeforeError    = __nccwpck_require__(4383);
+var TokenExpiredError = __nccwpck_require__(6637);
+var decode            = __nccwpck_require__(3359);
+var timespan          = __nccwpck_require__(6098);
+var PS_SUPPORTED      = __nccwpck_require__(9085);
+var jws               = __nccwpck_require__(2597);
 
 var PUB_KEY_ALGS = ['RS256', 'RS384', 'RS512', 'ES256', 'ES384', 'ES512'];
 var RSA_KEY_ALGS = ['RS256', 'RS384', 'RS512'];
@@ -37526,13 +37515,13 @@ module.exports = function (jwtString, secretOrPublicKey, options, callback) {
 
 /***/ }),
 
-/***/ 6799:
+/***/ 6010:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var bufferEqual = __nccwpck_require__(9658);
-var Buffer = __nccwpck_require__(3964).Buffer;
+var bufferEqual = __nccwpck_require__(9239);
+var Buffer = __nccwpck_require__(1867).Buffer;
 var crypto = __nccwpck_require__(6417);
-var formatEcdsa = __nccwpck_require__(4435);
+var formatEcdsa = __nccwpck_require__(1728);
 var util = __nccwpck_require__(1669);
 
 var MSG_INVALID_ALGORITHM = '"%s" is not a valid algorithm.\n  Supported algorithms are:\n  "HS256", "HS384", "HS512", "RS256", "RS384", "RS512", "PS256", "PS384", "PS512", "ES256", "ES384", "ES512" and "none".'
@@ -37785,12 +37774,12 @@ module.exports = function jwa(algorithm) {
 
 /***/ }),
 
-/***/ 7931:
+/***/ 4636:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 /*global exports*/
-var SignStream = __nccwpck_require__(2410);
-var VerifyStream = __nccwpck_require__(5486);
+var SignStream = __nccwpck_require__(3334);
+var VerifyStream = __nccwpck_require__(5522);
 
 var ALGORITHMS = [
   'HS256', 'HS384', 'HS512',
@@ -37814,11 +37803,11 @@ exports.createVerify = function createVerify(opts) {
 
 /***/ }),
 
-/***/ 7996:
+/***/ 1868:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 /*global module, process*/
-var Buffer = __nccwpck_require__(3964).Buffer;
+var Buffer = __nccwpck_require__(1867).Buffer;
 var Stream = __nccwpck_require__(2413);
 var util = __nccwpck_require__(1669);
 
@@ -37876,15 +37865,15 @@ module.exports = DataStream;
 
 /***/ }),
 
-/***/ 2410:
+/***/ 3334:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 /*global module*/
-var Buffer = __nccwpck_require__(3964).Buffer;
-var DataStream = __nccwpck_require__(7996);
-var jwa = __nccwpck_require__(6608);
+var Buffer = __nccwpck_require__(1867).Buffer;
+var DataStream = __nccwpck_require__(1868);
+var jwa = __nccwpck_require__(9783);
 var Stream = __nccwpck_require__(2413);
-var toString = __nccwpck_require__(4624);
+var toString = __nccwpck_require__(5292);
 var util = __nccwpck_require__(1669);
 
 function base64url(string, encoding) {
@@ -37961,7 +37950,7 @@ module.exports = SignStream;
 
 /***/ }),
 
-/***/ 4624:
+/***/ 5292:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 /*global module*/
@@ -37978,15 +37967,15 @@ module.exports = function toString(obj) {
 
 /***/ }),
 
-/***/ 5486:
+/***/ 5522:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 /*global module*/
-var Buffer = __nccwpck_require__(3964).Buffer;
-var DataStream = __nccwpck_require__(7996);
-var jwa = __nccwpck_require__(6608);
+var Buffer = __nccwpck_require__(1867).Buffer;
+var DataStream = __nccwpck_require__(1868);
+var jwa = __nccwpck_require__(9783);
 var Stream = __nccwpck_require__(2413);
-var toString = __nccwpck_require__(4624);
+var toString = __nccwpck_require__(5292);
 var util = __nccwpck_require__(1669);
 var JWS_REGEX = /^[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)?$/;
 
@@ -38105,13 +38094,13 @@ module.exports = VerifyStream;
 
 /***/ }),
 
-/***/ 6608:
+/***/ 9783:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var bufferEqual = __nccwpck_require__(9658);
-var Buffer = __nccwpck_require__(3964).Buffer;
+var bufferEqual = __nccwpck_require__(9239);
+var Buffer = __nccwpck_require__(1867).Buffer;
 var crypto = __nccwpck_require__(6417);
-var formatEcdsa = __nccwpck_require__(4435);
+var formatEcdsa = __nccwpck_require__(1728);
 var util = __nccwpck_require__(1669);
 
 var MSG_INVALID_ALGORITHM = '"%s" is not a valid algorithm.\n  Supported algorithms are:\n  "HS256", "HS384", "HS512", "RS256", "RS384", "RS512", "PS256", "PS384", "PS512", "ES256", "ES384", "ES512" and "none".'
@@ -38364,10 +38353,10 @@ module.exports = function jwa(algorithm) {
 
 /***/ }),
 
-/***/ 4513:
+/***/ 3229:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var keytar = __nccwpck_require__(3125)
+var keytar = __nccwpck_require__(242)
 
 function checkRequired(val, name) {
   if (!val || val.length <= 0) {
@@ -38414,7 +38403,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 4702:
+/***/ 7931:
 /***/ ((module) => {
 
 /**
@@ -39166,7 +39155,7 @@ module.exports = includes;
 
 /***/ }),
 
-/***/ 4722:
+/***/ 6501:
 /***/ ((module) => {
 
 /**
@@ -39243,7 +39232,7 @@ module.exports = isBoolean;
 
 /***/ }),
 
-/***/ 6911:
+/***/ 1441:
 /***/ ((module) => {
 
 /**
@@ -39515,7 +39504,7 @@ module.exports = isInteger;
 
 /***/ }),
 
-/***/ 8981:
+/***/ 298:
 /***/ ((module) => {
 
 /**
@@ -39601,7 +39590,7 @@ module.exports = isNumber;
 
 /***/ }),
 
-/***/ 7255:
+/***/ 5723:
 /***/ ((module) => {
 
 /**
@@ -39747,7 +39736,7 @@ module.exports = isPlainObject;
 
 /***/ }),
 
-/***/ 2075:
+/***/ 5180:
 /***/ ((module) => {
 
 /**
@@ -39849,7 +39838,7 @@ module.exports = isString;
 
 /***/ }),
 
-/***/ 8530:
+/***/ 4499:
 /***/ ((module) => {
 
 /**
@@ -40150,7 +40139,7 @@ module.exports = once;
 
 /***/ }),
 
-/***/ 8809:
+/***/ 7426:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 /*!
@@ -40168,7 +40157,7 @@ module.exports = __nccwpck_require__(3313)
 
 /***/ }),
 
-/***/ 626:
+/***/ 3583:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -40186,7 +40175,7 @@ module.exports = __nccwpck_require__(3313)
  * @private
  */
 
-var db = __nccwpck_require__(8809)
+var db = __nccwpck_require__(7426)
 var extname = __nccwpck_require__(5622).extname
 
 /**
@@ -40364,7 +40353,7 @@ function populateMaps (extensions, types) {
 
 /***/ }),
 
-/***/ 4958:
+/***/ 9623:
 /***/ (function(module, __unused_webpack_exports, __nccwpck_require__) {
 
 /* module decorator */ module = __nccwpck_require__.nmd(module);
@@ -46041,7 +46030,7 @@ function populateMaps (extensions, types) {
 
 /***/ }),
 
-/***/ 1575:
+/***/ 900:
 /***/ ((module) => {
 
 /**
@@ -46210,7 +46199,7 @@ function plural(ms, msAbs, n, name) {
 
 /***/ }),
 
-/***/ 3663:
+/***/ 467:
 /***/ ((module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -46375,7 +46364,7 @@ FetchError.prototype.name = 'FetchError';
 
 let convert;
 try {
-	convert = __nccwpck_require__(7189).convert;
+	convert = __nccwpck_require__(2877).convert;
 } catch (e) {}
 
 const INTERNALS = Symbol('Body internals');
@@ -47867,7 +47856,7 @@ exports.FetchError = FetchError;
 
 /***/ }),
 
-/***/ 3136:
+/***/ 504:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 var hasMap = typeof Map === 'function' && Map.prototype;
@@ -47902,7 +47891,7 @@ var gPO = (typeof Reflect === 'function' ? Reflect.getPrototypeOf : Object.getPr
         : null
 );
 
-var inspectCustom = __nccwpck_require__(9727).custom;
+var inspectCustom = __nccwpck_require__(7265).custom;
 var inspectSymbol = inspectCustom && isSymbol(inspectCustom) ? inspectCustom : null;
 var toStringTag = typeof Symbol === 'function' && typeof Symbol.toStringTag !== 'undefined' ? Symbol.toStringTag : null;
 
@@ -48342,7 +48331,7 @@ function arrObjKeys(obj, inspect) {
 
 /***/ }),
 
-/***/ 9727:
+/***/ 7265:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 module.exports = __nccwpck_require__(1669).inspect;
@@ -48350,10 +48339,10 @@ module.exports = __nccwpck_require__(1669).inspect;
 
 /***/ }),
 
-/***/ 7825:
+/***/ 1223:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var wrappy = __nccwpck_require__(9802)
+var wrappy = __nccwpck_require__(2940)
 module.exports = wrappy(once)
 module.exports.strict = wrappy(onceStrict)
 
@@ -48399,7 +48388,7 @@ function onceStrict (fn) {
 
 /***/ }),
 
-/***/ 4873:
+/***/ 5768:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
@@ -48408,8 +48397,8 @@ const {promisify} = __nccwpck_require__(1669);
 const path = __nccwpck_require__(5622);
 const childProcess = __nccwpck_require__(3129);
 const fs = __nccwpck_require__(5747);
-const isWsl = __nccwpck_require__(8431);
-const isDocker = __nccwpck_require__(8665);
+const isWsl = __nccwpck_require__(2559);
+const isDocker = __nccwpck_require__(8768);
 
 const pAccess = promisify(fs.access);
 const pReadFile = promisify(fs.readFile);
@@ -48602,7 +48591,7 @@ module.exports = async (target, options) => {
 
 /***/ }),
 
-/***/ 5919:
+/***/ 4907:
 /***/ ((module) => {
 
 "use strict";
@@ -48633,15 +48622,15 @@ module.exports = {
 
 /***/ }),
 
-/***/ 3277:
+/***/ 2760:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var stringify = __nccwpck_require__(2428);
-var parse = __nccwpck_require__(493);
-var formats = __nccwpck_require__(5919);
+var stringify = __nccwpck_require__(9954);
+var parse = __nccwpck_require__(3912);
+var formats = __nccwpck_require__(4907);
 
 module.exports = {
     formats: formats,
@@ -48652,13 +48641,13 @@ module.exports = {
 
 /***/ }),
 
-/***/ 493:
+/***/ 3912:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var utils = __nccwpck_require__(3427);
+var utils = __nccwpck_require__(2360);
 
 var has = Object.prototype.hasOwnProperty;
 var isArray = Array.isArray;
@@ -48923,15 +48912,15 @@ module.exports = function (str, opts) {
 
 /***/ }),
 
-/***/ 2428:
+/***/ 9954:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var getSideChannel = __nccwpck_require__(2059);
-var utils = __nccwpck_require__(3427);
-var formats = __nccwpck_require__(5919);
+var getSideChannel = __nccwpck_require__(4334);
+var utils = __nccwpck_require__(2360);
+var formats = __nccwpck_require__(4907);
 var has = Object.prototype.hasOwnProperty;
 
 var arrayPrefixGenerators = {
@@ -49221,13 +49210,13 @@ module.exports = function (object, opts) {
 
 /***/ }),
 
-/***/ 3427:
+/***/ 2360:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var formats = __nccwpck_require__(5919);
+var formats = __nccwpck_require__(4907);
 
 var has = Object.prototype.hasOwnProperty;
 var isArray = Array.isArray;
@@ -49480,7 +49469,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 3964:
+/***/ 1867:
 /***/ ((module, exports, __nccwpck_require__) => {
 
 /*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
@@ -49552,7 +49541,7 @@ SafeBuffer.allocUnsafeSlow = function (size) {
 
 /***/ }),
 
-/***/ 4371:
+/***/ 5911:
 /***/ ((module, exports) => {
 
 exports = module.exports = SemVer
@@ -51042,15 +51031,15 @@ function coerce (version) {
 
 /***/ }),
 
-/***/ 2059:
+/***/ 4334:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
 
 
-var GetIntrinsic = __nccwpck_require__(51);
-var callBound = __nccwpck_require__(7709);
-var inspect = __nccwpck_require__(3136);
+var GetIntrinsic = __nccwpck_require__(4538);
+var callBound = __nccwpck_require__(8803);
+var inspect = __nccwpck_require__(504);
 
 var $TypeError = GetIntrinsic('%TypeError%');
 var $WeakMap = GetIntrinsic('%WeakMap%', true);
@@ -51174,7 +51163,7 @@ module.exports = function getSideChannel() {
 
 /***/ }),
 
-/***/ 8593:
+/***/ 4477:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 "use strict";
@@ -51247,7 +51236,7 @@ module.exports = (server, grace) => {
 
 /***/ }),
 
-/***/ 6914:
+/***/ 4351:
 /***/ ((module) => {
 
 /*! *****************************************************************************
@@ -51560,15 +51549,15 @@ var __createBinding;
 
 /***/ }),
 
-/***/ 968:
+/***/ 4294:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-module.exports = __nccwpck_require__(1634);
+module.exports = __nccwpck_require__(4219);
 
 
 /***/ }),
 
-/***/ 1634:
+/***/ 4219:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -51840,7 +51829,7 @@ exports.debug = debug; // for test
 
 /***/ }),
 
-/***/ 2909:
+/***/ 5030:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -51866,11 +51855,11 @@ exports.getUserAgent = getUserAgent;
 
 /***/ }),
 
-/***/ 5313:
+/***/ 2155:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var v1 = __nccwpck_require__(9042);
-var v4 = __nccwpck_require__(6674);
+var v1 = __nccwpck_require__(8749);
+var v4 = __nccwpck_require__(824);
 
 var uuid = v4;
 uuid.v1 = v1;
@@ -51881,7 +51870,7 @@ module.exports = uuid;
 
 /***/ }),
 
-/***/ 8182:
+/***/ 2707:
 /***/ ((module) => {
 
 /**
@@ -51914,7 +51903,7 @@ module.exports = bytesToUuid;
 
 /***/ }),
 
-/***/ 4745:
+/***/ 5859:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 // Unique ID creation requires a high quality random # generator.  In node.js
@@ -51929,11 +51918,11 @@ module.exports = function nodeRNG() {
 
 /***/ }),
 
-/***/ 9042:
+/***/ 8749:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var rng = __nccwpck_require__(4745);
-var bytesToUuid = __nccwpck_require__(8182);
+var rng = __nccwpck_require__(5859);
+var bytesToUuid = __nccwpck_require__(2707);
 
 // **`v1()` - Generate time-based UUID**
 //
@@ -52045,11 +52034,11 @@ module.exports = v1;
 
 /***/ }),
 
-/***/ 6674:
+/***/ 824:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var rng = __nccwpck_require__(4745);
-var bytesToUuid = __nccwpck_require__(8182);
+var rng = __nccwpck_require__(5859);
+var bytesToUuid = __nccwpck_require__(2707);
 
 function v4(options, buf, offset) {
   var i = buf && offset || 0;
@@ -52081,7 +52070,7 @@ module.exports = v4;
 
 /***/ }),
 
-/***/ 9802:
+/***/ 2940:
 /***/ ((module) => {
 
 // Returns a wrapper function that returns a wrapped callback
@@ -52121,15 +52110,14 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
-/***/ 3125:
-/***/ ((module) => {
+/***/ 242:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-module.exports = eval("require")("../build/Release/keytar.node");
-
+module.exports = require(__nccwpck_require__.ab + "build/Release/keytar.node")
 
 /***/ }),
 
-/***/ 7189:
+/***/ 2877:
 /***/ ((module) => {
 
 module.exports = eval("require")("encoding");
@@ -52137,7 +52125,7 @@ module.exports = eval("require")("encoding");
 
 /***/ }),
 
-/***/ 9440:
+/***/ 132:
 /***/ ((module) => {
 
 module.exports = eval("require")("supports-color");
@@ -52359,7 +52347,7 @@ module.exports = require("zlib");
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __nccwpck_require__(9599);
+/******/ 	var __webpack_exports__ = __nccwpck_require__(4822);
 /******/ 	module.exports = __webpack_exports__;
 /******/ 	
 /******/ })()
