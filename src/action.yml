@@ -1,0 +1,26 @@
+description: 'Mirror Icm tickets to GitHub planning board issues'
+inputs:
+  repo-token:
+    description: 'The GITHUB_TOKEN secret'
+    required: true
+  ado-token:
+    description: 'The Azure DevOps token'
+    required: true
+  label-filter:
+    description: 'GitHub label to filter existing issues on'
+    required: false
+  labels-for-issues:
+    description: 'GitHub label to add to newly created issues'
+    required: false
+  tenant-id:
+    description: 'Tenant id of organization '
+    required: false
+  aad-app-id:
+    description: 'AAD app Id'
+    required: true
+  aad-app-key:
+    description: 'App key of AAD app'
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
