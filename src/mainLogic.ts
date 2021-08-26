@@ -26,9 +26,12 @@ class MainLogic {
         const resultArray: any = [];
 
         while (!currentRow.done) {
+            resultArray.push(currentRow);            
             console.log(currentRow);
+
             currentRow = resultsIterator.next();
         }
+        console.log(`Found ${resultArray.length} ICM tickets`);
 
         return resultArray;
     }
