@@ -71,7 +71,7 @@ class MainLogic {
      */
     static async createIssues(octokit: Models.OktokitType, existingIssues: string[], workItems: any[][], labelForIssues, issuePrefix) {
         console.log(`GitHub issues that match: ${existingIssues.length}\n`);
-
+        console.log(workItems);
         workItems.forEach(item => {
             let title: string;
             let itemId: string;

@@ -197,6 +197,7 @@ class MainLogic {
     static createIssues(octokit, existingIssues, workItems, labelForIssues, issuePrefix) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(`GitHub issues that match: ${existingIssues.length}\n`);
+            console.log(workItems);
             workItems.forEach(item => {
                 let title;
                 let itemId;
